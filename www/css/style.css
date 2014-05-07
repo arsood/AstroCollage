@@ -1,5 +1,7 @@
 body {
 	margin:0;
+	font-size:15px;
+	font-family:Arial, Sans Serif;
 }
 
 .chrome-background {
@@ -94,7 +96,6 @@ body {
 
 .bottom-options {
 	position:absolute;
-	border:1px solid;
 	padding:10px;
 	width:30px;
 	height:30px;
@@ -284,4 +285,52 @@ body {
 	text-align:center;
 	padding-top:10px;
 	z-index:9999;
+}
+
+.menu-buttons {
+	padding:10px;
+	width:35px;
+	height:30px;
+	background-color:#2D2D2D;
+	color:#FFF;
+	font-size:2em;
+	text-align:center;
+}
+
+.menu-buttons-small {
+	padding:5px;
+	width:30px;
+	height:25px;
+	font-size:1.4em;
+}
+
+#snap-menu {
+	position:absolute;
+	top:0;
+	left:0;
+	padding:20px;
+	display:none;
+}
+
+.snap-menu-item-container {
+	overflow:hidden;
+	margin-top:20px;
+}
+
+.snap-menu-item-container:first-child {
+	margin-top:0;
+}
+
+.snap-menu-1 {
+	float:left;
+	width:44px;
+}
+
+.snap-menu-2 {
+	float:right;
+	font-size:1.2em;
+	margin-left:10px;
+	padding-top:10px;
+	width:180px;
+	font-weight:bold;
 }
