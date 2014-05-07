@@ -57,7 +57,7 @@ $(document).on("tap", "#menu-backgrounds-color-options div", function() {
 
 //Create carousel for all slidy menus
 
-$("#add-menu-container, #menu-select-nebulae, #menu-select-nurseries, #menu-select-galaxies, #menu-select-sun, #menu-select-planets, #menu-select-misc").owlCarousel({
+$("#add-menu-container, #menu-select-nebulae, #menu-select-nurseries, #menu-select-galaxies, #menu-select-stars, #menu-select-sun, #menu-select-planets, #menu-select-misc").owlCarousel({
     slideSpeed:300,
     paginationSpeed:400,
     singleItem:true
