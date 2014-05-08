@@ -184,7 +184,8 @@ body {
 	border-bottom:#333 5px solid;
 	width:50px;
 	bottom:0;
-	left:348px;
+	left:50%;
+	margin-left:-25px;
 }
 
 .menu-backgrounds-icon {
@@ -304,12 +305,17 @@ body {
 	font-size:1.4em;
 }
 
+.menu-buttons-small img {
+	width:30px;
+	padding-top:3px;
+}
+
 #snap-menu {
 	position:absolute;
-	top:0;
-	left:0;
 	padding:20px;
+	padding-bottom:40px;
 	display:none;
+	z-index:9999;
 }
 
 .snap-menu-item-container {

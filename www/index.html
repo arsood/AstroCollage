@@ -22,16 +22,7 @@
 	<div id="stamp-pad-container">
 		<div id="stamp-pad-scroll-container" class="chrome-background">
 			<div id="stamp-pad-image-container">
-				<div class="stamp-pad-image" style="background:url(img/sample/black_galaxy.jpg) no-repeat;"></div>
-				<div class="stamp-pad-image" style="background:url(img/sample/black_galaxy.jpg) no-repeat;"></div>
-				<div class="stamp-pad-image" style="background:url(img/sample/black_galaxy.jpg) no-repeat;"></div>
-				<div class="stamp-pad-image" style="background:url(img/sample/black_galaxy.jpg) no-repeat;"></div>
-				<div class="stamp-pad-image" style="background:url(img/sample/black_galaxy.jpg) no-repeat;"></div>
-				<div class="stamp-pad-image" style="background:url(img/sample/black_galaxy.jpg) no-repeat;"></div>
-				<div class="stamp-pad-image" style="background:url(img/sample/black_galaxy.jpg) no-repeat;"></div>
-				<div class="stamp-pad-image" style="background:url(img/sample/black_galaxy.jpg) no-repeat;"></div>
-				<div class="stamp-pad-image" style="background:url(img/sample/black_galaxy.jpg) no-repeat;"></div>
-				<div class="stamp-pad-image" style="background:url(img/sample/black_galaxy.jpg) no-repeat;"></div>
+				<!--LOADER HERE-->
 			</div>
 		</div>
 		<div id="stamp-pad-handle" class="chrome-background">
@@ -40,6 +31,12 @@
 		</div>
 	</div>
 	<!--/Stamp Pad-->
+
+	<!--Stamp Pad Template-->
+	<script id="stamp-pad-template" type="text/x-template">
+		<div class="stamp-pad-image black-background" style="background:url(img/thumbs/{{ image }}) no-repeat;"></div>
+	</script>
+	<!--/Stamp Pad Template-->
 
 	<!--Add Image Menu-->
 	<div id="add-menu-container" class="main-menu-container chrome-background rounded-white-border">
@@ -212,7 +209,7 @@
 		<div id="snap-menu-place" class="snap-menu-item-container">
 			<div class="snap-menu-1">
 				<div class="menu-buttons menu-buttons-small rounded-white-border">
-					<i class="fa fa-plus-square-o"></i>
+					<i class="fa fa-crosshairs"></i>
 				</div>
 			</div>
 			<div class="snap-menu-2">
@@ -223,7 +220,7 @@
 		<div id="snap-menu-add" class="snap-menu-item-container">
 			<div class="snap-menu-1">
 				<div class="menu-buttons menu-buttons-small rounded-white-border">
-					<i class="fa fa-camera"></i>
+					<img src="img/palette.png" />
 				</div>
 			</div>
 			<div class="snap-menu-2">
@@ -234,13 +231,14 @@
 		<div id="snap-menu-cancel" class="snap-menu-item-container">
 			<div class="snap-menu-1">
 				<div class="menu-buttons menu-buttons-small rounded-white-border">
-					<i class="fa fa-camera"></i>
+					<i class="fa fa-ban"></i>
 				</div>
 			</div>
 			<div class="snap-menu-2">
 				CANCEL
 			</div>
 		</div>
+		<div class="menu-bottom-tick"></div>
 	</div>
 	<!--/Snap Image Menu-->
 
@@ -888,11 +886,11 @@
 
 <script src="libraries/hammer/hammer.min.js"></script>
 <script src="libraries/kinetic/kinetic.js"></script>
-<!-- <script src="libraries/pinchlayer/pinchlayer.js"></script> -->
 <script src="libraries/jquery/jquery.js"></script>
 <script src="libraries/jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
 <script src="libraries/jquery-tap/jquery.tap.min.js"></script>
 <script src="libraries/owl-carousel/owl.carousel.min.js"></script>
+<script src="libraries/handlebars/handlebars-v1.3.0.js"></script>
 <script src="js/app.js"></script>
 
 </body>

@@ -17,6 +17,8 @@ $(document).ready(function() {
 
     $("#add-menu-container").hide();
 
+    //Make container responsive
+
     $("#container").height($(document).height());
 });
 
@@ -89,39 +91,83 @@ $(document).on("tap", "#select-menu-container div.menu-image", function() {
     if ($(this).children().length === 1) {
         return false;
     } else {
-        //Place image on canvas
+        //Open up snap menu
 
-        var imageObj = new Image();
-        
-        imageObj.onload = function() {
-            var piece = new Kinetic.Image({
-                x: imageObj.width / 2,
-                y: imageObj.height / 2,
-                offsetX: imageObj.width / 2,
-                offsetY: imageObj.height / 2,
-                image: imageObj,
-                draggable:true
-            });
+        var thisOffset = $(this).offset();
 
-            layer.add(piece);
-            stage.add(layer);
+        $("#snap-menu").css("top", thisOffset.top - ($(this).height() * 2 + 30)).css("left", thisOffset.left - ($(this).width() / 2) + 10).show();
 
-            //User Hammer.js for pinch zooming and rotating
-
-            var hammertime = Hammer(piece);
-
-            hammertime.on("transform", function(event) {
-                event.preventDefault();
-
-                piece.scale({
-                    x:event.gesture.scale,
-                    y:event.gesture.scale
-                }).rotation(event.gesture.rotation);
-
-                layer.draw();
-            });
-        };
-        
-        imageObj.src = 'img/library/' + $(this).attr("data-image");
+        localStorage.setItem("selected_image", $(this).attr("data-image"));
     }
+});
+
+//Handle snap menu place
+
+$(document).on("tap", "#snap-menu-place", function() {
+    //Place image on canvas
+
+    var imageObj = new Image();
+    
+    imageObj.onload = function() {
+        var piece = new Kinetic.Image({
+            x: imageObj.width / 2,
+            y: imageObj.height / 2,
+            offsetX: imageObj.width / 2,
+            offsetY: imageObj.height / 2,
+            image: imageObj,
+            draggable:true
+        });
+
+        layer.add(piece);
+        stage.add(layer);
+
+        //User Hammer.js for pinch zooming and rotating
+
+        var hammertime = Hammer(piece);
+
+        var originalScale = {
+            x:1,
+            y:1
+        };
+        var originalRotation = 0;
+
+        hammertime.on("transform", function(event) {
+            event.preventDefault();
+
+            piece.scale({
+                x:event.gesture.scale,
+                y:event.gesture.scale
+            }).rotation(event.gesture.rotation + originalRotation);
+
+            layer.draw();
+        }).on("transformend", function() {
+            originalScale = piece.scale();
+            originalRotation = piece.rotation();
+        });
+    };
+    
+    imageObj.src = 'img/library/' + localStorage.getItem("selected_image");
+
+    $("#snap-menu").hide();
+});
+
+//Handle snap menu add to stamp pad
+
+var stampTemplateSource = $("#stamp-pad-template").html();
+var stampTemplate = Handlebars.compile(stampTemplateSource);
+
+$(document).on("tap", "#snap-menu-add", function() {
+    var html = stampTemplate({ image:localStorage.getItem("selected_image") });
+
+    $("#stamp-pad-image-container").append(html);
+
+    resizeStampScroll();
+
+    $("#snap-menu").hide();
+});
+
+//Handle snap menu cancel
+
+$(document).on("tap", "#snap-menu-cancel", function() {
+    $("#snap-menu").fadeOut("fast");
 });
