@@ -28,14 +28,6 @@ $(document).on("tap", "#stamp-pad-handle", function() {
     $("#stamp-pad-image-container").slideToggle(200);
 });
 
-//Tap on a stamp pad image
-
-$(document).on("tap", ".stamp-pad-image", function() {
-    $(".stamp-pad-image").removeClass("black-border");
-    $(this).addClass("black-border");
-    $("#stamp-pad-image-container").slideUp(200);
-});
-
 function resizeStampScroll() {
     //Resize scroll container
 
@@ -101,17 +93,20 @@ $(document).on("tap", "#select-menu-container div.menu-image", function() {
     }
 });
 
-//Handle snap menu place
-
-$(document).on("tap", "#snap-menu-place", function() {
+function placeImage(insertImage, xCoord, yCoord) {
     //Place image on canvas
 
     var imageObj = new Image();
     
     imageObj.onload = function() {
+        if (xCoord === "none" && yCoord === "none") {
+            xCoord = imageObj.width / 2;
+            yCoord = imageObj.height / 2;
+        }
+
         var piece = new Kinetic.Image({
-            x: imageObj.width / 2,
-            y: imageObj.height / 2,
+            x: xCoord,
+            y: yCoord,
             offsetX: imageObj.width / 2,
             offsetY: imageObj.height / 2,
             image: imageObj,
@@ -146,7 +141,13 @@ $(document).on("tap", "#snap-menu-place", function() {
         });
     };
     
-    imageObj.src = 'img/library/' + localStorage.getItem("selected_image");
+    imageObj.src = 'img/library/' + insertImage;
+}
+
+//Handle snap menu place
+
+$(document).on("tap", "#snap-menu-place", function() {
+    placeImage(localStorage.getItem("selected_image"), "none", "none");
 
     $("#snap-menu").hide();
 });
@@ -170,4 +171,33 @@ $(document).on("tap", "#snap-menu-add", function() {
 
 $(document).on("tap", "#snap-menu-cancel", function() {
     $("#snap-menu").fadeOut("fast");
+});
+
+//Tap on a stamp pad image
+
+$(document).on("tap", ".stamp-pad-image", function() {
+    localStorage.setItem("stamp_selected", $(this).attr("data-image"));
+    $(".stamp-pad-image").removeClass("black-border");
+    $(this).addClass("black-border");
+    $("#stamp-pad-image-container").slideUp(200);
+});
+
+//Machine gun to place stamp image that was selected
+
+$(document).on("tap", "canvas", function(event) {
+    if (localStorage.getItem("stamp_selected")) {
+        placeImage(localStorage.getItem("stamp_selected"), event.pageX, event.pageY);
+    } else {
+        return false;
+    }
+});
+
+//Render canvas to image
+
+$(document).on("tap", "#share-menu-button", function() {
+    stage.toDataURL({
+        callback:function(dataUrl) {
+            console.log(dataUrl);
+        }
+    });
 });

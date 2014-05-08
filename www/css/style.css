@@ -340,3 +340,11 @@ body {
 	width:180px;
 	font-weight:bold;
 }
+
+#edit-menu {
+	position:absolute;
+	padding:20px;
+	padding-bottom:40px;
+	display:none;
+	z-index:9999;
+}

@@ -34,7 +34,7 @@
 
 	<!--Stamp Pad Template-->
 	<script id="stamp-pad-template" type="text/x-template">
-		<div class="stamp-pad-image black-background" style="background:url(img/thumbs/{{ image }}) no-repeat;"></div>
+		<div data-image="{{ image }}" class="stamp-pad-image black-background" style="background:url(img/thumbs/{{ image }}) no-repeat;"></div>
 	</script>
 	<!--/Stamp Pad Template-->
 
@@ -870,6 +870,65 @@
 		</div>
 	</div>
 	<!--/Select Image Menu-->
+
+	<!--Edit Image Menu-->
+	<div id="edit-menu" class="chrome-background rounded-white-border">
+		<div id="edit-menu-place" class="snap-menu-item-container">
+			<div class="snap-menu-1">
+				<div class="menu-buttons menu-buttons-small rounded-white-border">
+					<i class="fa fa-crosshairs"></i>
+				</div>
+			</div>
+			<div class="snap-menu-2">
+				RECTANGULAR CROP
+			</div>
+		</div>
+
+		<div id="snap-menu-add" class="snap-menu-item-container">
+			<div class="snap-menu-1">
+				<div class="menu-buttons menu-buttons-small rounded-white-border">
+					<img src="img/palette.png" />
+				</div>
+			</div>
+			<div class="snap-menu-2">
+				CIRCULAR CROP
+			</div>
+		</div>
+
+		<div id="snap-menu-cancel" class="snap-menu-item-container">
+			<div class="snap-menu-1">
+				<div class="menu-buttons menu-buttons-small rounded-white-border">
+					<i class="fa fa-ban"></i>
+				</div>
+			</div>
+			<div class="snap-menu-2">
+				FREE CROP
+			</div>
+		</div>
+
+		<div id="snap-menu-cancel" class="snap-menu-item-container">
+			<div class="snap-menu-1">
+				<div class="menu-buttons menu-buttons-small rounded-white-border">
+					<i class="fa fa-ban"></i>
+				</div>
+			</div>
+			<div class="snap-menu-2">
+				ADD TO STAMP PAD AND USE
+			</div>
+		</div>
+
+		<div id="snap-menu-cancel" class="snap-menu-item-container">
+			<div class="snap-menu-1">
+				<div class="menu-buttons menu-buttons-small rounded-white-border">
+					<i class="fa fa-ban"></i>
+				</div>
+			</div>
+			<div class="snap-menu-2">
+				REMOVE PHOTO
+			</div>
+		</div>
+	</div>
+	<!--/Edit Image Menu-->
 
 	<!--Bottom Buttons-->
 	<div class="bottom-options" id="grid-menu-button">
