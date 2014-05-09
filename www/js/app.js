@@ -93,6 +93,18 @@ $(document).on("tap", "#select-menu-container div.menu-image", function() {
     }
 });
 
+//Hide and show manipulation menu
+
+function hideManiMenu() {
+    $("#edit-menu").removeClass("edit-menu-show").addClass("edit-menu-hide");
+}
+
+function showManiMenu() {
+    $("#edit-menu").removeClass("edit-menu-hide").addClass("edit-menu-show");
+}
+
+var lastId = 1;
+
 function placeImage(insertImage, xCoord, yCoord) {
     //Place image on canvas
 
@@ -110,7 +122,8 @@ function placeImage(insertImage, xCoord, yCoord) {
             offsetX: imageObj.width / 2,
             offsetY: imageObj.height / 2,
             image: imageObj,
-            draggable:true
+            draggable:true,
+            id:lastId++
         });
 
         layer.add(piece);
@@ -140,13 +153,14 @@ function placeImage(insertImage, xCoord, yCoord) {
             originalRotation = piece.rotation();
         });
 
-        //Show layer options
+        //Show layer options and set id so we can manipulate this layer later
 
         piece.on("tap", function() {
+            localStorage.setItem("canvas_image_selected", this.id());
             if ($("#edit-menu").hasClass("edit-menu-hide")) {
-                $("#edit-menu").removeClass("edit-menu-hide").addClass("edit-menu-show");
+                showManiMenu();
             } else {
-                $("#edit-menu").removeClass("edit-menu-show").addClass("edit-menu-hide");
+                hideManiMenu();
             }
         });
     };
@@ -220,4 +234,25 @@ $(document).on("tap", "#cancel-stamp-menu", function() {
     localStorage.removeItem("stamp_selected");
     $(".stamp-pad-image").removeClass("black-border");
     $(this).fadeOut();
+});
+
+//Remove an image from the canvas
+
+$(document).on("tap", "#edit-menu-remove", function() {
+    stage.find("#" + localStorage.getItem("canvas_image_selected")).remove();
+    layer.draw();
+
+    hideManiMenu();
+});
+
+//Change layer
+
+$(document).on("tap", "#change-layer-up", function() {
+    stage.find("#" + localStorage.getItem("canvas_image_selected")).moveUp();
+    layer.draw();
+});
+
+$(document).on("tap", "#change-layer-down", function() {
+    stage.find("#" + localStorage.getItem("canvas_image_selected")).moveDown();
+    layer.draw();
 });

@@ -396,3 +396,23 @@ body {
 	z-index:9999;
 	display:none;
 }
+
+.change-layer-container {
+	overflow:hidden;
+}
+
+.change-layer-option {
+	float:left;
+	padding:15px 20px;
+	background-color:#6705E8;
+	color:#FFF;
+}
+
+.change-layer-text {
+	float:left;
+	text-align:center;
+	width:265px;
+	padding-top:15px;
+	font-size:1.3em;
+	font-weight:bold;
+}
