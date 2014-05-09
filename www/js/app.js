@@ -139,6 +139,16 @@ function placeImage(insertImage, xCoord, yCoord) {
             originalScale = piece.scale();
             originalRotation = piece.rotation();
         });
+
+        //Show layer options
+
+        piece.on("tap", function() {
+            if ($("#edit-menu").hasClass("edit-menu-hide")) {
+                $("#edit-menu").removeClass("edit-menu-hide").addClass("edit-menu-show");
+            } else {
+                $("#edit-menu").removeClass("edit-menu-show").addClass("edit-menu-hide");
+            }
+        });
     };
     
     imageObj.src = 'img/library/' + insertImage;
@@ -179,7 +189,9 @@ $(document).on("tap", ".stamp-pad-image", function() {
     localStorage.setItem("stamp_selected", $(this).attr("data-image"));
     $(".stamp-pad-image").removeClass("black-border");
     $(this).addClass("black-border");
-    $("#stamp-pad-image-container").slideUp(200);
+    $("#stamp-pad-image-container").slideUp(200, function() {
+        $("#cancel-stamp-menu").fadeIn(200);
+    });
 });
 
 //Machine gun to place stamp image that was selected
@@ -200,4 +212,12 @@ $(document).on("tap", "#share-menu-button", function() {
             console.log(dataUrl);
         }
     });
+});
+
+//Clear stamp selection
+
+$(document).on("tap", "#cancel-stamp-menu", function() {
+    localStorage.removeItem("stamp_selected");
+    $(".stamp-pad-image").removeClass("black-border");
+    $(this).fadeOut();
 });

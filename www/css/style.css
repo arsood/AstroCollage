@@ -74,7 +74,7 @@ body {
 }
 
 #stamp-pad-handle span {
-	font-size:1.4em;
+	font-size:1.5em;
 	font-family:Arial, Sans Serif;
 	color:#777;
 	vertical-align:middle;
@@ -284,7 +284,7 @@ body {
 	font-size:5em;
 	color:#555;
 	text-align:center;
-	padding-top:10px;
+	padding-top:15px;
 	z-index:9999;
 }
 
@@ -343,8 +343,56 @@ body {
 
 #edit-menu {
 	position:absolute;
+	top:0;
+	right:0;
 	padding:20px;
-	padding-bottom:40px;
-	display:none;
+	display:block;
 	z-index:9999;
+}
+
+.edit-menu-hide {
+	right:-420px !important;
+	transition:all 0.3s linear;
+}
+
+.edit-menu-show {
+	right:0 !important;
+	transition:all 0.3s linear;
+}
+
+.menu-group-container {
+	overflow:hidden;
+	margin-top:20px;
+}
+
+.menu-group-container:first-child {
+	margin-top:0;
+}
+
+.menu-group-icon {
+	width:59px;
+	float:left;
+}
+
+.menu-group-icon img {
+	width:45px;
+	margin-top:-7px;
+	margin-left:-5px;
+}
+
+.menu-group-text {
+	float:right;
+	width:300px;
+	font-size:1.3em;
+	padding-top:15px;
+	padding-left:20px;
+}
+
+#cancel-stamp-menu {
+	position:absolute;
+	width:255px;
+	top:10px;
+	right:10px;
+	z-index:9999;
+	display:none;
 }
