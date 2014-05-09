@@ -159,9 +159,14 @@ function placeImage(insertImage, xCoord, yCoord) {
             localStorage.setItem("canvas_image_selected", this.id());
             if ($("#edit-menu").hasClass("edit-menu-hide")) {
                 showManiMenu();
+                this.stroke("red");
+                this.strokeWidth(4);
             } else {
                 hideManiMenu();
+                this.stroke(0);
             }
+
+            layer.draw();
         });
     };
     

@@ -352,12 +352,12 @@ body {
 
 .edit-menu-hide {
 	right:-420px !important;
-	transition:all 0.3s linear;
+	transition:all 0.3s ease-in-out;
 }
 
 .edit-menu-show {
 	right:0 !important;
-	transition:all 0.3s linear;
+	transition:all 0.3s ease-in-out;
 }
 
 .menu-group-container {
@@ -367,6 +367,10 @@ body {
 
 .menu-group-container:first-child {
 	margin-top:0;
+}
+
+.menu-group-container:last-child {
+	margin-top:40px;
 }
 
 .menu-group-icon {
