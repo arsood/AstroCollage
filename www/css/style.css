@@ -374,21 +374,21 @@ body {
 }
 
 .menu-group-icon {
-	width:59px;
+	width:44px;
 	float:left;
 }
 
 .menu-group-icon img {
-	width:45px;
-	margin-top:-7px;
-	margin-left:-5px;
+	width:30px;
+	margin-top:-5px;
+	margin-left:0px;
 }
 
 .menu-group-text {
 	float:right;
 	width:300px;
-	font-size:1.3em;
-	padding-top:15px;
+	font-size:1.2em;
+	padding-top:8px;
 	padding-left:20px;
 }
 
@@ -407,7 +407,7 @@ body {
 
 .change-layer-option {
 	float:left;
-	padding:15px 20px;
+	padding:10px 15px;
 	background-color:#6705E8;
 	color:#FFF;
 }
@@ -415,8 +415,8 @@ body {
 .change-layer-text {
 	float:left;
 	text-align:center;
-	width:265px;
-	padding-top:15px;
-	font-size:1.3em;
+	width:270px;
+	padding-top:10px;
+	font-size:1.2em;
 	font-weight:bold;
 }
