@@ -59,20 +59,32 @@ $(document).on("tap", "#menu-backgrounds-color-options div", function() {
 //Function to fill background of stage
 
 function fillBackground(type, value) {
+    //Remove old background
+
+    stage.find("#stage-background").remove();
+
     if (type === "color") {
         var rect = new Kinetic.Rect({
             x:0,
             y:0,
             width:$(document).width(),
             height:$(document).height(),
-            fill:value
+            fill:value,
+            id:"stage-background"
         });
 
         layer.add(rect);
         stage.add(layer);
 
-        rect.moveToBottom();
+        resetStageBackground();
     }
+}
+
+//Make sure background is on bottom
+
+function resetStageBackground() {
+    stage.find("#stage-background").moveToBottom();
+    layer.draw();
 }
 
 //Create carousel for all slidy menus
@@ -182,21 +194,29 @@ function placeImage(insertImage, xCoord, yCoord) {
         //Show layer options and set id so we can manipulate this layer later
 
         piece.on("tap", function() {
-            localStorage.setItem("canvas_image_selected", this.id());
-            if ($("#edit-menu").hasClass("edit-menu-hide")) {
-                showManiMenu();
-                this.stroke("red");
-                this.strokeWidth(4);
-            } else {
-                hideManiMenu();
-                this.stroke(0);
-            }
+            //Toggle option menu on tap of canvas image
 
-            layer.draw();
+            if (localStorage.getItem("stamp_selected")) {
+                return false;
+            } else {
+                localStorage.setItem("canvas_image_selected", this.id());
+                if ($("#edit-menu").hasClass("edit-menu-hide")) {
+                    showManiMenu();
+                    this.stroke("red");
+                    this.strokeWidth(4);
+                } else {
+                    hideManiMenu();
+                    this.stroke(0);
+                }
+
+                layer.draw();
+            }
         });
     };
     
     imageObj.src = 'img/library/' + insertImage;
+
+    resetStageBackground();
 }
 
 //Handle snap menu place
