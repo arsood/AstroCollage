@@ -33,8 +33,6 @@ body {
 #container {
 	width:100%;
 	position:relative;
-	border:1px solid;
-	background-color:#000;
 }
 
 #stamp-pad-container {

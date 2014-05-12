@@ -11,6 +11,12 @@ var layer = new Kinetic.Layer();
 stage.add(layer);
 
 $(document).ready(function() {
+    //Set background fill on start
+
+    fillBackground("color", "#000000");
+
+    //Set stamp pad width
+
     resizeStampScroll();
 
     //Fix for owlcarousel automatic show
@@ -46,8 +52,28 @@ $(document).on("tap", "#add-menu-button", function() {
 //Change background color of canvas
 
 $(document).on("tap", "#menu-backgrounds-color-options div", function() {
-    $("#stage").css("background-color", $(this).css("background-color"));
+    //$("#stage").css("background-color", $(this).css("background-color"));
+    fillBackground("color", $(this).css("background-color"));
 });
+
+//Function to fill background of stage
+
+function fillBackground(type, value) {
+    if (type === "color") {
+        var rect = new Kinetic.Rect({
+            x:0,
+            y:0,
+            width:$(document).width(),
+            height:$(document).height(),
+            fill:value
+        });
+
+        layer.add(rect);
+        stage.add(layer);
+
+        rect.moveToBottom();
+    }
+}
 
 //Create carousel for all slidy menus
 
@@ -194,6 +220,25 @@ $(document).on("tap", "#snap-menu-add", function() {
     resizeStampScroll();
 
     $("#snap-menu").hide();
+
+    //Create draggable element
+
+    $(".stamp-pad-image").draggable({
+        revert:true,
+        helper:"clone",
+        appendTo:"#container"
+    });
+
+    //Create droppable effect
+
+    $("#container").droppable({
+        drop:function(event, ui) {
+            if (ui.offset.top >= 100) {
+                ui.draggable.fadeOut(200);
+                ui.helper.fadeOut(200);
+            }
+        }
+    });
 });
 
 //Handle snap menu cancel
