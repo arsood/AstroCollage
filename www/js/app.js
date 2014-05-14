@@ -12,6 +12,8 @@ var layer = new Kinetic.Layer();
 
 stage.add(layer);
 
+//Do stuff upon document ready
+
 $(document).ready(function() {
     //Set background fill on start
 
@@ -28,6 +30,12 @@ $(document).ready(function() {
     //Make container responsive
 
     $("#container").height($(document).height());
+
+    //Show stamp cancel if it is set
+
+    if (localStorage.getItem("stamp_selected")) {
+        $("#cancel-stamp-menu").show();
+    }
 });
 
 //Toggle stamp pad visibility
@@ -182,9 +190,11 @@ function placeImage(insertImage, xCoord, yCoord) {
         hammertime.on("transform", function(event) {
             event.preventDefault();
 
+            var scaleDiff = 1 - originalScale.x;
+
             piece.scale({
-                x:event.gesture.scale,
-                y:event.gesture.scale
+                x:event.gesture.scale - scaleDiff,
+                y:event.gesture.scale - scaleDiff
             }).rotation(event.gesture.rotation + originalRotation);
 
             layer.draw();
@@ -204,11 +214,11 @@ function placeImage(insertImage, xCoord, yCoord) {
                 localStorage.setItem("canvas_image_selected", this.id());
                 if ($("#edit-menu").hasClass("edit-menu-hide")) {
                     showManiMenu();
-                    this.stroke("red");
-                    this.strokeWidth(4);
+                    // this.stroke("red");
+                    // this.strokeWidth(4);
                 } else {
                     hideManiMenu();
-                    this.stroke(0);
+                    //this.stroke(0);
                 }
 
                 layer.draw();
