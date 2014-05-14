@@ -98,9 +98,9 @@ body {
 	overflow-y:hidden;
 }
 
-/*#stamp-pad-scroll-container::-webkit-scrollbar {
+#stamp-pad-scroll-container::-webkit-scrollbar {
 	display:none;
-}*/
+}
 
 .bottom-options {
 	position:absolute;
@@ -402,8 +402,9 @@ body {
 
 #cancel-stamp-menu {
 	position:absolute;
+	padding:5px;
 	width:255px;
-	top:10px;
+	top:30px;
 	right:10px;
 	z-index:9999;
 	display:none;
