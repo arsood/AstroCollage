@@ -1,5 +1,7 @@
 //Set up Kinetic
 
+Kinetic.pixelRatio = 1;
+
 var stage = new Kinetic.Stage({
   container: 'stage',
   width: $(document).width(),
