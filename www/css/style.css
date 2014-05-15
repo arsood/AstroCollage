@@ -30,6 +30,10 @@ body {
 	background-color:#000 !important;
 }
 
+#holder {
+	position:fixed;
+}
+
 #container {
 	width:100%;
 	position:relative;
@@ -354,7 +358,6 @@ body {
 	top:20px;
 	right:0;
 	padding:20px;
-	display:block;
 	z-index:9999;
 }
 
