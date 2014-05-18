@@ -36,6 +36,14 @@ $(document).ready(function() {
     if (localStorage.getItem("stamp_selected")) {
         $("#cancel-stamp-menu").show();
     }
+
+    //Remove edit menu on swipe right
+
+    var editMenu = document.getElementById("edit-menu");
+
+    Hammer(editMenu).on("dragright", function(event) {
+        hideManiMenu();
+    });
 });
 
 //Toggle stamp pad visibility
@@ -52,6 +60,7 @@ function resizeStampScroll() {
 }
 
 $(document).on("tap", "#add-menu-button", function() {
+    hideManiMenu();
     if ($("#select-menu-container").is(":visible")) {
         $("#select-menu-container").fadeOut(200);
     } else {
@@ -214,8 +223,8 @@ function placeImage(insertImage, xCoord, yCoord) {
                 localStorage.setItem("canvas_image_selected", this.id());
                 if ($("#edit-menu").hasClass("edit-menu-hide")) {
                     showManiMenu();
-                    // this.stroke("red");
-                    // this.strokeWidth(4);
+                    //this.stroke("red");
+                    //this.strokeWidth(4);
                 } else {
                     hideManiMenu();
                     //this.stroke(0);
@@ -332,9 +341,11 @@ $(document).on("tap", "#edit-menu-remove", function() {
 $(document).on("tap", "#change-layer-up", function() {
     stage.find("#" + localStorage.getItem("canvas_image_selected")).moveUp();
     layer.draw();
+    resetStageBackground();
 });
 
 $(document).on("tap", "#change-layer-down", function() {
     stage.find("#" + localStorage.getItem("canvas_image_selected")).moveDown();
     layer.draw();
+    resetStageBackground();
 });
