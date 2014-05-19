@@ -379,7 +379,8 @@ $(document).on("tap", "#edit-menu-reccrop", function(e) {
         height:adjHeight,
         stroke:"blue",
         strokeWidth:4,
-        draggable:true
+        draggable:true,
+        id:'cropRect'
     });
 
     transImage(rect, false);
@@ -388,4 +389,17 @@ $(document).on("tap", "#edit-menu-reccrop", function(e) {
     stage.add(layer);
 
     hideManiMenu();
+
+    rect.on("tap", function() {
+        astroElement.crop({
+            x:rect.attrs.x,
+            y:rect.attrs.y,
+            width:rect.attrs.width,
+            height:rect.attrs.height
+        });
+
+        rect.remove();
+
+        layer.draw();
+    });
 });
