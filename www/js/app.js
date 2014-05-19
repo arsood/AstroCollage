@@ -362,7 +362,9 @@ $(document).on("tap", "#change-layer-down", function() {
 
 //Rectangular crop
 
-$(document).on("tap", "#edit-menu-reccrop", function() {
+$(document).on("tap", "#edit-menu-reccrop", function(e) {
+    e.stopPropagation();
+
     var astroElement = stage.find("#" + localStorage.getItem("canvas_image_selected"));
 
     var adjWidth = astroElement[0].attrs.image.width * astroElement[0].attrs.scaleX;
@@ -380,10 +382,10 @@ $(document).on("tap", "#edit-menu-reccrop", function() {
         draggable:true
     });
 
+    transImage(rect, false);
+
     layer.add(rect);
     stage.add(layer);
-
-    transImage(rect, false);
 
     hideManiMenu();
 });
