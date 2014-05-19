@@ -38,7 +38,8 @@
 
 		<!--Stamp Pad Template-->
 		<script id="stamp-pad-template" type="text/x-template">
-			<div data-image="{{ image }}" class="stamp-pad-image black-background" style="background:url(img/thumbs/{{ image }}) no-repeat;"></div>
+			<div data-image="{{ image }}" class="stamp-pad-image black-background" style="background:url(img/thumbs/{{ image }}) no-repeat;">
+			</div>
 		</script>
 		<!--/Stamp Pad Template-->
 
@@ -892,7 +893,7 @@
 
 		<!--Edit Image Menu-->
 		<div id="edit-menu" class="chrome-background edit-menu-hide">
-			<div class="menu-group-container">
+			<div id="edit-menu-reccrop" class="menu-group-container">
 				<div class="menu-group-icon">
 					<div class="menu-buttons menu-buttons-small rounded-white-border">
 						<img src="img/icons/rectangular_crop.png" />
@@ -978,7 +979,7 @@
 </div>
 
 <!--Include Cordova-->
-<script src="cordova.js"></script>
+<!--<script src="cordova.js"></script>-->
 
 <!--Include Additional Libraries-->
 <script src="libraries/hammer/hammer.min.js"></script>

@@ -186,31 +186,9 @@ function placeImage(insertImage, xCoord, yCoord) {
         layer.add(piece);
         stage.add(layer);
 
-        //User Hammer.js for pinch zooming and rotating
+        //Set up image transforms
 
-        var hammertime = Hammer(piece);
-
-        var originalScale = {
-            x:1,
-            y:1
-        };
-        var originalRotation = 0;
-
-        hammertime.on("transform", function(event) {
-            event.preventDefault();
-
-            var scaleDiff = 1 - originalScale.x;
-
-            piece.scale({
-                x:event.gesture.scale - scaleDiff,
-                y:event.gesture.scale - scaleDiff
-            }).rotation(event.gesture.rotation + originalRotation);
-
-            layer.draw();
-        }).on("transformend", function() {
-            originalScale = piece.scale();
-            originalRotation = piece.rotation();
-        });
+        transImage(piece, true);
 
         //Show layer options and set id so we can manipulate this layer later
 
@@ -238,6 +216,38 @@ function placeImage(insertImage, xCoord, yCoord) {
     imageObj.src = 'img/library/' + insertImage;
 
     resetStageBackground();
+}
+
+function transImage(item, rotation) {
+    //User Hammer.js for pinch zooming and rotating
+
+    var hammertime = Hammer(item);
+
+    var originalScale = {
+        x:1,
+        y:1
+    };
+    var originalRotation = 0;
+
+    hammertime.on("transform", function(event) {
+        event.preventDefault();
+
+        var scaleDiff = 1 - originalScale.x;
+
+        item.scale({
+            x:event.gesture.scale - scaleDiff,
+            y:event.gesture.scale - scaleDiff
+        })
+
+        if (rotation) {
+            item.rotation(event.gesture.rotation + originalRotation);
+        }
+
+        layer.draw();
+    }).on("transformend", function() {
+        originalScale = item.scale();
+        originalRotation = item.rotation();
+    });
 }
 
 //Handle snap menu place
@@ -348,4 +358,32 @@ $(document).on("tap", "#change-layer-down", function() {
     stage.find("#" + localStorage.getItem("canvas_image_selected")).moveDown();
     layer.draw();
     resetStageBackground();
+});
+
+//Rectangular crop
+
+$(document).on("tap", "#edit-menu-reccrop", function() {
+    var astroElement = stage.find("#" + localStorage.getItem("canvas_image_selected"));
+
+    var adjWidth = astroElement[0].attrs.image.width * astroElement[0].attrs.scaleX;
+    var adjHeight = astroElement[0].attrs.image.height * astroElement[0].attrs.scaleY;
+
+    var rect = new Kinetic.Rect({
+        x:astroElement[0].attrs.x,
+        y:astroElement[0].attrs.y,
+        offsetX:adjWidth / 2,
+        offsetY:adjHeight / 2,
+        width:adjWidth,
+        height:adjHeight,
+        stroke:"blue",
+        strokeWidth:4,
+        draggable:true
+    });
+
+    layer.add(rect);
+    stage.add(layer);
+
+    transImage(rect, false);
+
+    hideManiMenu();
 });
