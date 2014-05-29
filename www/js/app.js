@@ -398,8 +398,8 @@ $(document).on("tap", "#edit-menu-reccrop", function(e) {
             height:rect.attrs.height
         });
 
-        rect.remove();
-
         layer.draw();
+
+        rect.remove();
     });
 });
