@@ -59,13 +59,20 @@ function resizeStampScroll() {
     $("#stamp-pad-image-container").css("width", size + "px");
 }
 
-$(document).on("tap", "#add-menu-button", function() {
+//Toggle image add menu on tap
+
+$(document).on("tap", "#add-menu-button", function(event) {
+    event.stopPropagation();
     hideManiMenu();
     if ($("#select-menu-container").is(":visible")) {
         $("#select-menu-container").fadeOut(200);
     } else {
         $("#add-menu-container").fadeToggle(200);
     }
+
+    //Make sure to hide the snap menu if it's visible
+
+    $("#snap-menu").hide();
 });
 
 //Change background color of canvas
@@ -199,7 +206,7 @@ function placeImage(insertImage, xCoord, yCoord) {
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide")) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible")) {
                     showManiMenu();
                     //this.stroke("red");
                     //this.strokeWidth(4);
