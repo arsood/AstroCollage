@@ -169,7 +169,7 @@ function showManiMenu() {
 
 var lastId = 1;
 
-function placeImage(insertImage, xCoord, yCoord) {
+function placeImage(insertImage, xCoord, yCoord, dimensions) {
     //Place image on canvas
 
     var imageObj = new Image();
@@ -187,7 +187,9 @@ function placeImage(insertImage, xCoord, yCoord) {
             offsetY: imageObj.height / 2,
             image: imageObj,
             draggable:true,
-            id:lastId++
+            id:lastId++,
+            width:dimensions.width,
+            height:dimensions.height
         });
 
         layer.add(piece);
@@ -220,7 +222,7 @@ function placeImage(insertImage, xCoord, yCoord) {
         });
     };
     
-    imageObj.src = 'img/library/' + insertImage;
+    imageObj.src = insertImage;
 
     resetStageBackground();
 }
@@ -260,7 +262,10 @@ function transImage(item, rotation) {
 //Handle snap menu place
 
 $(document).on("tap", "#snap-menu-place", function() {
-    placeImage(localStorage.getItem("selected_image"), "none", "none");
+    placeImage("img/library/" + localStorage.getItem("selected_image"), "none", "none", {
+        width:null,
+        height:null
+    });
 
     $("#snap-menu").hide();
 });
@@ -320,7 +325,10 @@ $(document).on("tap", ".stamp-pad-image", function() {
 
 $(document).on("tap", "canvas", function(event) {
     if (localStorage.getItem("stamp_selected")) {
-        placeImage(localStorage.getItem("stamp_selected"), event.pageX, event.pageY);
+        placeImage("img/library/" + localStorage.getItem("stamp_selected"), event.pageX, event.pageY, {
+            width:null,
+            height:null
+        });
     } else {
         return false;
     }

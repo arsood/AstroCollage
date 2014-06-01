@@ -134,6 +134,11 @@ body {
 
 #share-menu-button {
 	bottom:20px;
+	right:100px;
+}
+
+#reset-canvas-button {
+	bottom:20px;
 	right:20px;
 }
 
