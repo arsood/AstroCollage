@@ -169,15 +169,27 @@ function showManiMenu() {
 
 var lastId = 1;
 
-function placeImage(insertImage, xCoord, yCoord, dimensions) {
+function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
     //Place image on canvas
 
     var imageObj = new Image();
     
     imageObj.onload = function() {
-        if (xCoord === "none" && yCoord === "none") {
+        if (xCoord === null && yCoord === null) {
             xCoord = imageObj.width / 2;
             yCoord = imageObj.height / 2;
+        }
+
+        if (imageId === null) {
+            idImage = lastId++;
+        } else {
+            idImage = imageId;
+        }
+
+        if (mani) {
+            dragMe = true;
+        } else {
+            dragMe = false;
         }
 
         var piece = new Kinetic.Image({
@@ -186,8 +198,8 @@ function placeImage(insertImage, xCoord, yCoord, dimensions) {
             offsetX: imageObj.width / 2,
             offsetY: imageObj.height / 2,
             image: imageObj,
-            draggable:true,
-            id:lastId++,
+            draggable:dragMe,
+            id:idImage,
             width:dimensions.width,
             height:dimensions.height
         });
@@ -197,7 +209,9 @@ function placeImage(insertImage, xCoord, yCoord, dimensions) {
 
         //Set up image transforms
 
-        transImage(piece, true);
+        if (mani) {
+            transImage(piece, true);
+        }
 
         //Show layer options and set id so we can manipulate this layer later
 
@@ -262,10 +276,10 @@ function transImage(item, rotation) {
 //Handle snap menu place
 
 $(document).on("tap", "#snap-menu-place", function() {
-    placeImage("img/library/" + localStorage.getItem("selected_image"), "none", "none", {
+    placeImage("img/library/" + localStorage.getItem("selected_image"), null, null, {
         width:null,
         height:null
-    });
+    }, null, true);
 
     $("#snap-menu").hide();
 });
@@ -328,7 +342,7 @@ $(document).on("tap", "canvas", function(event) {
         placeImage("img/library/" + localStorage.getItem("stamp_selected"), event.pageX, event.pageY, {
             width:null,
             height:null
-        });
+        }, null, true);
     } else {
         return false;
     }
