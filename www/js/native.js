@@ -75,10 +75,6 @@ $(document).on("tap", "#background-take-photo", function() {
 function placeCordovaBackground(imageData) {
 	stage.find("#stage-background").remove();
 
-	fillBackground("color", "#000000");
-
-	layer.draw();
-
 	placeImage(imageData, null, null, {
 		width:$(document).width(),
 		height:$(document).height()

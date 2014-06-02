@@ -38,10 +38,47 @@
 
 		<!--Stamp Pad Template-->
 		<script id="stamp-pad-template" type="text/x-template">
-			<div data-image="{{ image }}" class="stamp-pad-image black-background" style="background:url(img/thumbs/{{ image }}) no-repeat;">
+			<div id="stamp{{ id }}" data-image="{{ image }}" class="stamp-pad-image black-background" style="background:url(img/thumbs/{{ image }}) no-repeat;">
 			</div>
 		</script>
 		<!--/Stamp Pad Template-->
+
+		<!--Stamp Image Menu-->
+		<div id="stamp-image-menu" class="chrome-background rounded-white-border">
+			<div id="stamp-image-activate" class="snap-menu-item-container">
+				<div class="stamp-image-menu-1">
+					<div class="menu-buttons menu-buttons-small rounded-white-border">
+						<img src="img/palette.png" />
+					</div>
+				</div>
+				<div class="stamp-image-menu-2">
+					ACTIVATE STAMP
+				</div>
+			</div>
+
+			<div id="stamp-image-remove" class="snap-menu-item-container">
+				<div class="stamp-image-menu-1">
+					<div class="menu-buttons menu-buttons-small rounded-white-border">
+						<i class="fa fa-times"></i>
+					</div>
+				</div>
+				<div class="stamp-image-menu-2">
+					REMOVE STAMP
+				</div>
+			</div>
+
+			<div id="stamp-image-cancel" class="snap-menu-item-container">
+				<div class="stamp-image-menu-1">
+					<div class="menu-buttons menu-buttons-small rounded-white-border">
+						<i class="fa fa-ban"></i>
+					</div>
+				</div>
+				<div class="stamp-image-menu-2">
+					CANCEL
+				</div>
+			</div>
+		</div>
+		<!--/Stamp Image Menu-->
 
 		<!--Add Image Menu-->
 		<div id="add-menu-container" class="main-menu-container chrome-background rounded-white-border">
@@ -153,6 +190,14 @@
 								</div>
 								<div class="menu-image-title">
 									FROM CAMERA ROLL
+								</div>
+							</td>
+							<td>
+								<div id="background-astro" class="menu-backgrounds-icon rounded-white-border">
+									<!--<img src="img/thumbs/stars/sta3.png" />-->
+								</div>
+								<div class="menu-image-title">
+									FROM ASTRO IMAGES
 								</div>
 							</td>
 							<td>

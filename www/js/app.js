@@ -289,8 +289,10 @@ $(document).on("tap", "#snap-menu-place", function() {
 var stampTemplateSource = $("#stamp-pad-template").html();
 var stampTemplate = Handlebars.compile(stampTemplateSource);
 
+var stampImageId = 0;
+
 $(document).on("tap", "#snap-menu-add", function() {
-    var html = stampTemplate({ image:localStorage.getItem("selected_image") });
+    var html = stampTemplate({ image:localStorage.getItem("selected_image"), id: stampImageId++ });
 
     $("#stamp-pad-image-container").append(html);
 
@@ -298,24 +300,26 @@ $(document).on("tap", "#snap-menu-add", function() {
 
     $("#snap-menu").hide();
 
+    //DARN SHAME :( This was some nice code!
+
     //Create draggable element
 
-    $(".stamp-pad-image").draggable({
-        revert:true,
-        helper:"clone",
-        appendTo:"#container"
-    });
+    // $(".stamp-pad-image").draggable({
+    //     revert:true,
+    //     helper:"clone",
+    //     appendTo:"#container"
+    // });
 
     //Create droppable effect
 
-    $("#container").droppable({
-        drop:function(event, ui) {
-            if (ui.offset.top >= 100) {
-                ui.draggable.fadeOut(200);
-                ui.helper.fadeOut(200);
-            }
-        }
-    });
+    // $("#container").droppable({
+    //     drop:function(event, ui) {
+    //         if (ui.offset.top >= 100) {
+    //             ui.draggable.fadeOut(200);
+    //             ui.helper.fadeOut(200);
+    //         }
+    //     }
+    // });
 });
 
 //Handle snap menu cancel
@@ -324,14 +328,63 @@ $(document).on("tap", "#snap-menu-cancel", function() {
     $("#snap-menu").fadeOut("fast");
 });
 
-//Tap on a stamp pad image
+//Tap on stamp pad image to get options
 
 $(document).on("tap", ".stamp-pad-image", function() {
-    localStorage.setItem("stamp_selected", $(this).attr("data-image"));
+    //Get ID to pass down scope to the menu
+
+    sessionStorage.setItem("temp_stamp_selected", $(this).attr("id"));
+
+    var thisOffset = $(this).offset();
+
+    var newLeftOffset = thisOffset.left - ($(this).width() / 2) - 10;
+
+    //Make sure menu doesn't go off-screen
+
+    if (newLeftOffset < 20) {
+        newLeftOffset = 0;
+    }
+
+    if (newLeftOffset > $(document).width() - 200) {
+        newLeftOffset = $(document).width() - 200;
+    }
+
+    $("#stamp-image-menu").css("left", newLeftOffset).show();
+});
+
+//Activate stamp pad image
+
+$(document).on("tap", "#stamp-image-activate", function() {
+    //Grab the data-image attribute to activate the stamp
+
+    var dataImage = $("#" + sessionStorage.getItem("temp_stamp_selected")).attr("data-image");
+    
+    //Set the persistent localStorage to hold on to the stamp
+
+    localStorage.setItem("stamp_selected", dataImage);
     $(".stamp-pad-image").removeClass("black-border");
-    $(this).addClass("black-border");
+    $("#" + sessionStorage.getItem("temp_stamp_selected")).addClass("black-border");
+    
+    //Hide the stamp image menu and the stamp container
+
+    $("#stamp-image-menu").hide();
+
     $("#stamp-pad-image-container").slideUp(200, function() {
         $("#cancel-stamp-menu").fadeIn(200);
+    });
+});
+
+//Cancel stamp image menu selection
+
+$(document).on("tap", "#stamp-image-cancel", function() {
+    $("#stamp-image-menu").fadeOut(300);
+});
+
+//Remove stamp from stamp pad
+
+$(document).on("tap", "#stamp-image-remove", function() {
+    $("#stamp-image-menu").fadeOut(100, function() {
+        $("#" + sessionStorage.getItem("temp_stamp_selected")).fadeOut(100);
     });
 });
 
