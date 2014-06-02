@@ -401,7 +401,7 @@ $(document).on("tap", "#stamp-image-activate", function() {
     
     //Hide the stamp image menu and the stamp container
 
-    $("#stamp-image-menu").hide();
+    hideStampImageMenu();
 
     $("#stamp-pad-image-container").slideUp(200, function() {
         $("#cancel-stamp-menu").fadeIn(200);
@@ -414,20 +414,19 @@ $(document).on("tap", "#stamp-image-cancel", function() {
     hideStampImageMenu();
 });
 
+//Remove stamp from stamp pad
+
+$(document).on("tap", "#stamp-image-remove", function() {
+    $("#" + sessionStorage.getItem("temp_stamp_selected")).fadeOut(100).dequeue()
+    hideStampImageMenu();
+});
+
 //Function to hide stamp image menu
 
 function hideStampImageMenu() {
     $("#stamp-image-menu").fadeOut(100).dequeue();
     $("#stamp-image-caret").fadeOut(100).dequeue();
 }
-
-//Remove stamp from stamp pad
-
-$(document).on("tap", "#stamp-image-remove", function() {
-    $("#stamp-image-menu").fadeOut(100).dequeue();
-    $("#" + sessionStorage.getItem("temp_stamp_selected")).fadeOut(100).dequeue()
-    $("#stamp-image-caret").fadeOut(100).dequeue();
-});
 
 //Machine gun to place stamp image that was selected
 
