@@ -147,7 +147,7 @@ body {
 	position:relative;
 }
 
-#add-menu-container, #select-menu-container {
+#add-menu-container, #select-menu-container, #add-astro-background-menu {
 	position:absolute;
 	bottom:90px;
 	left:50%;
@@ -372,7 +372,7 @@ body {
 	padding:20px;
 	padding-bottom:20px;
 	z-index:9999;
-	top:120px;
+	top:140px;
 	display:none;
 }
 
@@ -388,6 +388,17 @@ body {
 	padding-top:10px;
 	width:140px;
 	font-weight:bold;
+}
+
+#stamp-image-caret {
+	display:none;
+	position:absolute;
+	top:125px;
+	width:0; 
+	height:0; 
+	border-left:20px solid transparent;
+	border-right:20px solid transparent;
+	border-bottom:20px solid #CCCCCC;
 }
 
 #edit-menu {

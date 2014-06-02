@@ -59,13 +59,24 @@ function resizeStampScroll() {
     $("#stamp-pad-image-container").css("width", size + "px");
 }
 
+//Stamp pad scroll event
+
+$("#stamp-pad-scroll-container").scroll(function() {
+    hideStampImageMenu();
+});
+
 //Toggle image add menu on tap
 
 $(document).on("tap", "#add-menu-button", function(event) {
     event.stopPropagation();
     hideManiMenu();
+
+    //Show or hide select menu and astro background menu
+
     if ($("#select-menu-container").is(":visible")) {
         $("#select-menu-container").fadeOut(200);
+    } else if ($("#add-astro-background-menu").is(":visible")) {
+        $("#add-astro-background-menu").fadeOut(200);
     } else {
         $("#add-menu-container").fadeToggle(200);
     }
@@ -109,8 +120,12 @@ function fillBackground(type, value) {
 //Make sure background is on bottom
 
 function resetStageBackground() {
-    stage.find("#stage-background").moveToBottom();
-    layer.draw();
+    //Wrap in timeout to fix loading errors
+
+    setTimeout(function() {
+        stage.find("#stage-background").moveToBottom();
+        layer.draw();
+    }, 10);
 }
 
 //Create carousel for all slidy menus
@@ -138,6 +153,7 @@ $(document).on("tap", "#add-menu-container div.menu-image", function() {
 
 $(document).on("tap", ".select-menu-back", function() {
     $("#select-menu-container").hide();
+    $("#add-astro-background-menu").hide();
     $("#add-menu-container").show();
 });
 
@@ -154,6 +170,23 @@ $(document).on("tap", "#select-menu-container div.menu-image", function() {
         $("#snap-menu").css("top", thisOffset.top - ($(this).height() * 2 + 30)).css("left", thisOffset.left - ($(this).width() / 2) + 10).show();
 
         localStorage.setItem("selected_image", $(this).attr("data-image"));
+    }
+});
+
+//Set astro background image
+
+$(document).on("tap", "#add-astro-background-menu div.menu-image", function() {
+    if ($(this).children().length === 1) {
+        return false;
+    } else {
+        stage.find("#stage-background").remove();
+
+        placeImage($(this).attr("data-image"), null, null, {
+            width:$(document).width(),
+            height:$(document).height()
+        }, "stage-background", false);
+
+        resetStageBackground();
     }
 });
 
@@ -222,7 +255,7 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible")) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible")) {
                     showManiMenu();
                     //this.stroke("red");
                     //this.strokeWidth(4);
@@ -342,14 +375,15 @@ $(document).on("tap", ".stamp-pad-image", function() {
     //Make sure menu doesn't go off-screen
 
     if (newLeftOffset < 20) {
-        newLeftOffset = 0;
+        newLeftOffset = 10;
     }
 
-    if (newLeftOffset > $(document).width() - 200) {
-        newLeftOffset = $(document).width() - 200;
+    if (newLeftOffset > $(document).width() - 250) {
+        newLeftOffset = $(document).width() - 248;
     }
 
     $("#stamp-image-menu").css("left", newLeftOffset).show();
+    $("#stamp-image-caret").css("left", thisOffset.left + 32).show();
 });
 
 //Activate stamp pad image
@@ -377,15 +411,22 @@ $(document).on("tap", "#stamp-image-activate", function() {
 //Cancel stamp image menu selection
 
 $(document).on("tap", "#stamp-image-cancel", function() {
-    $("#stamp-image-menu").fadeOut(300);
+    hideStampImageMenu();
 });
+
+//Function to hide stamp image menu
+
+function hideStampImageMenu() {
+    $("#stamp-image-menu").fadeOut(100).dequeue();
+    $("#stamp-image-caret").fadeOut(100).dequeue();
+}
 
 //Remove stamp from stamp pad
 
 $(document).on("tap", "#stamp-image-remove", function() {
-    $("#stamp-image-menu").fadeOut(100, function() {
-        $("#" + sessionStorage.getItem("temp_stamp_selected")).fadeOut(100);
-    });
+    $("#stamp-image-menu").fadeOut(100).dequeue();
+    $("#" + sessionStorage.getItem("temp_stamp_selected")).fadeOut(100).dequeue()
+    $("#stamp-image-caret").fadeOut(100).dequeue();
 });
 
 //Machine gun to place stamp image that was selected
@@ -484,4 +525,11 @@ $(document).on("tap", "#edit-menu-reccrop", function(e) {
 
         rect.remove();
     });
+});
+
+//Open up astro background menu
+
+$(document).on("tap", "#background-astro", function() {
+    $("#add-menu-container").hide();
+    $("#add-astro-background-menu").show();
 });
