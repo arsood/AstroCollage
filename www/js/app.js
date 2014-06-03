@@ -125,7 +125,7 @@ function resetStageBackground() {
     setTimeout(function() {
         stage.find("#stage-background").moveToBottom();
         layer.draw();
-    }, 10);
+    }, 30);
 }
 
 //Create carousel for all slidy menus
