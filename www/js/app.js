@@ -69,6 +69,9 @@ $("#stamp-pad-scroll-container").scroll(function() {
 
 $(document).on("tap", "#add-menu-button", function(event) {
     event.stopPropagation();
+
+    hideGridMenu();
+
     hideManiMenu();
 
     //Show or hide select menu and astro background menu
@@ -89,7 +92,6 @@ $(document).on("tap", "#add-menu-button", function(event) {
 //Change background color of canvas
 
 $(document).on("tap", "#menu-backgrounds-color-options div", function() {
-    //$("#stage").css("background-color", $(this).css("background-color"));
     fillBackground("color", $(this).css("background-color"));
 });
 
@@ -272,6 +274,8 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
     imageObj.src = insertImage;
 
     resetStageBackground();
+
+    resetGridPosition();
 }
 
 function transImage(item, rotation) {
@@ -531,4 +535,53 @@ $(document).on("tap", "#edit-menu-reccrop", function(e) {
 $(document).on("tap", "#background-astro", function() {
     $("#add-menu-container").hide();
     $("#add-astro-background-menu").show();
+});
+
+//Hide add menu
+
+function hideAddMenu() {
+    hideManiMenu();
+
+    $("#select-menu-container").hide();
+    $("#add-astro-background-menu").hide();
+    $("#add-menu-container").hide();
+
+    $("#snap-menu").hide();
+}
+
+//Hide grid menu
+
+function hideGridMenu() {
+    $("#grid-menu").hide();
+}
+
+//Open up grid options menu
+
+$(document).on("tap", "#grid-menu-button", function() {
+    hideAddMenu();
+
+    $("#grid-menu").fadeToggle(200);
+});
+
+//Place grid on canvas
+
+$(document).on("tap", ".grid-menu-item", function() {
+    stage.find("#stage-grid").remove();
+
+    var imageObj = new Image();
+
+    var piece = new Kinetic.Image({
+        image: imageObj,
+        id:"stage-grid",
+        width:$(document).width(),
+        height:$(document).height(),
+        opacity:0.3
+    });
+
+    imageObj.src = $(this).attr("data-grid");
+
+    layer.add(piece);
+    stage.add(layer);
+
+    resetStageBackground();
 });

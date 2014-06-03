@@ -144,7 +144,6 @@ body {
 
 .main-menu-container {
 	padding:20px;
-	position:relative;
 }
 
 #add-menu-container, #select-menu-container, #add-astro-background-menu {
@@ -479,4 +478,23 @@ body {
 	padding-top:10px;
 	font-size:1.2em;
 	font-weight:bold;
+}
+
+#grid-menu {
+	position:absolute;
+	bottom:90px;
+	left:20px;
+	display:none;
+}
+
+.grid-menu-item {
+	width:200px;
+	height:150px;
+	background-size:cover !important;
+	float:left;
+	margin-left:20px;
+}
+
+.grid-menu-item:first-child {
+	margin-left:0;
 }
