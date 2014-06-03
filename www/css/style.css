@@ -498,3 +498,15 @@ body {
 .grid-menu-item:first-child {
 	margin-left:0;
 }
+
+#grid-menu-options {
+	position:absolute;
+	right:20px;
+	top:35%;
+	padding:10px;
+	display:none;
+}
+
+#grid-menu-options div.change-layer-option {
+	float:none;
+}

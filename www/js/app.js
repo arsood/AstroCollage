@@ -584,4 +584,31 @@ $(document).on("tap", ".grid-menu-item", function() {
     stage.add(layer);
 
     resetStageBackground();
+
+    $("#grid-menu").fadeOut(200).dequeue();
+    $("#grid-menu-options").fadeIn(200).dequeue();
+});
+
+//Change grid layers
+
+$(document).on("tap", "#grid-layer-up", function() {
+    stage.find("#stage-grid").moveUp();
+
+    layer.draw();
+});
+
+$(document).on("tap", "#grid-layer-down", function() {
+    stage.find("#stage-grid").moveDown();
+
+    layer.draw();
+});
+
+//Remove grid
+
+$(document).on("tap", "#remove-grid-button", function() {
+    stage.find("#stage-grid").remove();
+
+    layer.draw();
+
+    $("#grid-menu-options").fadeOut(200);
 });
