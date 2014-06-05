@@ -41,7 +41,7 @@ $(document).ready(function() {
 
     var editMenu = document.getElementById("edit-menu");
 
-    Hammer(editMenu).on("dragright", function(event) {
+    Hammer(editMenu).on("dragright", function() {
         hideManiMenu();
     });
 });
@@ -67,9 +67,7 @@ $("#stamp-pad-scroll-container").scroll(function() {
 
 //Toggle image add menu on tap
 
-$(document).on("tap", "#add-menu-button", function(event) {
-    event.stopPropagation();
-
+$(document).on("tap", "#add-menu-button", function() {
     hideGridMenu();
 
     hideManiMenu();
@@ -274,8 +272,6 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
     imageObj.src = insertImage;
 
     resetStageBackground();
-
-    resetGridPosition();
 }
 
 function transImage(item, rotation) {
@@ -488,9 +484,7 @@ $(document).on("tap", "#change-layer-down", function() {
 
 //Rectangular crop
 
-$(document).on("tap", "#edit-menu-reccrop", function(e) {
-    e.stopPropagation();
-
+$(document).on("tap", "#edit-menu-reccrop", function() {
     var astroElement = stage.find("#" + localStorage.getItem("canvas_image_selected"));
 
     var adjWidth = astroElement[0].attrs.image.width * astroElement[0].attrs.scaleX;
