@@ -181,10 +181,19 @@ $(document).on("tap", "#add-astro-background-menu div.menu-image", function() {
     } else {
         stage.find("#stage-background").remove();
 
-        placeImage($(this).attr("data-image"), null, null, {
+        var imageObj = new Image();
+
+        var piece = new Kinetic.Image({
+            image: imageObj,
+            id:"stage-background",
             width:$(document).width(),
             height:$(document).height()
-        }, "stage-background", false);
+        });
+
+        imageObj.src = $(this).attr("data-image");
+
+        layer.add(piece);
+        stage.add(layer);
 
         resetStageBackground();
     }
@@ -589,12 +598,16 @@ $(document).on("tap", "#grid-layer-up", function() {
     stage.find("#stage-grid").moveUp();
 
     layer.draw();
+
+    resetStageBackground();
 });
 
 $(document).on("tap", "#grid-layer-down", function() {
     stage.find("#stage-grid").moveDown();
 
     layer.draw();
+
+    resetStageBackground();
 });
 
 //Remove grid
