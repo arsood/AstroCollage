@@ -493,7 +493,9 @@ $(document).on("tap", "#change-layer-down", function() {
 
 //Rectangular crop
 
-$(document).on("tap", "#edit-menu-reccrop", function() {
+$(document).on("tap", "#edit-menu-reccrop", function(event) {
+    event.stopPropagation();
+
     var astroElement = stage.find("#" + localStorage.getItem("canvas_image_selected"));
 
     var adjWidth = astroElement[0].attrs.image.width * astroElement[0].attrs.scaleX;
@@ -520,16 +522,21 @@ $(document).on("tap", "#edit-menu-reccrop", function() {
     hideManiMenu();
 
     rect.on("tap", function() {
-        astroElement.crop({
-            x:rect.attrs.x,
-            y:rect.attrs.y,
-            width:rect.attrs.width,
-            height:rect.attrs.height
-        });
+        // astroElement.crop({
+        //     x:rect.attrs.x,
+        //     y:rect.attrs.y,
+        //     width:rect.attrs.width,
+        //     height:rect.attrs.height
+        // });
 
-        layer.draw();
+        // layer.draw();
 
-        rect.remove();
+        // rect.remove();
+
+        var fillImage = new Image();
+        fillImage.src = $(astroElement[0].attrs.image).attr("src");
+
+        this.fillPatternImage(fillImage);
     });
 });
 
