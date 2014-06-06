@@ -75,10 +75,19 @@ $(document).on("tap", "#background-take-photo", function() {
 function placeCordovaBackground(imageData) {
 	stage.find("#stage-background").remove();
 
-	placeImage(imageData, null, null, {
-		width:$(document).width(),
-		height:$(document).height()
-	}, "stage-background", false);
+	var imageObj = new Image();
+
+    var piece = new Kinetic.Image({
+        image:imageObj,
+        id:"stage-background",
+        width:$(document).width(),
+        height:$(document).height()
+    });
+
+    imageObj.src = imageData;
+
+    layer.add(piece);
+    stage.add(layer);
 
 	resetStageBackground();
 }
