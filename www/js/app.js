@@ -522,21 +522,21 @@ $(document).on("tap", "#edit-menu-reccrop", function(event) {
     hideManiMenu();
 
     rect.on("tap", function() {
-        // astroElement.crop({
-        //     x:rect.attrs.x,
-        //     y:rect.attrs.y,
-        //     width:rect.attrs.width,
-        //     height:rect.attrs.height
-        // });
+        astroElement.crop({
+            x:rect.attrs.x,
+            y:rect.attrs.y,
+            width:rect.attrs.width,
+            height:rect.attrs.height
+        });
 
-        // layer.draw();
+        layer.draw();
 
-        // rect.remove();
+        this.remove();
 
-        var fillImage = new Image();
-        fillImage.src = $(astroElement[0].attrs.image).attr("src");
+        // var fillImage = new Image();
+        // fillImage.src = $(astroElement[0].attrs.image).attr("src");
 
-        this.fillPatternImage(fillImage);
+        // this.fillPatternImage(fillImage);
     });
 });
 
