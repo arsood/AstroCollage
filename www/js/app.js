@@ -501,8 +501,8 @@ $(document).on("tap", "#edit-menu-reccrop", function(event) {
 
     var astroElement = stage.find("#" + localStorage.getItem("canvas_image_selected"));
 
-    var adjWidth = astroElement[0].children[0].attrs.image.width * astroElement[0].attrs.scaleX;
-    var adjHeight = astroElement[0].children[0].attrs.image.height * astroElement[0].attrs.scaleY;
+    var adjWidth = astroElement[0].children[0].attrs.image.width; //* astroElement[0].attrs.scaleX;
+    var adjHeight = astroElement[0].children[0].attrs.image.height; //* astroElement[0].attrs.scaleY;
 
     var rect = new Kinetic.Rect({
         x:astroElement[0].attrs.x,
