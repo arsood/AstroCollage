@@ -235,29 +235,35 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
         }
 
         var piece = new Kinetic.Image({
+            image:imageObj
+        });
+
+        var pieceGroup = new Kinetic.Group({
             x: xCoord,
             y: yCoord,
             offsetX: imageObj.width / 2,
             offsetY: imageObj.height / 2,
-            image: imageObj,
-            draggable:dragMe,
             id:idImage,
+            offsetX: imageObj.width / 2,
+            offsetY: imageObj.height / 2,
+            draggable:dragMe,
             width:dimensions.width,
             height:dimensions.height
         });
 
-        layer.add(piece);
+        pieceGroup.add(piece);
+        layer.add(pieceGroup);
         stage.add(layer);
 
         //Set up image transforms
 
         if (mani) {
-            transImage(piece, true);
+            transImage(pieceGroup, true);
         }
 
         //Show layer options and set id so we can manipulate this layer later
 
-        piece.on("tap", function() {
+        pieceGroup.on("tap", function() {
             //Toggle option menu on tap of canvas image
 
             if (localStorage.getItem("stamp_selected")) {
@@ -266,11 +272,8 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
                 localStorage.setItem("canvas_image_selected", this.id());
                 if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible")) {
                     showManiMenu();
-                    //this.stroke("red");
-                    //this.strokeWidth(4);
                 } else {
                     hideManiMenu();
-                    //this.stroke(0);
                 }
 
                 layer.draw();
@@ -498,8 +501,8 @@ $(document).on("tap", "#edit-menu-reccrop", function(event) {
 
     var astroElement = stage.find("#" + localStorage.getItem("canvas_image_selected"));
 
-    var adjWidth = astroElement[0].attrs.image.width * astroElement[0].attrs.scaleX;
-    var adjHeight = astroElement[0].attrs.image.height * astroElement[0].attrs.scaleY;
+    var adjWidth = astroElement[0].children[0].attrs.image.width * astroElement[0].attrs.scaleX;
+    var adjHeight = astroElement[0].children[0].attrs.image.height * astroElement[0].attrs.scaleY;
 
     var rect = new Kinetic.Rect({
         x:astroElement[0].attrs.x,
@@ -511,15 +514,43 @@ $(document).on("tap", "#edit-menu-reccrop", function(event) {
         stroke:"blue",
         strokeWidth:4,
         draggable:true,
-        id:'cropRect'
+        id:'cropRect',
+        dragBoundFunc:function(pos) {
+            var X = pos.x;
+            var Y = pos.y;
+            if (X < minX) {
+                X = minX;
+            }
+            if (X > maxX) {
+                X = maxX;
+            }
+            if (Y < minY) {
+                Y = minY;
+            }
+            if (Y > maxY) {
+                Y = maxY;
+            }
+            return {
+                x:X,
+                y:Y
+            }
+        }
     });
+
+    var minX = astroElement.getX();
+    var maxX = astroElement.getX() + astroElement.getWidth() - rect.getWidth();
+    var minY = astroElement.getY();
+    var maxY = astroElement.getY() + astroElement.getHeight() - rect.getHeight();
+
+    astroElement.add(rect);
 
     transImage(rect, false);
 
-    layer.add(rect);
-    stage.add(layer);
+    layer.draw();
 
     hideManiMenu();
+
+    return false;
 
     rect.on("tap", function() {
         astroElement.crop({
