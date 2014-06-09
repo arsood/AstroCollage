@@ -671,6 +671,12 @@ var textId = 0;
 $(document).on("tap", "#add-text-button", function(event) {
     event.preventDefault();
 
+    var textValue = $("#add-text-input").val();
+
+    if (textValue === "") {
+        return false;
+    }
+
     var newText = new Kinetic.Text({
         x:stage.width() / 3,
         y:200,
@@ -691,8 +697,4 @@ $(document).on("tap", "#add-text-button", function(event) {
 
     document.activeElement.blur();
     $("#add-text-input").blur();
-
-    newText.on("tap", function() {
-        alert(this.id());
-    });
 });
