@@ -540,3 +540,11 @@ body {
 #delete-text-button {
 	background-color:#900;
 }
+
+#crop-confirm-menu {
+	position:absolute;
+	top:30%;
+	left:20px;
+	padding:10px;
+	display:none;
+}
