@@ -647,6 +647,40 @@ $(document).on("tap", "#text-style-colors div", function() {
     layer.draw();
 });
 
+//Change font size up and down
+
+$(document).on("tap", "#text-size-up", function() {
+    var text = stage.find("#" + localStorage.getItem("text_block_selected"))[0];
+    var newSize = text.attrs.fontSize + 20;
+
+    tweenFontSize(text, newSize);
+});
+
+$(document).on("tap", "#text-size-down", function() {
+    var text = stage.find("#" + localStorage.getItem("text_block_selected"))[0];
+    var newSize = text.attrs.fontSize - 20;
+
+    tweenFontSize(text, newSize);
+});
+
+function tweenFontSize(node, size) {
+    var tween = new Kinetic.Tween({
+        node:node,
+        fontSize:size,
+        duration:0.2
+    });
+
+    tween.play();
+}
+
+//Remove selected text
+
+$(document).on("tap", "#delete-text-button", function() {
+    stage.find("#" + localStorage.getItem("text_block_selected")).remove();
+    layer.draw();
+    $("#text-style-menu").fadeOut(200);
+});
+
 //Close menus with X button
 
 $(document).on("tap", "#text-style-menu .close-menu-x", hideAddMenu);
