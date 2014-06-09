@@ -673,12 +673,12 @@ $(document).on("tap", "#add-text-button", function(event) {
 
     var newText = new Kinetic.Text({
         x:stage.width() / 3,
-        y:100,
+        y:200,
         fontSize:50,
         text:$("#add-text-input").val(),
         fill:"#FFFFFF",
         draggable:true,
-        id:"text" + textId++
+        id:"text" + (textId++)
     });
 
     layer.add(newText);
@@ -686,4 +686,13 @@ $(document).on("tap", "#add-text-button", function(event) {
 
     $("#add-text-input").val("");
     $("#add-text-menu").fadeOut(200);
+
+    //Hide iOS keyboard
+
+    document.activeElement.blur();
+    $("#add-text-input").blur();
+
+    newText.on("tap", function() {
+        alert(this.id());
+    });
 });
