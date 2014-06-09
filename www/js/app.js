@@ -72,12 +72,14 @@ $(document).on("tap", "#add-menu-button", function() {
 
     hideManiMenu();
 
-    //Show or hide select menu and astro background menu
+    //Show or hide select menu, astro background menu, and text add menu
 
     if ($("#select-menu-container").is(":visible")) {
         $("#select-menu-container").fadeOut(200);
     } else if ($("#add-astro-background-menu").is(":visible")) {
         $("#add-astro-background-menu").fadeOut(200);
+    } else if ($("#add-text-menu").is(":visible")) {
+        $("#add-text-menu").fadeOut(200);
     } else {
         $("#add-menu-container").fadeToggle(200);
     }
@@ -155,6 +157,7 @@ $(document).on("tap", ".select-menu-back", function() {
     $("#select-menu-container").hide();
     $("#add-astro-background-menu").hide();
     $("#add-menu-container").show();
+    $("#add-text-menu").hide();
 });
 
 //Handle tap of image in a category
@@ -244,8 +247,6 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
             offsetX: imageObj.width / 2,
             offsetY: imageObj.height / 2,
             id:idImage,
-            offsetX: imageObj.width / 2,
-            offsetY: imageObj.height / 2,
             draggable:dragMe,
             width:dimensions.width,
             height:dimensions.height
@@ -270,7 +271,7 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible")) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible")) {
                     showManiMenu();
                 } else {
                     hideManiMenu();
@@ -499,18 +500,18 @@ $(document).on("tap", "#change-layer-down", function() {
 $(document).on("tap", "#edit-menu-reccrop", function(event) {
     event.stopPropagation();
 
-    var astroElement = stage.find("#" + localStorage.getItem("canvas_image_selected"));
+    var astroElement = stage.find("#" + localStorage.getItem("canvas_image_selected"))[0];
 
-    var adjWidth = astroElement[0].children[0].attrs.image.width; //* astroElement[0].attrs.scaleX;
-    var adjHeight = astroElement[0].children[0].attrs.image.height; //* astroElement[0].attrs.scaleY;
+    var adjWidth = astroElement.children[0].attrs.image.width; //* astroElement[0].attrs.scaleX;
+    var adjHeight = astroElement.children[0].attrs.image.height; //* astroElement[0].attrs.scaleY;
 
     var rect = new Kinetic.Rect({
-        x:astroElement[0].attrs.x,
-        y:astroElement[0].attrs.y,
+        x:astroElement.attrs.x,
+        y:astroElement.attrs.y,
         offsetX:adjWidth / 2,
         offsetY:adjHeight / 2,
-        width:adjWidth,
-        height:adjHeight,
+        width:300,
+        height:300,
         stroke:"blue",
         strokeWidth:4,
         draggable:true,
@@ -538,10 +539,10 @@ $(document).on("tap", "#edit-menu-reccrop", function(event) {
     });
 
     var minX = astroElement.getX();
-    var maxX = astroElement.getX() + astroElement.getWidth() - rect.getWidth();
+    var maxX = astroElement.getX() + adjWidth - rect.getWidth();
     var minY = astroElement.getY();
-    var maxY = astroElement.getY() + astroElement.getHeight() - rect.getHeight();
-
+    var maxY = astroElement.getY() + adjHeight - rect.getHeight();
+    
     astroElement.add(rect);
 
     transImage(rect, false);
@@ -550,25 +551,23 @@ $(document).on("tap", "#edit-menu-reccrop", function(event) {
 
     hideManiMenu();
 
-    return false;
+    // rect.on("tap", function() {
+    //     astroElement.crop({
+    //         x:rect.attrs.x,
+    //         y:rect.attrs.y,
+    //         width:rect.attrs.width,
+    //         height:rect.attrs.height
+    //     });
 
-    rect.on("tap", function() {
-        astroElement.crop({
-            x:rect.attrs.x,
-            y:rect.attrs.y,
-            width:rect.attrs.width,
-            height:rect.attrs.height
-        });
+    //     layer.draw();
 
-        layer.draw();
+    //     this.remove();
 
-        this.remove();
+    //     var fillImage = new Image();
+    //     fillImage.src = $(astroElement[0].attrs.image).attr("src");
 
-        // var fillImage = new Image();
-        // fillImage.src = $(astroElement[0].attrs.image).attr("src");
-
-        // this.fillPatternImage(fillImage);
-    });
+    //     this.fillPatternImage(fillImage);
+    // });
 });
 
 //Open up astro background menu
@@ -656,4 +655,35 @@ $(document).on("tap", "#remove-grid-button", function() {
     layer.draw();
 
     $("#grid-menu-options").fadeOut(200);
+});
+
+//Show add text options
+
+$(document).on("tap", "#place-text", function() {
+    hideAddMenu();
+    $("#add-text-menu").show();
+});
+
+//Add text to canvas
+
+var textId = 0;
+
+$(document).on("tap", "#add-text-button", function(event) {
+    event.preventDefault();
+
+    var newText = new Kinetic.Text({
+        x:stage.width() / 3,
+        y:100,
+        fontSize:50,
+        text:$("#add-text-input").val(),
+        fill:"#FFFFFF",
+        draggable:true,
+        id:"text" + textId++
+    });
+
+    layer.add(newText);
+    stage.add(layer);
+
+    $("#add-text-input").val("");
+    $("#add-text-menu").fadeOut(200);
 });
