@@ -146,7 +146,7 @@ body {
 	padding:20px;
 }
 
-#add-menu-container, #select-menu-container, #add-astro-background-menu, #add-text-menu {
+#add-menu-container, #select-menu-container, #add-astro-background-menu, #add-text-menu, #text-style-menu {
 	position:absolute;
 	bottom:90px;
 	left:50%;
@@ -221,10 +221,6 @@ body {
 	margin-right:auto;
 }
 
-#backgrounds-table td {
-	width:200px;
-}
-
 #background-astro {
 	background:url(../img/thumbs/stars/sta3.png) no-repeat;
 	background-size:cover;
@@ -237,7 +233,11 @@ body {
 	text-align:center;
 }
 
-#menu-backgrounds-color-options div {
+#backgrounds-table td, #text-style-colors td {
+	width:200px;
+}
+
+.menu-color-options div {
 	height:50px;
 	width:50px;
 	margin-left:auto;
@@ -248,47 +248,47 @@ body {
 	-webkit-border-radius:5px;
 }
 
-#menu-backgrounds-1 {
+#menu-backgrounds-1, #text-color-1 {
 	background-color:#000;
 }
 
-#menu-backgrounds-2 {
+#menu-backgrounds-2, #text-color-2 {
 	background-color:#2e3190;
 }
 
-#menu-backgrounds-3 {
+#menu-backgrounds-3, #text-color-3 {
 	background-color:#00a451;
 }
 
-#menu-backgrounds-4 {
+#menu-backgrounds-4, #text-color-4 {
 	background-color:#f5911e;
 }
 
-#menu-backgrounds-5 {
+#menu-backgrounds-5, #text-color-5 {
 	background-color:#ea008a;
 }
 
-#menu-backgrounds-6 {
+#menu-backgrounds-6, #text-color-6 {
 	background-color:#eb1c24;
 }
 
-#menu-backgrounds-7 {
+#menu-backgrounds-7, #text-color-7 {
 	background-color:#8ac43f;
 }
 
-#menu-backgrounds-8 {
+#menu-backgrounds-8, #text-color-8 {
 	background-color:#26a8df;
 }
 
-#menu-backgrounds-9 {
+#menu-backgrounds-9, #text-color-9 {
 	background-color:#8f278d;
 }
 
-#menu-backgrounds-10 {
-	background-color:#fff000;
+#menu-backgrounds-10, #text-color-10 {
+	background-color:#999999;
 }
 
-.select-menu-back {
+.select-menu-back, .close-menu-x {
 	font-size:2em;
 	color:#333;
 	position:absolute;

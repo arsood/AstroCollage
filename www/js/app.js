@@ -80,6 +80,8 @@ $(document).on("tap", "#add-menu-button", function() {
         $("#add-astro-background-menu").fadeOut(200);
     } else if ($("#add-text-menu").is(":visible")) {
         $("#add-text-menu").fadeOut(200);
+    } else if ($("#text-style-menu").is(":visible")) { 
+        $("#text-style-menu").fadeOut(200);
     } else {
         $("#add-menu-container").fadeToggle(200);
     }
@@ -271,7 +273,7 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible")) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible")) {
                     showManiMenu();
                 } else {
                     hideManiMenu();
@@ -510,6 +512,8 @@ function hideAddMenu() {
     $("#select-menu-container").hide();
     $("#add-astro-background-menu").hide();
     $("#add-menu-container").hide();
+    $("#add-text-menu").hide();
+    $("#text-style-menu").hide();
 
     $("#snap-menu").hide();
 }
@@ -622,4 +626,27 @@ $(document).on("tap", "#add-text-button", function(event) {
 
     document.activeElement.blur();
     $("#add-text-input").blur();
+
+    //Set up tap on text element
+
+    newText.on("tap", function() {
+        localStorage.setItem("text_block_selected", this.id());
+        hideAddMenu();
+
+        $("#text-style-menu").fadeIn(200);
+    });
 });
+
+//Change font color of selected text
+
+$(document).on("tap", "#text-style-colors div", function() {
+    var text = stage.find("#" + localStorage.getItem("text_block_selected"))[0];
+
+    text.attrs.fill = $(this).css("background-color");
+
+    layer.draw();
+});
+
+//Close menus with X button
+
+$(document).on("tap", "#text-style-menu .close-menu-x", hideAddMenu);
