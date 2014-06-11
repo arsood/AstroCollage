@@ -485,13 +485,15 @@ $(document).on("tap", "#edit-menu-remove", function() {
 
 //Change layer
 
-$(document).on("tap", "#change-layer-up", function() {
+$(document).on("tap", "#change-layer-up", function(event) {
+    event.stopPropagation();
     stage.find("#" + localStorage.getItem("canvas_image_selected")).moveUp();
     layer.draw();
     resetStageBackground();
 });
 
-$(document).on("tap", "#change-layer-down", function() {
+$(document).on("tap", "#change-layer-down", function(event) {
+    event.stopPropagation();
     stage.find("#" + localStorage.getItem("canvas_image_selected")).moveDown();
     layer.draw();
     resetStageBackground();
