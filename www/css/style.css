@@ -176,7 +176,8 @@ body {
 .menu-image {
 	width:150px;
 	height:100px;
-	background-size:cover !important;
+	background-size:contain !important;
+	background-position:center !important;
 	margin-left:auto;
 	margin-right:auto;
 	position:relative;
@@ -333,6 +334,19 @@ body {
 .menu-buttons-small img {
 	width:30px;
 	padding-top:3px;
+}
+
+.close-button {
+	padding:5px;
+	font-size:1.3em;
+	border-radius:50px;
+	width:25px;
+}
+
+.close-button.right-top {
+	position:absolute;
+	top:-20px;
+	right:0;
 }
 
 #snap-menu {

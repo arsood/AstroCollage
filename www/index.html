@@ -97,25 +97,25 @@
 					<table>
 						<tr>
 							<td>
-								<div data-category="nebulae" class="menu-image rounded-white-border" style="background:url(img/categories/planetary_nebulae.jpg) no-repeat;"></div>
+								<div data-category="nebulae" class="menu-image rounded-white-border black-background" style="background:url(img/categories/planetary_nebulae.jpg) no-repeat;"></div>
 								<div class="menu-image-title">
 									PLANETARY NEBULAE
 								</div>
 							</td>
 							<td>
-								<div data-category="supernovae" class="menu-image rounded-white-border" style="background:url(img/categories/supernovae.jpg) no-repeat;"></div>
+								<div data-category="supernovae" class="menu-image rounded-white-border black-background" style="background:url(img/categories/supernovae.jpg) no-repeat;"></div>
 								<div class="menu-image-title">
 									SUPERNOVAE
 								</div>
 							</td>
 							<td>
-								<div data-category="nurseries" class="menu-image rounded-white-border" style="background:url(img/categories/stellar_nurseries.jpg) no-repeat;"></div>
+								<div data-category="nurseries" class="menu-image rounded-white-border black-background" style="background:url(img/categories/stellar_nurseries.jpg) no-repeat;"></div>
 								<div class="menu-image-title">
 									STELLAR NURSERIES
 								</div>
 							</td>
 							<td>
-								<div data-category="galaxies" class="menu-image rounded-white-border" style="background:url(img/categories/galaxies.jpg) no-repeat;"></div>
+								<div data-category="galaxies" class="menu-image rounded-white-border black-background" style="background:url(img/categories/galaxies.jpg) no-repeat;"></div>
 								<div class="menu-image-title">
 									GALAXIES
 								</div>
@@ -124,25 +124,25 @@
 						<tr height="20px"></tr>
 						<tr>
 							<td>
-								<div data-category="stars" class="menu-image rounded-white-border" style="background:url(img/categories/stars.jpg) no-repeat;"></div>
+								<div data-category="stars" class="menu-image rounded-white-border black-background" style="background:url(img/categories/stars.jpg) no-repeat;"></div>
 								<div class="menu-image-title">
 									STARS
 								</div>
 							</td>
 							<td>
-								<div data-category="sun" class="menu-image rounded-white-border" style="background:url(img/categories/sun.jpg) no-repeat;"></div>
+								<div data-category="sun" class="menu-image rounded-white-border black-background" style="background:url(img/categories/sun.jpg) no-repeat;"></div>
 								<div class="menu-image-title">
 									SUN
 								</div>
 							</td>
 							<td>
-								<div data-category="planets" class="menu-image rounded-white-border" style="background:url(img/categories/planets.jpg) no-repeat;"></div>
+								<div data-category="planets" class="menu-image rounded-white-border black-background" style="background:url(img/categories/planets.jpg) no-repeat;"></div>
 								<div class="menu-image-title">
-									PLANETS
+									PLANETS AND MOONS
 								</div>
 							</td>
 							<td>
-								<div data-category="misc" class="menu-image rounded-white-border" style="background:url(img/categories/miscellaneous.jpg) no-repeat;"></div>
+								<div data-category="misc" class="menu-image rounded-white-border black-background" style="background:url(img/categories/miscellaneous.jpg) no-repeat;"></div>
 								<div class="menu-image-title">
 									MISCELLANEOUS
 								</div>
@@ -1073,71 +1073,76 @@
 
 		<!--Edit Image Menu-->
 		<div id="edit-menu" class="chrome-background edit-menu-hide">
-			<div id="edit-menu-reccrop" class="menu-group-container">
-				<div class="menu-group-icon">
-					<div class="menu-buttons menu-buttons-small rounded-white-border">
-						<img src="img/icons/rectangular_crop.png" />
+			<div class="relative-container">
+				<div id="close-mani-menu-button" class="menu-buttons menu-buttons-small close-button right-top">
+					<i class="fa fa-times"></i>
+				</div>
+				<div id="edit-menu-reccrop" class="menu-group-container">
+					<div class="menu-group-icon">
+						<div class="menu-buttons menu-buttons-small rounded-white-border">
+							<img src="img/icons/rectangular_crop.png" />
+						</div>
+					</div>
+					<div class="menu-group-text">
+						RECTANGULAR CROP
 					</div>
 				</div>
-				<div class="menu-group-text">
-					RECTANGULAR CROP
-				</div>
-			</div>
 
-			<div id="edit-menu-circrop" class="menu-group-container">
-				<div class="menu-group-icon">
-					<div class="menu-buttons menu-buttons-small rounded-white-border">
-						<img src="img/icons/circular_crop.png" />
+				<div id="edit-menu-circrop" class="menu-group-container">
+					<div class="menu-group-icon">
+						<div class="menu-buttons menu-buttons-small rounded-white-border">
+							<img src="img/icons/circular_crop.png" />
+						</div>
+					</div>
+					<div class="menu-group-text">
+						CIRCULAR CROP
 					</div>
 				</div>
-				<div class="menu-group-text">
-					CIRCULAR CROP
-				</div>
-			</div>
 
-			<div id="edit-menu-freecrop" class="menu-group-container">
-				<div class="menu-group-icon">
-					<div class="menu-buttons menu-buttons-small rounded-white-border">
-						<img src="img/icons/free_crop.png" />
+				<div id="edit-menu-freecrop" class="menu-group-container">
+					<div class="menu-group-icon">
+						<div class="menu-buttons menu-buttons-small rounded-white-border">
+							<img src="img/icons/free_crop.png" />
+						</div>
+					</div>
+					<div class="menu-group-text">
+						FREE CROP
 					</div>
 				</div>
-				<div class="menu-group-text">
-					FREE CROP
-				</div>
-			</div>
 
-			<div class="menu-group-container">
-				<div class="menu-group-icon">
-					<div class="menu-buttons menu-buttons-small rounded-white-border">
-						<img src="img/palette.png" />
+				<div class="menu-group-container">
+					<div class="menu-group-icon">
+						<div class="menu-buttons menu-buttons-small rounded-white-border">
+							<img src="img/palette.png" />
+						</div>
+					</div>
+					<div class="menu-group-text">
+						ADD TO STAMP PAD AND USE
 					</div>
 				</div>
-				<div class="menu-group-text">
-					ADD TO STAMP PAD AND USE
-				</div>
-			</div>
 
-			<div id="edit-menu-remove" class="menu-group-container">
-				<div class="menu-group-icon">
-					<div class="menu-buttons menu-buttons-small rounded-white-border">
-						<img src="img/icons/remove_photo.png" />
+				<div id="edit-menu-remove" class="menu-group-container">
+					<div class="menu-group-icon">
+						<div class="menu-buttons menu-buttons-small rounded-white-border">
+							<img src="img/icons/remove_photo.png" />
+						</div>
+					</div>
+					<div class="menu-group-text">
+						REMOVE PHOTO
 					</div>
 				</div>
-				<div class="menu-group-text">
-					REMOVE PHOTO
-				</div>
-			</div>
 
-			<div class="menu-group-container">
-				<div class="change-layer-container">
-					<div id="change-layer-up" class="change-layer-option rounded-white-border">
-						<i class="fa fa-plus"></i>
-					</div>
-					<div class="change-layer-text">
-						CHANGE LAYER
-					</div>
-					<div id="change-layer-down" class="change-layer-option rounded-white-border">
-						<i class="fa fa-minus"></i>
+				<div class="menu-group-container">
+					<div class="change-layer-container">
+						<div id="change-layer-up" class="change-layer-option rounded-white-border">
+							<i class="fa fa-plus"></i>
+						</div>
+						<div class="change-layer-text">
+							CHANGE LAYER
+						</div>
+						<div id="change-layer-down" class="change-layer-option rounded-white-border">
+							<i class="fa fa-minus"></i>
+						</div>
 					</div>
 				</div>
 			</div>

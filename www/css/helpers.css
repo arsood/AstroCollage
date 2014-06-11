@@ -22,3 +22,7 @@
 .bold {
 	font-weight:bold;
 }
+
+.relative-container {
+	position:relative;
+}

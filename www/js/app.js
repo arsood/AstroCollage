@@ -39,16 +39,19 @@ $(document).ready(function() {
 
     //Remove edit menu on swipe right
 
-    var editMenu = document.getElementById("edit-menu");
+    // var editMenu = document.getElementById("edit-menu");
 
-    Hammer(editMenu).on("dragright", function() {
-        hideManiMenu();
-    });
+    // Hammer(editMenu).on("dragright", function() {
+    //     hideManiMenu();
+    // });
 });
 
 //Toggle stamp pad visibility
 
 $(document).on("tap", "#stamp-pad-handle", function() {
+    cancelStampSelection();
+    hideStampImageMenu();
+    hideManiMenu();
     $("#stamp-pad-image-container").slideToggle(200);
 });
 
@@ -213,6 +216,12 @@ function hideManiMenu() {
 function showManiMenu() {
     $("#edit-menu").removeClass("edit-menu-hide").addClass("edit-menu-show");
 }
+
+//Hide mani menu button
+
+$(document).on("tap", "#close-mani-menu-button", hideManiMenu);
+
+//Image place function
 
 var lastId = 1;
 
@@ -468,11 +477,13 @@ $(document).on("tap", "#share-menu-button", function() {
 
 //Clear stamp selection
 
-$(document).on("tap", "#cancel-stamp-menu", function() {
+$(document).on("tap", "#cancel-stamp-menu", cancelStampSelection);
+
+function cancelStampSelection() {
     localStorage.removeItem("stamp_selected");
     $(".stamp-pad-image").removeClass("black-border");
-    $(this).fadeOut();
-});
+    $("#cancel-stamp-menu").fadeOut();
+}
 
 //Remove an image from the canvas
 
