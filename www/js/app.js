@@ -171,13 +171,22 @@ $(document).on("tap", "#select-menu-container div.menu-image", function() {
     if ($(this).children().length === 1) {
         return false;
     } else {
+        localStorage.setItem("selected_image", $(this).attr("data-image"));
+
+        placeImage("img/library/" + localStorage.getItem("selected_image"), null, null, {
+            width:null,
+            height:null
+        }, null, true);
+
+        hideAddMenu();
+
         //Open up snap menu
 
-        var thisOffset = $(this).offset();
+        // var thisOffset = $(this).offset();
 
-        $("#snap-menu").css("top", thisOffset.top - ($(this).height() * 2 + 30)).css("left", thisOffset.left - ($(this).width() / 2) + 10).show();
+        // $("#snap-menu").css("top", thisOffset.top - ($(this).height() * 2 + 30)).css("left", thisOffset.left - ($(this).width() / 2) + 10).show();
 
-        localStorage.setItem("selected_image", $(this).attr("data-image"));
+        // localStorage.setItem("selected_image", $(this).attr("data-image"));
     }
 });
 
@@ -214,7 +223,11 @@ function hideManiMenu() {
 }
 
 function showManiMenu() {
-    $("#edit-menu").removeClass("edit-menu-hide").addClass("edit-menu-show");
+    if ($("#stamp-pad-image-container").is(":visible")) {
+        return false;
+    } else {
+        $("#edit-menu").removeClass("edit-menu-hide").addClass("edit-menu-show");
+    }
 }
 
 //Hide mani menu button
@@ -332,14 +345,14 @@ function transImage(item, rotation) {
 
 //Handle snap menu place
 
-$(document).on("tap", "#snap-menu-place", function() {
-    placeImage("img/library/" + localStorage.getItem("selected_image"), null, null, {
-        width:null,
-        height:null
-    }, null, true);
+// $(document).on("tap", "#snap-menu-place", function() {
+//     placeImage("img/library/" + localStorage.getItem("selected_image"), null, null, {
+//         width:null,
+//         height:null
+//     }, null, true);
 
-    $("#snap-menu").hide();
-});
+//     $("#snap-menu").hide();
+// });
 
 //Handle snap menu add to stamp pad
 
