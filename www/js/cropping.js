@@ -1,10 +1,10 @@
-//Rectangular crop
 var CropName = "";
 var astroElement = null;
 var CropObj = null;
 var ControlObj = null;
 var dragFlag = false;
 
+//Rectangular crop
 
 $(document).on("tap", "#edit-menu-reccrop", function(event) {
     event.stopPropagation();

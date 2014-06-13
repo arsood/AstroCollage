@@ -168,7 +168,7 @@ $("#add-menu-container, #menu-select-nebulae, #menu-select-nurseries, #menu-sele
 
 //Open up category-specific image options
 
-$(document).on("tap click", "#add-menu-container div.menu-image", function() {
+$(document).on("tap", "#add-menu-container div.menu-image", function() {
     $("#add-menu-container").hide();
     $("#select-menu-container").show();
 
@@ -190,7 +190,7 @@ $(document).on("tap", ".select-menu-back", function() {
 
 //Handle tap of image in a category
 
-$(document).on("tap click", "#select-menu-container div.menu-image", function() {
+$(document).on("tap", "#select-menu-container div.menu-image", function() {
     if ($(this).children().length === 1) {
         return false;
     } else {
@@ -311,7 +311,7 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
 
         //Show layer options and set id so we can manipulate this layer later
 
-        pieceGroup.on("tap click", function() {
+        pieceGroup.on("tap", function() {
             //Toggle option menu on tap of canvas image
 
             if (localStorage.getItem("stamp_selected")) {
@@ -490,7 +490,7 @@ function hideStampImageMenu() {
 
 //Machine gun to place stamp image that was selected
 
-$(document).on("tap click", "canvas", function(event) {
+$(document).on("tap", "canvas", function(event) {
     if (localStorage.getItem("stamp_selected")) {
         placeImage("img/library/" + localStorage.getItem("stamp_selected"), event.pageX, event.pageY, {
             width:null,
