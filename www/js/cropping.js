@@ -53,21 +53,26 @@ $(document).on("tap", "#edit-menu-freecrop", function(event) {
 
 //Cancel crop
 
-$(document).on("tap", "#crop-cancel-button", function() {
-    $("#crop-confirm-menu").hide();
+$(document).on("tap", "#crop-cancel-button", cancelCrop);
+
+function cancelCrop() {
+	$("#crop-confirm-menu").hide();
 	recoverDragFlag();
 	
-	if(CropObj)
+	if(CropObj) {
 		CropObj.destroy();
-	if(ControlObj)
+	}
+
+	if(ControlObj) {
 		ControlObj.destroy();
+	}
 		
 	layer.draw();
 	CropName = "";
 	CropObj = null;
 	ControlObj = null;
 	astroElement = null;
-});
+}
 
 $(document).on("tap", "#crop-confirm-button", function(){
     $("#crop-confirm-menu").hide();

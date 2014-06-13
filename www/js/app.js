@@ -3,13 +3,15 @@
 Kinetic.pixelRatio = 1;
 
 var stage = new Kinetic.Stage({
-  container: 'stage',
-  width: $(document).width(),
-  height: $(document).height()
+    container: 'stage',
+    width: $(document).width(),
+    height: $(document).height()
 });
+
 var MouseUpF = false;
 
 var layer = new Kinetic.Layer();
+
 layer.on('touchstart mousedown', function(event){
 	MouseUpF = true;
 
@@ -17,11 +19,13 @@ layer.on('touchstart mousedown', function(event){
 		createFreeCropObject(stage.getPointerPosition());
 	}
 });
+
 layer.on('touchmove mousemove', function(event){
 	if(CropName == "free" && MouseUpF == true){
 		updateFreeCropObject(stage.getPointerPosition());
 	}
 });
+
 layer.on('touchend mouseup', function(event){
 	MouseUpF = false;
 	if(CropName == "free"){
@@ -30,6 +34,7 @@ layer.on('touchend mouseup', function(event){
 });
 
 stage.add(layer);
+
 //Do stuff upon document ready
 
 $(document).ready(function() {
@@ -521,6 +526,8 @@ function cancelStampSelection() {
 $(document).on("tap", "#edit-menu-remove", function() {
     stage.find("#" + localStorage.getItem("canvas_image_selected")).remove();
     layer.draw();
+
+    cancelCrop();
 
     hideManiMenu();
 });
