@@ -78,10 +78,13 @@ $(document).on("tap", "#crop-confirm-button", function(){
     $("#crop-confirm-menu").hide();
 	recoverDragFlag();
 	
-	if(CropObj)
+	if(CropObj) {
 		CropObj.destroy();
-	if(ControlObj)
+	}
+
+	if(ControlObj) {
 		ControlObj.destroy();
+	}
 		
 	processCrop();
 	
