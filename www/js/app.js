@@ -95,6 +95,7 @@ $("#stamp-pad-scroll-container").scroll(function() {
 
 $(document).on("tap", "#add-menu-button", function() {
     hideGridMenu();
+    hideShareMenu();
 
     hideManiMenu();
 
@@ -318,7 +319,7 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible")) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible")) {
                     showManiMenu();
                 } else {
                     hideManiMenu();
@@ -504,12 +505,21 @@ $(document).on("tap", "canvas", function(event) {
 //Render canvas to image
 
 $(document).on("tap", "#share-menu-button", function() {
-    stage.toDataURL({
-        callback:function(dataUrl) {
-            console.log(dataUrl);
-        }
-    });
+    hideGridMenu();
+    hideAddMenu();
+    $("#share-menu").fadeToggle(200);
+    // stage.toDataURL({
+    //     callback:function(dataUrl) {
+    //         console.log(dataUrl);
+    //     }
+    // });
 });
+
+//Hide share menu
+
+function hideShareMenu() {
+    $("#share-menu").hide();
+}
 
 //Clear stamp selection
 
