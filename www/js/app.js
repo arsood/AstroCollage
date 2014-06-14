@@ -429,9 +429,11 @@ var stampImageId = 0;
 $(document).on("tap", "#edit-menu-stamp-adduse", function() {
     var selectedLayer = stage.find("#" + localStorage.getItem("canvas_image_selected"))[0];
 
+    console.log(selectedLayer);
+
     console.log(selectedLayer.toJSON());
 
-    console.log(selectedLayer.toDataURL());
+    console.log(selectedLayer.children[0].toDataURL());
 });
 
 //Tap on stamp pad image to get options
