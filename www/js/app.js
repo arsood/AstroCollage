@@ -385,41 +385,53 @@ var stampTemplate = Handlebars.compile(stampTemplateSource);
 
 var stampImageId = 0;
 
-$(document).on("tap", "#snap-menu-add", function() {
-    var html = stampTemplate({ image:localStorage.getItem("selected_image"), id: stampImageId++ });
+//OLD CODE: Add to stamp pad from snap menu
 
-    $("#stamp-pad-image-container").append(html);
+// $(document).on("tap", "#snap-menu-add", function() {
+//     var html = stampTemplate({ image:localStorage.getItem("selected_image"), id: stampImageId++ });
 
-    resizeStampScroll();
+//     $("#stamp-pad-image-container").append(html);
 
-    $("#snap-menu").hide();
+//     resizeStampScroll();
 
-    //DARN SHAME :( This was some nice code!
+//     $("#snap-menu").hide();
 
-    //Create draggable element
+//     OLD CODE: Can remove element from stamp pad on downward drag
 
-    // $(".stamp-pad-image").draggable({
-    //     revert:true,
-    //     helper:"clone",
-    //     appendTo:"#container"
-    // });
+//     Create draggable element
 
-    //Create droppable effect
+//     $(".stamp-pad-image").draggable({
+//         revert:true,
+//         helper:"clone",
+//         appendTo:"#container"
+//     });
 
-    // $("#container").droppable({
-    //     drop:function(event, ui) {
-    //         if (ui.offset.top >= 100) {
-    //             ui.draggable.fadeOut(200);
-    //             ui.helper.fadeOut(200);
-    //         }
-    //     }
-    // });
-});
+//     Create droppable effect
+
+//     $("#container").droppable({
+//         drop:function(event, ui) {
+//             if (ui.offset.top >= 100) {
+//                 ui.draggable.fadeOut(200);
+//                 ui.helper.fadeOut(200);
+//             }
+//         }
+//     });
+// });
 
 //Handle snap menu cancel
 
-$(document).on("tap", "#snap-menu-cancel", function() {
-    $("#snap-menu").fadeOut("fast");
+// $(document).on("tap", "#snap-menu-cancel", function() {
+//     $("#snap-menu").fadeOut("fast");
+// });
+
+//Save image data to localStorage and set to stamp pad
+
+$(document).on("tap", "#edit-menu-stamp-adduse", function() {
+    var selectedLayer = stage.find("#" + localStorage.getItem("canvas_image_selected"))[0];
+
+    console.log(selectedLayer.toJSON());
+
+    console.log(selectedLayer.toDataURL());
 });
 
 //Tap on stamp pad image to get options
@@ -502,17 +514,20 @@ $(document).on("tap", "canvas", function(event) {
     }
 });
 
-//Render canvas to image
+//Open share menu and render canvas to image
 
 $(document).on("tap", "#share-menu-button", function() {
     hideGridMenu();
     hideAddMenu();
-    $("#share-menu").fadeToggle(200);
-    // stage.toDataURL({
-    //     callback:function(dataUrl) {
-    //         console.log(dataUrl);
-    //     }
-    // });
+
+    $("#share-menu").fadeToggle(200, function() {
+        stage.toDataURL({
+            callback:function(dataUrl) {
+                $("#share-render-container").attr("style", "background:url(" + dataUrl + ") no-repeat;");
+                localStorage.setItem("full_canvas_render", dataUrl);
+            }
+        });
+    });
 });
 
 //Hide share menu

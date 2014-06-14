@@ -572,8 +572,9 @@ body {
 
 #share-render-container {
 	width:150px;
-	height:130px;
-	background-size:cover !important;
+	height:113px;
+	background-size:contain !important;
+	background-color:#000000 !important;
 	border:#FFF 5px solid;
 	box-shadow:4px 4px 5px 0px rgba(50, 50, 50, 0.75);
 }
