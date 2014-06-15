@@ -596,7 +596,7 @@ $(document).on("tap", "#background-astro", function() {
 function hideAddMenu() {
     hideManiMenu();
 
-    $("#select-menu-container").hide(0, function() {
+    $("#select-menu-container").hide(10, function() {
         //Reactivate piece tapping
         pieceTapFlag = true;
     });

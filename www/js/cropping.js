@@ -57,6 +57,7 @@ $(document).on("tap", "#crop-cancel-button", cancelCrop);
 
 function cancelCrop() {
 	$("#crop-confirm-menu").hide();
+
 	recoverDragFlag();
 	
 	if(CropObj) {
@@ -76,6 +77,7 @@ function cancelCrop() {
 
 $(document).on("tap", "#crop-confirm-button", function(){
     $("#crop-confirm-menu").hide();
+
 	recoverDragFlag();
 	
 	if(CropObj) {
