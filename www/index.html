@@ -272,16 +272,16 @@
 					<table>
 						<tr>
 							<td>
-								<div data-image="img/backgrounds/back1.png" class="menu-image rounded-white-border" style="background:url(img/thumbs/backgrounds/back1.png) no-repeat;"></div>
+								<div data-image="img/backgrounds/back1.png" class="menu-image rounded-white-border" style="background:url(img/thumbs/backgrounds/back1.png) no-repeat; background-size:cover !important;"></div>
 							</td>
 							<td>
-								<div data-image="img/backgrounds/back2.png" class="menu-image rounded-white-border" style="background:url(img/thumbs/backgrounds/back2.png) no-repeat;"></div>
+								<div data-image="img/backgrounds/back2.png" class="menu-image rounded-white-border" style="background:url(img/thumbs/backgrounds/back2.png) no-repeat; background-size:cover !important;"></div>
 							</td>
 							<td>
-								<div data-image="img/backgrounds/back3.png" class="menu-image rounded-white-border" style="background:url(img/thumbs/backgrounds/back3.png) no-repeat;"></div>
+								<div data-image="img/backgrounds/back3.png" class="menu-image rounded-white-border" style="background:url(img/thumbs/backgrounds/back3.png) no-repeat; background-size:cover !important;"></div>
 							</td>
 							<td>
-								<div data-image="img/backgrounds/back4_l.png" class="menu-image rounded-white-border" style="background:url(img/thumbs/backgrounds/back4_l.png) no-repeat;">
+								<div data-image="img/backgrounds/back4_l.png" class="menu-image rounded-white-border" style="background:url(img/thumbs/backgrounds/back4_l.png) no-repeat; background-size:cover !important;">
 									<div class="locked"><i class="fa fa-lock"></i></div>
 								</div>
 							</td>
@@ -1151,9 +1151,15 @@
 
 		<!--Grid Menu-->
 		<div id="grid-menu" class="main-menu-container chrome-background rounded-white-border">
-			<div data-grid="img/thumbs/grids/grid1.png" class="grid-menu-item rounded-white-border" style="background:url(img/thumbs/grids/grid1.png) no-repeat;"></div>
-			<div data-grid="img/thumbs/grids/grid2.png" class="grid-menu-item rounded-white-border" style="background:url(img/thumbs/grids/grid2.png) no-repeat;"></div>
-			<div data-grid="img/thumbs/grids/grid3.png" class="grid-menu-item rounded-white-border" style="background:url(img/thumbs/grids/grid3.png) no-repeat;"></div>
+			<div class="main-menu-title-container">
+				<div id="main-menu-title">
+					CHOOSE A GRID
+				</div>
+			</div>
+
+			<div data-grid="img/thumbs/grids/grid1.png" class=" margin-top-20 grid-menu-item rounded-white-border" style="background:url(img/thumbs/grids/grid1.png) no-repeat;"></div>
+			<div data-grid="img/thumbs/grids/grid2.png" class="margin-top-20 grid-menu-item rounded-white-border" style="background:url(img/thumbs/grids/grid2.png) no-repeat;"></div>
+			<div data-grid="img/thumbs/grids/grid3.png" class="margin-top-20 grid-menu-item rounded-white-border" style="background:url(img/thumbs/grids/grid3.png) no-repeat;"></div>
 		</div>
 		<!--/Grid Menu-->
 
@@ -1199,7 +1205,11 @@
 			</div>
 
 			<div class="margin-top-20">
-				<div id="share-render-container"></div>
+				<div id="share-render-container">
+					<div class="ajax-block">
+						<img src="img/ajax-loader.gif" />
+					</div>
+				</div>
 			</div>
 
 			<div class="margin-top-20">

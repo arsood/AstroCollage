@@ -195,6 +195,8 @@ $(document).on("tap", "#select-menu-container div.menu-image", function() {
     if ($(this).children().length === 1) {
         return false;
     } else {
+        pieceTapFlag = false;
+
         localStorage.setItem("selected_image", $(this).attr("data-image"));
 
         placeImage("img/library/" + localStorage.getItem("selected_image"), null, null, {
@@ -261,6 +263,7 @@ $(document).on("tap", "#close-mani-menu-button", hideManiMenu);
 //Image place function
 
 var lastId = 1;
+var pieceTapFlag = true;
 
 function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
     //Place image on canvas
@@ -319,7 +322,7 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible")) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && pieceTapFlag) {
                     showManiMenu();
                 } else {
                     hideManiMenu();
@@ -429,11 +432,9 @@ var stampImageId = 0;
 $(document).on("tap", "#edit-menu-stamp-adduse", function() {
     var selectedLayer = stage.find("#" + localStorage.getItem("canvas_image_selected"))[0];
 
-    console.log(selectedLayer);
-
     console.log(selectedLayer.toJSON());
 
-    console.log(selectedLayer.children[0].toDataURL());
+    console.log(selectedLayer.toDataURL());
 });
 
 //Tap on stamp pad image to get options
@@ -522,14 +523,22 @@ $(document).on("tap", "#share-menu-button", function() {
     hideGridMenu();
     hideAddMenu();
 
-    $("#share-menu").fadeToggle(200, function() {
-        stage.toDataURL({
-            callback:function(dataUrl) {
-                $("#share-render-container").attr("style", "background:url(" + dataUrl + ") no-repeat;");
-                localStorage.setItem("full_canvas_render", dataUrl);
-            }
+    if ($("#share-menu").is(":visible")) {
+        $("#share-menu").fadeOut(200, function() {
+            $("#share-render-container .ajax-block").show();
+            $("#share-render-container").removeAttr("style");
         });
-    });
+    } else {
+        $("#share-menu").fadeIn(200, function() {
+            stage.toDataURL({
+                callback:function(dataUrl) {
+                    $("#share-render-container").attr("style", "background:url(" + dataUrl + ") no-repeat;");
+                    localStorage.setItem("full_canvas_render", dataUrl);
+                    $("#share-render-container .ajax-block").hide();
+                }
+            });
+        });
+    }
 });
 
 //Hide share menu
@@ -587,7 +596,11 @@ $(document).on("tap", "#background-astro", function() {
 function hideAddMenu() {
     hideManiMenu();
 
-    $("#select-menu-container").hide();
+    $("#select-menu-container").hide(0, function() {
+        //Reactivate piece tapping
+        pieceTapFlag = true;
+    });
+
     $("#add-astro-background-menu").hide();
     $("#add-menu-container").hide();
     $("#add-text-menu").hide();
