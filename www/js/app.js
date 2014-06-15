@@ -380,11 +380,6 @@ function transImage(item, rotation) {
 
 //Handle snap menu add to stamp pad
 
-var stampTemplateSource = $("#stamp-pad-template").html();
-var stampTemplate = Handlebars.compile(stampTemplateSource);
-
-var stampImageId = 0;
-
 //OLD CODE: Add to stamp pad from snap menu
 
 // $(document).on("tap", "#snap-menu-add", function() {
@@ -426,12 +421,25 @@ var stampImageId = 0;
 
 //Save image data to localStorage and set to stamp pad
 
+var stampTemplateSource = $("#stamp-pad-template").html();
+var stampTemplate = Handlebars.compile(stampTemplateSource);
+
+var stampImageId = 0;
+
 $(document).on("tap", "#edit-menu-stamp-adduse", function() {
     var selectedLayer = stage.find("#" + localStorage.getItem("canvas_image_selected"))[0];
 
-    console.log(selectedLayer.toJSON());
+    //Please change the variable below to be only the size of the actual image.
 
-    console.log(selectedLayer.toDataURL());
+    var canvasImageUrl = selectedLayer.toDataURL();
+
+    var html = stampTemplate({ image:canvasImageUrl, id:stampImageId++ });
+
+    $("#stamp-pad-image-container").append(html);
+
+    resizeStampScroll();
+
+    hideManiMenu();
 });
 
 //Tap on stamp pad image to get options
@@ -505,7 +513,7 @@ function hideStampImageMenu() {
 
 $(document).on("tap", "canvas", function(event) {
     if (localStorage.getItem("stamp_selected")) {
-        placeImage("img/library/" + localStorage.getItem("stamp_selected"), event.pageX, event.pageY, {
+        placeImage(localStorage.getItem("stamp_selected"), event.pageX, event.pageY, {
             width:null,
             height:null
         }, null, true);
