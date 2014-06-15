@@ -7,7 +7,7 @@ var dragFlag = false;
 //Rectangular crop
 
 $(document).on("tap", "#edit-menu-reccrop", function(event) {
-    event.stopPropagation();
+    event.preventDefault();
 
     astroElement = stage.find("#" + localStorage.getItem("canvas_image_selected"))[0];
 
@@ -23,7 +23,7 @@ $(document).on("tap", "#edit-menu-reccrop", function(event) {
 //Circular crop
 
 $(document).on("tap", "#edit-menu-circrop", function(event) {
-    event.stopPropagation();
+    event.preventDefault();
 
     astroElement = stage.find("#" + localStorage.getItem("canvas_image_selected"))[0];
 
@@ -39,7 +39,7 @@ $(document).on("tap", "#edit-menu-circrop", function(event) {
 //Free crop
 
 $(document).on("tap", "#edit-menu-freecrop", function(event) {
-    event.stopPropagation();
+    event.preventDefault();
 
     astroElement = stage.find("#" + localStorage.getItem("canvas_image_selected"))[0];
 
@@ -53,7 +53,10 @@ $(document).on("tap", "#edit-menu-freecrop", function(event) {
 
 //Cancel crop
 
-$(document).on("tap", "#crop-cancel-button", cancelCrop);
+$(document).on("tap", "#crop-cancel-button", function(event) {
+	event.preventDefault();
+	cancelCrop()
+});
 
 function cancelCrop() {
 	$("#crop-confirm-menu").hide();
@@ -75,7 +78,9 @@ function cancelCrop() {
 	astroElement = null;
 }
 
-$(document).on("tap", "#crop-confirm-button", function(){
+$(document).on("tap", "#crop-confirm-button", function(event){
+	event.preventDefault();
+
     $("#crop-confirm-menu").hide();
 
 	recoverDragFlag();
