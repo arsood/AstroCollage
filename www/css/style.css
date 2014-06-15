@@ -85,9 +85,8 @@ body {
 	border:#FFF 2px solid;
 	margin:10px;
 	border-radius:5px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	background-size:cover !important;
+	background-size:contain !important;
+	background-position:center !important;
 }
 
 #stamp-pad-handle {

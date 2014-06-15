@@ -455,6 +455,12 @@ $(document).on("tap", "#edit-menu-stamp-adduse", function() {
     resizeStampScroll();
 
     hideManiMenu();
+
+    //Activate stamp
+
+    localStorage.setItem("stamp_selected", canvasImageUrl);
+
+    $("#cancel-stamp-menu").fadeIn(200);
 });
 
 //Tap on stamp pad image to get options
