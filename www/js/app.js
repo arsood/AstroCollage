@@ -167,6 +167,7 @@ $("#add-menu-container, #menu-select-nebulae, #menu-select-nurseries, #menu-sele
     singleItem:true
 });
 
+
 //Open up category-specific image options
 
 $(document).on("tap", "#add-menu-container div.menu-image", function() {
@@ -419,7 +420,7 @@ function transImage(item, rotation) {
 //     $("#snap-menu").fadeOut("fast");
 // });
 
-//Save image data to localStorage and set to stamp pad
+//Save to stamp pad and activate stamp
 
 var stampTemplateSource = $("#stamp-pad-template").html();
 var stampTemplate = Handlebars.compile(stampTemplateSource);
@@ -429,9 +430,23 @@ var stampImageId = 0;
 $(document).on("tap", "#edit-menu-stamp-adduse", function() {
     var selectedLayer = stage.find("#" + localStorage.getItem("canvas_image_selected"))[0];
 
-    //Please change the variable below to be only the size of the actual image.
+	var x = selectedLayer.x() - selectedLayer.offsetX() * selectedLayer.scaleX();
+	var y = selectedLayer.y() - selectedLayer.offsetY() * selectedLayer.scaleY();
+	var w = selectedLayer.getWidth() * selectedLayer.scaleX();
+	var h = selectedLayer.getHeight() * selectedLayer.scaleY();
+	
+	if( selectedLayer.getType() == 'Group' ) {
+		var child = selectedLayer.getChildren()[0];
+		w = child.width() * selectedLayer.scaleX();
+		h = child.height() * selectedLayer.scaleY();
+	}
 
-    var canvasImageUrl = selectedLayer.toDataURL();
+    var canvasImageUrl = selectedLayer.toDataURL({
+		x: x,
+		y: y,
+		width: w,
+		height: h,
+	});
 
     var html = stampTemplate({ image:canvasImageUrl, id:stampImageId++ });
 

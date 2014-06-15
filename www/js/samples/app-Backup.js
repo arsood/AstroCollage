@@ -3,12 +3,35 @@
 Kinetic.pixelRatio = 1;
 
 var stage = new Kinetic.Stage({
-  container: 'stage',
-  width: $(document).width(),
-  height: $(document).height()
+    container: 'stage',
+    width: $(document).width(),
+    height: $(document).height()
 });
 
+var MouseUpF = false;
+
 var layer = new Kinetic.Layer();
+
+layer.on('touchstart mousedown', function(event){
+    MouseUpF = true;
+
+	if(CropName == "free"){
+		createFreeCropObject(stage.getPointerPosition());
+	}
+});
+
+layer.on('touchmove mousemove', function(event){
+	if(CropName == "free" && MouseUpF == true){
+		updateFreeCropObject(stage.getPointerPosition());
+	}
+});
+
+layer.on('touchend mouseup', function(event){
+	MouseUpF = false;
+	if(CropName == "free"){
+		closeFreeCropObject(stage.getPointerPosition());
+	}
+});
 
 stage.add(layer);
 
@@ -72,6 +95,7 @@ $("#stamp-pad-scroll-container").scroll(function() {
 
 $(document).on("tap", "#add-menu-button", function() {
     hideGridMenu();
+    hideShareMenu();
 
     hideManiMenu();
 
@@ -167,7 +191,9 @@ $(document).on("tap", ".select-menu-back", function() {
 
 //Handle tap of image in a category
 
-$(document).on("tap", "#select-menu-container div.menu-image", function() {
+$(document).on("tap", "#select-menu-container div.menu-image", function(event) {
+    event.preventDefault();
+
     if ($(this).children().length === 1) {
         return false;
     } else {
@@ -295,13 +321,11 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible")) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible")) {
                     showManiMenu();
                 } else {
                     hideManiMenu();
                 }
-
-                layer.draw();
             }
         });
     };
@@ -356,46 +380,66 @@ function transImage(item, rotation) {
 
 //Handle snap menu add to stamp pad
 
+//OLD CODE: Add to stamp pad from snap menu
+
+// $(document).on("tap", "#snap-menu-add", function() {
+//     var html = stampTemplate({ image:localStorage.getItem("selected_image"), id: stampImageId++ });
+
+//     $("#stamp-pad-image-container").append(html);
+
+//     resizeStampScroll();
+
+//     $("#snap-menu").hide();
+
+//     OLD CODE: Can remove element from stamp pad on downward drag
+
+//     Create draggable element
+
+//     $(".stamp-pad-image").draggable({
+//         revert:true,
+//         helper:"clone",
+//         appendTo:"#container"
+//     });
+
+//     Create droppable effect
+
+//     $("#container").droppable({
+//         drop:function(event, ui) {
+//             if (ui.offset.top >= 100) {
+//                 ui.draggable.fadeOut(200);
+//                 ui.helper.fadeOut(200);
+//             }
+//         }
+//     });
+// });
+
+//Handle snap menu cancel
+
+// $(document).on("tap", "#snap-menu-cancel", function() {
+//     $("#snap-menu").fadeOut("fast");
+// });
+
+//Save image data to localStorage and set to stamp pad
+
 var stampTemplateSource = $("#stamp-pad-template").html();
 var stampTemplate = Handlebars.compile(stampTemplateSource);
 
 var stampImageId = 0;
 
-$(document).on("tap", "#snap-menu-add", function() {
-    var html = stampTemplate({ image:localStorage.getItem("selected_image"), id: stampImageId++ });
+$(document).on("tap", "#edit-menu-stamp-adduse", function() {
+    var selectedLayer = stage.find("#" + localStorage.getItem("canvas_image_selected"))[0];
+
+    //Please change the variable below to be only the size of the actual image.
+
+    var canvasImageUrl = selectedLayer.toDataURL();
+
+    var html = stampTemplate({ image:canvasImageUrl, id:stampImageId++ });
 
     $("#stamp-pad-image-container").append(html);
 
     resizeStampScroll();
 
-    $("#snap-menu").hide();
-
-    //DARN SHAME :( This was some nice code!
-
-    //Create draggable element
-
-    // $(".stamp-pad-image").draggable({
-    //     revert:true,
-    //     helper:"clone",
-    //     appendTo:"#container"
-    // });
-
-    //Create droppable effect
-
-    // $("#container").droppable({
-    //     drop:function(event, ui) {
-    //         if (ui.offset.top >= 100) {
-    //             ui.draggable.fadeOut(200);
-    //             ui.helper.fadeOut(200);
-    //         }
-    //     }
-    // });
-});
-
-//Handle snap menu cancel
-
-$(document).on("tap", "#snap-menu-cancel", function() {
-    $("#snap-menu").fadeOut("fast");
+    hideManiMenu();
 });
 
 //Tap on stamp pad image to get options
@@ -469,7 +513,7 @@ function hideStampImageMenu() {
 
 $(document).on("tap", "canvas", function(event) {
     if (localStorage.getItem("stamp_selected")) {
-        placeImage("img/library/" + localStorage.getItem("stamp_selected"), event.pageX, event.pageY, {
+        placeImage(localStorage.getItem("stamp_selected"), event.pageX, event.pageY, {
             width:null,
             height:null
         }, null, true);
@@ -478,15 +522,35 @@ $(document).on("tap", "canvas", function(event) {
     }
 });
 
-//Render canvas to image
+//Open share menu and render canvas to image
 
 $(document).on("tap", "#share-menu-button", function() {
-    stage.toDataURL({
-        callback:function(dataUrl) {
-            console.log(dataUrl);
-        }
-    });
+    hideGridMenu();
+    hideAddMenu();
+
+    if ($("#share-menu").is(":visible")) {
+        $("#share-menu").fadeOut(200, function() {
+            $("#share-render-container .ajax-block").show();
+            $("#share-render-container").removeAttr("style");
+        });
+    } else {
+        $("#share-menu").fadeIn(200, function() {
+            stage.toDataURL({
+                callback:function(dataUrl) {
+                    $("#share-render-container").attr("style", "background:url(" + dataUrl + ") no-repeat;");
+                    localStorage.setItem("full_canvas_render", dataUrl);
+                    $("#share-render-container .ajax-block").hide();
+                }
+            });
+        });
+    }
 });
+
+//Hide share menu
+
+function hideShareMenu() {
+    $("#share-menu").hide();
+}
 
 //Clear stamp selection
 
@@ -503,6 +567,8 @@ function cancelStampSelection() {
 $(document).on("tap", "#edit-menu-remove", function() {
     stage.find("#" + localStorage.getItem("canvas_image_selected")).remove();
     layer.draw();
+
+    cancelCrop();
 
     hideManiMenu();
 });
@@ -536,6 +602,7 @@ function hideAddMenu() {
     hideManiMenu();
 
     $("#select-menu-container").hide();
+
     $("#add-astro-background-menu").hide();
     $("#add-menu-container").hide();
     $("#add-text-menu").hide();
@@ -641,6 +708,7 @@ $(document).on("tap", "#add-text-button", function(event) {
         draggable:true,
         id:"text" + (textId++)
     });
+
 
     layer.add(newText);
     stage.add(layer);
