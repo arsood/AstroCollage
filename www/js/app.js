@@ -545,6 +545,8 @@ $(document).on("tap", "canvas", function(event) {
 
 //Open share menu and render canvas to image
 
+var fullCanvasURL;
+
 $(document).on("tap", "#share-menu-button", function() {
     hideGridMenu();
     hideAddMenu();
@@ -559,7 +561,7 @@ $(document).on("tap", "#share-menu-button", function() {
             stage.toDataURL({
                 callback:function(dataUrl) {
                     $("#share-render-container").attr("style", "background:url(" + dataUrl + ") no-repeat;");
-                    localStorage.setItem("full_canvas_render", dataUrl);
+                    fullCanvasURL = dataUrl;
                     $("#share-render-container .ajax-block").hide();
                 }
             });
