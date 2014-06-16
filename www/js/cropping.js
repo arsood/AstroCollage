@@ -3,11 +3,14 @@ var astroElement = null;
 var CropObj = null;
 var ControlObj = null;
 var dragFlag = false;
+var cropFlag = false;
 
 //Rectangular crop
 
 $(document).on("tap", "#edit-menu-reccrop", function(event) {
     event.preventDefault();
+
+    cropFlag = true;
 
     astroElement = stage.find("#" + localStorage.getItem("canvas_image_selected"))[0];
 
@@ -25,6 +28,8 @@ $(document).on("tap", "#edit-menu-reccrop", function(event) {
 $(document).on("tap", "#edit-menu-circrop", function(event) {
     event.preventDefault();
 
+    cropFlag = true;
+
     astroElement = stage.find("#" + localStorage.getItem("canvas_image_selected"))[0];
 
     //YOUR CODE HERE
@@ -41,6 +46,8 @@ $(document).on("tap", "#edit-menu-circrop", function(event) {
 $(document).on("tap", "#edit-menu-freecrop", function(event) {
     event.preventDefault();
 
+    cropFlag = true;
+
     astroElement = stage.find("#" + localStorage.getItem("canvas_image_selected"))[0];
 
     //YOUR CODE HERE
@@ -55,7 +62,7 @@ $(document).on("tap", "#edit-menu-freecrop", function(event) {
 
 $(document).on("tap", "#crop-cancel-button", function(event) {
 	event.preventDefault();
-	cancelCrop()
+	cancelCrop();
 });
 
 function cancelCrop() {
@@ -76,6 +83,7 @@ function cancelCrop() {
 	CropObj = null;
 	ControlObj = null;
 	astroElement = null;
+	cropFlag = false;
 }
 
 $(document).on("tap", "#crop-confirm-button", function(event){
@@ -99,6 +107,7 @@ $(document).on("tap", "#crop-confirm-button", function(event){
 	CropName = "";
 	CropObj = null;
 	ControlObj = null;
+	cropFlag = false;
 });
 
 function setNonDrag(){
@@ -425,7 +434,7 @@ function rectCrop(){
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible")) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !cropFlag) {
                     showManiMenu();
                 } else {
                     hideManiMenu();
@@ -495,7 +504,7 @@ function circleCrop(){
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible")) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !cropFlag) {
                     showManiMenu();
                 } else {
                     hideManiMenu();
@@ -681,7 +690,7 @@ function freeCrop(){
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible")) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !cropFlag) {
                     showManiMenu();
                 } else {
                     hideManiMenu();

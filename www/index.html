@@ -553,7 +553,7 @@
 							<tr height="20px"></tr>
 							<tr>
 								<td>
-									<div class="menu-image rounded-white-border" style="background:url(img/sample/black_galaxy.jpg) no-repeat;">
+									<div class="menu-image rounded-white-border black-background" style="background:url(img/sample/black_galaxy.jpg) no-repeat;">
 										<div class="locked"><i class="fa fa-lock"></i></div>
 									</div>
 								</td>
@@ -1287,26 +1287,6 @@
 <!--Include Cordova-->
 <script src="cordova.js"></script>
 
-<!--Facebook-->
-<script>
-window.fbAsyncInit = function() {
-	FB.init({
-		appId:'673431819405015',
-		xfbml:true,
-		version:'v2.0'
-	});
-};
-
-(function(d, s, id){
-	var js, fjs = d.getElementsByTagName(s)[0];
-	if (d.getElementById(id)) {return;}
-	js = d.createElement(s); js.id = id;
-	js.src = "//connect.facebook.net/en_US/sdk.js";
-	fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
-<!--/Facebook-->
-
 <!--Include Additional Libraries-->
 <script src="libraries/hammer/hammer.min.js"></script>
 <script src="libraries/kinetic/kinetic.js"></script>
@@ -1318,7 +1298,6 @@ window.fbAsyncInit = function() {
 <script src="libraries/handlebars/handlebars-v1.3.0.js"></script>
 <script src="js/app.js"></script>
 <script src="js/cropping.js"></script>
-<script src="js/social.js"></script>
 <script src="js/native.js"></script>
 
 </body>

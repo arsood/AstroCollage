@@ -151,12 +151,8 @@ function fillBackground(type, value) {
 //Make sure background is on bottom
 
 function resetStageBackground() {
-    //Wrap in timeout to fix loading errors
-
-    setTimeout(function() {
-        stage.find("#stage-background").moveToBottom();
-        layer.draw();
-    }, 30);
+    stage.find("#stage-background").moveToBottom();
+    layer.draw();
 }
 
 //Create carousel for all slidy menus
@@ -219,7 +215,9 @@ $(document).on("tap", "#select-menu-container div.menu-image", function(event) {
 
 //Set astro background image
 
-$(document).on("tap", "#add-astro-background-menu div.menu-image", function() {
+$(document).on("tap", "#add-astro-background-menu div.menu-image", function(event) {
+    event.preventDefault();
+
     if ($(this).children().length === 1) {
         return false;
     } else {
@@ -322,7 +320,7 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible")) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !cropFlag) {
                     showManiMenu();
                 } else {
                     hideManiMenu();
@@ -550,6 +548,11 @@ var fullCanvasURL;
 $(document).on("tap", "#share-menu-button", function() {
     hideGridMenu();
     hideAddMenu();
+    
+    //Make sure crop and grid are disabled before render
+
+    cancelCrop();
+    stage.find("#stage-grid").remove();
 
     if ($("#share-menu").is(":visible")) {
         $("#share-menu").fadeOut(200, function() {
