@@ -151,12 +151,8 @@ function fillBackground(type, value) {
 //Make sure background is on bottom
 
 function resetStageBackground() {
-    //Wrap in timeout to fix loading errors
-
-    setTimeout(function() {
-        stage.find("#stage-background").moveToBottom();
-        layer.draw();
-    }, 30);
+    stage.find("#stage-background").moveToBottom();
+    layer.draw();
 }
 
 //Create carousel for all slidy menus
@@ -166,6 +162,7 @@ $("#add-menu-container, #menu-select-nebulae, #menu-select-nurseries, #menu-sele
     paginationSpeed:400,
     singleItem:true
 });
+
 
 //Open up category-specific image options
 
@@ -218,7 +215,9 @@ $(document).on("tap", "#select-menu-container div.menu-image", function(event) {
 
 //Set astro background image
 
-$(document).on("tap", "#add-astro-background-menu div.menu-image", function() {
+$(document).on("tap", "#add-astro-background-menu div.menu-image", function(event) {
+    event.preventDefault();
+
     if ($(this).children().length === 1) {
         return false;
     } else {
@@ -321,7 +320,7 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible")) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !cropFlag) {
                     showManiMenu();
                 } else {
                     hideManiMenu();
@@ -419,19 +418,35 @@ function transImage(item, rotation) {
 //     $("#snap-menu").fadeOut("fast");
 // });
 
-//Save image data to localStorage and set to stamp pad
+//Save to stamp pad and activate stamp
 
 var stampTemplateSource = $("#stamp-pad-template").html();
 var stampTemplate = Handlebars.compile(stampTemplateSource);
 
 var stampImageId = 0;
 
-$(document).on("tap", "#edit-menu-stamp-adduse", function() {
+$(document).on("tap", "#edit-menu-stamp-adduse", function(event) {
+    event.preventDefault();
+    
     var selectedLayer = stage.find("#" + localStorage.getItem("canvas_image_selected"))[0];
 
-    //Please change the variable below to be only the size of the actual image.
+	var x = selectedLayer.x() - selectedLayer.offsetX() * selectedLayer.scaleX();
+	var y = selectedLayer.y() - selectedLayer.offsetY() * selectedLayer.scaleY();
+	var w = selectedLayer.getWidth() * selectedLayer.scaleX();
+	var h = selectedLayer.getHeight() * selectedLayer.scaleY();
+	
+	if( selectedLayer.getType() == 'Group' ) {
+		var child = selectedLayer.getChildren()[0];
+		w = child.width() * selectedLayer.scaleX();
+		h = child.height() * selectedLayer.scaleY();
+	}
 
-    var canvasImageUrl = selectedLayer.toDataURL();
+    var canvasImageUrl = selectedLayer.toDataURL({
+		x: x,
+		y: y,
+		width: w,
+		height: h,
+	});
 
     var html = stampTemplate({ image:canvasImageUrl, id:stampImageId++ });
 
@@ -440,6 +455,12 @@ $(document).on("tap", "#edit-menu-stamp-adduse", function() {
     resizeStampScroll();
 
     hideManiMenu();
+
+    //Activate stamp
+
+    localStorage.setItem("stamp_selected", canvasImageUrl);
+
+    $("#cancel-stamp-menu").fadeIn(200);
 });
 
 //Tap on stamp pad image to get options
@@ -524,9 +545,21 @@ $(document).on("tap", "canvas", function(event) {
 
 //Open share menu and render canvas to image
 
+var fullCanvasURL;
+
 $(document).on("tap", "#share-menu-button", function() {
     hideGridMenu();
     hideAddMenu();
+    
+    //Make sure crop and grid are disabled before render
+
+    cancelCrop();
+
+    //Make sure grid is gone before render
+
+    stage.find("#stage-grid").remove();
+    layer.draw();
+    $("#grid-menu-options").hide();
 
     if ($("#share-menu").is(":visible")) {
         $("#share-menu").fadeOut(200, function() {
@@ -538,7 +571,7 @@ $(document).on("tap", "#share-menu-button", function() {
             stage.toDataURL({
                 callback:function(dataUrl) {
                     $("#share-render-container").attr("style", "background:url(" + dataUrl + ") no-repeat;");
-                    localStorage.setItem("full_canvas_render", dataUrl);
+                    fullCanvasURL = dataUrl;
                     $("#share-render-container .ajax-block").hide();
                 }
             });

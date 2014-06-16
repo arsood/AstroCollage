@@ -425,7 +425,17 @@ var stampTemplate = Handlebars.compile(stampTemplateSource);
 
 var stampImageId = 0;
 
-$(document).on("tap", "#edit-menu-stamp-adduse", function() {
+function rotate_point (pointX, pointY, originX, originY, angle) {
+    angle = angle * Math.PI / 180.0;
+    return {
+        x: Math.cos(angle) * (pointX-originX) - Math.sin(angle) * (pointY-originY) + originX,
+        y: Math.sin(angle) * (pointX-originX) + Math.cos(angle) * (pointY-originY) + originY
+    };
+};
+
+$(document).on("tap", "#edit-menu-stamp-adduse", function(event) {
+    event.preventDefault();
+    
     var selectedLayer = stage.find("#" + localStorage.getItem("canvas_image_selected"))[0];
 
 	var x = selectedLayer.x() - selectedLayer.offsetX() * selectedLayer.scaleX();
@@ -438,12 +448,24 @@ $(document).on("tap", "#edit-menu-stamp-adduse", function() {
 		w = child.width() * selectedLayer.scaleX();
 		h = child.height() * selectedLayer.scaleY();
 	}
-
+	
+	var rotation = selectedLayer.rotation();
+	
+	var pos1 = rotate_point(x, y, x + w / 2, y + h / 2, rotation);
+	var pos2 = rotate_point(x + w, y, x + w / 2, y + h / 2, rotation);
+	var pos3 = rotate_point(x + w, y + h, x + w / 2, y + h / 2, rotation);
+	var pos4 = rotate_point(x, y + h, x + w / 2, y + h / 2, rotation);
+	
+	x = Math.min(pos1.x, pos2.x, pos3.x, pos4.x);
+	y = Math.min(pos1.y, pos2.y, pos3.y, pos4.y);
+	w = Math.max(pos1.x, pos2.x, pos3.x, pos4.x) - x;
+	h = Math.max(pos1.y, pos2.y, pos3.y, pos4.y) - y;
+	
     var canvasImageUrl = selectedLayer.toDataURL({
 		x: x,
 		y: y,
 		width: w,
-		height: h,
+		height: h
 	});
 
     var html = stampTemplate({ image:canvasImageUrl, id:stampImageId++ });
