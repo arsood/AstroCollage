@@ -552,7 +552,12 @@ $(document).on("tap", "#share-menu-button", function() {
     //Make sure crop and grid are disabled before render
 
     cancelCrop();
+
+    //Make sure grid is gone before render
+
     stage.find("#stage-grid").remove();
+    layer.draw();
+    $("#grid-menu-options").hide();
 
     if ($("#share-menu").is(":visible")) {
         $("#share-menu").fadeOut(200, function() {
