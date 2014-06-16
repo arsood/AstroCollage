@@ -1,3 +1,7 @@
 platforms/
 
 externals/
+
+.DS_STORE
+
+www/.DS_STORE
