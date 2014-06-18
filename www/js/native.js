@@ -91,3 +91,19 @@ function placeCordovaBackground(imageData) {
 
 	resetStageBackground();
 }
+
+//Save canvas to camera roll
+
+$(document).on("tap", "#share-save-to-camera-roll", function(event) {
+	event.preventDefault();
+
+	window.canvas2ImagePlugin.saveImageDataToLibrary(
+        function(msg){
+            console.log(msg);
+        },
+        function(err){
+            console.log(err);
+        },
+        document.getElementsByTagName('canvas')[0]
+    );
+});

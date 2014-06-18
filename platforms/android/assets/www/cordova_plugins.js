@@ -55,6 +55,20 @@ module.exports = [
         "merges": [
             "navigator.notification"
         ]
+    },
+    {
+        "file": "plugins/nl.x-services.plugins.socialsharing/www/SocialSharing.js",
+        "id": "nl.x-services.plugins.socialsharing.SocialSharing",
+        "clobbers": [
+            "window.plugins.socialsharing"
+        ]
+    },
+    {
+        "file": "plugins/org.devgeeks.Canvas2ImagePlugin/www/Canvas2ImagePlugin.js",
+        "id": "org.devgeeks.Canvas2ImagePlugin.Canvas2ImagePlugin",
+        "clobbers": [
+            "window.canvas2ImagePlugin"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -63,7 +77,9 @@ module.exports.metadata =
     "org.apache.cordova.camera": "0.2.10-dev",
     "com.ququplay.websocket.WebSocket": "0.1.0",
     "org.apache.cordova.dialogs": "0.2.8-dev",
-    "org.apache.cordova.vibration": "0.3.9-dev"
+    "org.apache.cordova.vibration": "0.3.9-dev",
+    "nl.x-services.plugins.socialsharing": "4.3.0",
+    "org.devgeeks.Canvas2ImagePlugin": "0.6.0"
 }
 // BOTTOM OF METADATA
 });
