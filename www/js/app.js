@@ -225,17 +225,19 @@ $(document).on("tap", "#add-astro-background-menu div.menu-image", function(even
 
         var imageObj = new Image();
 
-        var piece = new Kinetic.Image({
-            image: imageObj,
-            id:"stage-background",
-            width:$(document).width(),
-            height:$(document).height()
-        });
+        imageObj.onload = function() {
+            var piece = new Kinetic.Image({
+                image: imageObj,
+                id:"stage-background",
+                width:$(document).width(),
+                height:$(document).height()
+            });
+
+            layer.add(piece);
+            stage.add(layer);
+        }
 
         imageObj.src = $(this).attr("data-image");
-
-        layer.add(piece);
-        stage.add(layer);
 
         resetStageBackground();
     }
