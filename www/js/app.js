@@ -329,11 +329,11 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
                 }
             }
         });
+
+        resetStageBackground();
     };
     
     imageObj.src = insertImage;
-
-    resetStageBackground();
 }
 
 function transImage(item, rotation) {

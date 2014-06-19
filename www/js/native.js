@@ -87,11 +87,11 @@ function placeCordovaBackground(imageData) {
 
 	    layer.add(piece);
 	    stage.add(layer);
+
+	    resetStageBackground();
 	}
 
 	imageObj.src = imageData;
-
-	resetStageBackground();
 }
 
 //Save canvas to camera roll

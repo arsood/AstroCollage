@@ -1,3 +1,5 @@
+//Share on Facebook
+
 $(document).on("tap", "#share-facebook", function(event) {
 	event.preventDefault();
 
