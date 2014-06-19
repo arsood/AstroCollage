@@ -235,11 +235,11 @@ $(document).on("tap", "#add-astro-background-menu div.menu-image", function(even
 
             layer.add(piece);
             stage.add(layer);
+
+            resetStageBackground();
         }
 
         imageObj.src = $(this).attr("data-image");
-
-        resetStageBackground();
     }
 });
 
