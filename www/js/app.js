@@ -10,7 +10,9 @@ var stage = new Kinetic.Stage({
 
 var MouseUpF = false;
 
-var layer = new Kinetic.Layer();
+var layer = new Kinetic.Layer({
+    clearBeforeDraw:false
+});
 
 layer.on('touchstart mousedown', function(event){
     MouseUpF = true;
@@ -592,9 +594,30 @@ $(document).on("tap", "#share-menu-button", function() {
         $("#share-menu").fadeIn(200, function() {
             stage.toDataURL({
                 callback:function(dataUrl) {
-                    $("#share-render-container").attr("style", "background:url(" + dataUrl + ") no-repeat;");
                     fullCanvasURL = dataUrl;
-                    $("#share-render-container .ajax-block").hide();
+
+                    ajaxUrl = fullCanvasURL.replace("data:image/png;base64,","");
+
+                    $.ajax({
+                        url:"http://astrocollage.net/convert.php",
+                        type:"POST",
+                        data:{
+                            astroUri:ajaxUrl
+                        },
+                        success:function(data) {
+                            $("#share-render-container").attr("style", "background:url(http://astrocollage.net/astrocollages/" + data + ") no-repeat;");
+                            $("#share-render-container .ajax-block").hide();
+                        },
+                        error:function() {
+                            $("#share-render-container .ajax-block").hide();
+                            navigator.notification.alert(
+                                "Sorry, your canvas cannot be shared at this time. Please save to your camera roll instead.",
+                                null,
+                                "Share Error",
+                                "Close"
+                            );
+                        }
+                    });
                 }
             });
         });
