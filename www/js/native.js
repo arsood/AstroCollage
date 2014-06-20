@@ -109,3 +109,26 @@ $(document).on("tap", "#share-save-to-camera-roll", function(event) {
         document.getElementsByTagName('canvas')[0]
     );
 });
+
+//Save image to temp filesystem
+
+function saveBlobToFile(blob) {
+	// root file system entry
+	var root = getFileSystemRoot(),
+
+	// writes a file
+	write_file = function(writer) {
+		// write to file
+		writer.write(blob);   
+	};
+
+	// creates a FileWriter object
+	create_writer = function(fileEntry) {
+		fileEntry.createWriter(write_file, null);
+	};
+
+	var newId = makeId();
+
+	// create a file and write to it
+	root.getFile(newId + '.png', {create: true}, create_writer, null);
+}
