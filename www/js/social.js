@@ -29,9 +29,6 @@ $(document).on("tap", "#share-menu-button", function() {
 
                     ajaxUrl = fullCanvasURL.replace("data:image/png;base64,","");
 
-                    console.log(saveBlobToFile(fullCanvasURL));
-                    return false;
-
                     $.ajax({
                         url:"http://astrocollage.net/convert.php",
                         type:"POST",
