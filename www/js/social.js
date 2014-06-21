@@ -30,13 +30,13 @@ $(document).on("tap", "#share-menu-button", function() {
                     ajaxUrl = fullCanvasURL.replace("data:image/png;base64,","");
 
                     $.ajax({
-                        url:"http://emboldenmedia.com/apps/astrocollage/convert.php",
+                        url:"http://104.130.4.114/convert.php",
                         type:"POST",
                         data:{
                             astroUri:ajaxUrl
                         },
                         success:function(data) {
-                            $("#share-render-container").attr("style", "background:url(http://emboldenmedia.com/apps/astrocollage/astrocollages/" + data + ") no-repeat;");
+                            $("#share-render-container").attr("style", "background:url(http://104.130.4.114/astrocollages/" + data + ") no-repeat;");
                             $("#share-render-container .ajax-block").hide();
                         },
                         error:function() {
