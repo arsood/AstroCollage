@@ -30,13 +30,13 @@ $(document).on("tap", "#share-menu-button", function() {
                     ajaxUrl = fullCanvasURL.replace("data:image/png;base64,","");
 
                     $.ajax({
-                        url:"http://104.130.4.114/convert.php",
+                        url:"http://api.astrocollage.net/convert.php",
                         type:"POST",
                         data:{
                             astroUri:ajaxUrl
                         },
                         success:function(data) {
-                            $("#share-render-container").attr("style", "background:url(http://104.130.4.114/astrocollages/" + data + ") no-repeat;");
+                            $("#share-render-container").attr("style", "background:url(http://api.astrocollage.net/astrocollages/" + data + ") no-repeat;");
                             $("#share-render-container .ajax-block").hide();
                         },
                         error:function() {
