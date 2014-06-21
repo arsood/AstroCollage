@@ -309,6 +309,7 @@ body {
 	position:absolute;
 	top:30px;
 	left:30px;
+	z-index:9999;
 }
 
 #menu-select-nebulae, #menu-select-supernovae {
@@ -622,4 +623,12 @@ body {
 	width:250px;
 	padding-top:10px;
 	font-size:1.1em;
+}
+
+.astro-edu-image {
+	width:250px;
+	height:188px;
+	background-size:contain !important;
+	background-position:center !important;
+	box-shadow:4px 4px 5px 0px rgba(50, 50, 50, 0.75);
 }

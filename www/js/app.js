@@ -111,6 +111,8 @@ $(document).on("tap", "#add-menu-button", function() {
         $("#add-text-menu").fadeOut(200);
     } else if ($("#text-style-menu").is(":visible")) { 
         $("#text-style-menu").fadeOut(200);
+    } else if ($("#astro-edu-menu").is(":visible")) {
+        $("#astro-edu-menu").fadeOut(200);
     } else {
         $("#add-menu-container").fadeToggle(200);
     }
@@ -159,20 +161,11 @@ function resetStageBackground() {
 
 //Create carousel for all slidy menus
 
-$("#add-menu-container, #menu-select-nebulae, #menu-select-nurseries, #menu-select-galaxies, #menu-select-stars, #menu-select-sun, #menu-select-planets, #menu-select-misc").owlCarousel({
+$("#add-menu-container, #menu-select-nebulae, #menu-select-nurseries, #menu-select-galaxies, #menu-select-stars, #menu-select-sun, #menu-select-planets, #menu-select-misc, #astro-edu-items").owlCarousel({
     slideSpeed:300,
     paginationSpeed:400,
     singleItem:true
 });
-
-//Create carousel for astro edu
-
-$("#astro-edu-nebulae").owlCarousel({
-    slideSpeed:300,
-    paginationSpeed:400,
-    singleItem:true
-});
-
 
 //Open up category-specific image options
 
@@ -190,10 +183,8 @@ $(document).on("tap", "#add-menu-container div.menu-image", function() {
 //Hide options on menu back tap
 
 $(document).on("tap", ".select-menu-back", function() {
-    $("#select-menu-container").hide();
-    $("#add-astro-background-menu").hide();
-    $("#add-text-menu").hide();
-    $("#astro-edu-menu").hide();
+    console.log("Worked");
+    hideAddMenu();
     $("#add-menu-container").show();
 });
 
