@@ -29,7 +29,7 @@ $(document).on("tap", "#share-menu-button", function() {
 
                     ajaxUrl = fullCanvasURL.replace("data:image/png;base64,","");
 
-                    saveBlobToFile(fullCanvasURL);
+                    console.log(saveBlobToFile(fullCanvasURL));
                     return false;
 
                     $.ajax({

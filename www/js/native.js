@@ -114,7 +114,9 @@ $(document).on("tap", "#share-save-to-camera-roll", function(event) {
 
 function saveBlobToFile(blob) {
 	// root file system entry
-	var root = getFileSystemRoot(),
+	var root = getFileSystemRoot();
+
+	return root;
 
 	// writes a file
 	write_file = function(writer) {

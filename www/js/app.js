@@ -165,6 +165,14 @@ $("#add-menu-container, #menu-select-nebulae, #menu-select-nurseries, #menu-sele
     singleItem:true
 });
 
+//Create carousel for astro edu
+
+$("#astro-edu-nebulae").owlCarousel({
+    slideSpeed:300,
+    paginationSpeed:400,
+    singleItem:true
+});
+
 
 //Open up category-specific image options
 
@@ -184,8 +192,9 @@ $(document).on("tap", "#add-menu-container div.menu-image", function() {
 $(document).on("tap", ".select-menu-back", function() {
     $("#select-menu-container").hide();
     $("#add-astro-background-menu").hide();
-    $("#add-menu-container").show();
     $("#add-text-menu").hide();
+    $("#astro-edu-menu").hide();
+    $("#add-menu-container").show();
 });
 
 //Handle tap of image in a category
@@ -324,7 +333,7 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !cropFlag) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !$("#astro-edu-menu").is(":visible") && !cropFlag) {
                     showManiMenu();
                 } else {
                     hideManiMenu();
@@ -622,6 +631,7 @@ function hideAddMenu() {
     $("#add-menu-container").hide();
     $("#add-text-menu").hide();
     $("#text-style-menu").hide();
+    $("#astro-edu-menu").hide();
 
     $("#snap-menu").hide();
 }
@@ -793,3 +803,11 @@ $(document).on("tap", "#delete-text-button", function() {
 //Close menus with X button
 
 $(document).on("tap", "#text-style-menu .close-menu-x", hideAddMenu);
+
+//Open astro edu menu
+
+$(document).on("tap", "#go-astroedu", function(event) {
+    event.preventDefault();
+    hideAddMenu();
+    $("#astro-edu-menu").show();
+});

@@ -160,7 +160,7 @@ body {
 	padding:20px;
 }
 
-#add-menu-container, #select-menu-container, #add-astro-background-menu, #add-text-menu, #text-style-menu {
+#add-menu-container, #select-menu-container, #add-astro-background-menu, #add-text-menu, #text-style-menu, #astro-edu-menu {
 	position:absolute;
 	bottom:90px;
 	left:50%;

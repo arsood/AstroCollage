@@ -427,14 +427,14 @@ function rectCrop(){
             width:w,
             height:h
 		});
-        pieceGroup.on("tap click", function() {
+        pieceGroup.on("tap", function() {
             //Toggle option menu on tap of canvas image
 
             if (localStorage.getItem("stamp_selected")) {
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !cropFlag) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !$("#astro-edu-menu").is(":visible") && !cropFlag) {
                     showManiMenu();
                 } else {
                     hideManiMenu();
@@ -504,7 +504,7 @@ function circleCrop(){
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !cropFlag) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !$("#astro-edu-menu").is(":visible") && !cropFlag) {
                     showManiMenu();
                 } else {
                     hideManiMenu();
@@ -690,7 +690,7 @@ function freeCrop(){
                 return false;
             } else {
                 localStorage.setItem("canvas_image_selected", this.id());
-                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !cropFlag) {
+                if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !$("#astro-edu-menu").is(":visible") && !cropFlag) {
                     showManiMenu();
                 } else {
                     hideManiMenu();
