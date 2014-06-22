@@ -655,7 +655,13 @@ $(document).on("tap", "#grid-menu-button", function() {
 //Place grid on canvas
 
 $(document).on("tap", ".grid-menu-item", function() {
-    stage.find("#stage-grid").remove();
+    //Remove old grid
+
+    if (stage.find("#stage-grid").length === 1) {
+        stage.find("#stage-grid").remove();
+    }
+
+    //Set grid image to canvas
 
     var imageObj = new Image();
 

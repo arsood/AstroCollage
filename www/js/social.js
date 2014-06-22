@@ -15,19 +15,16 @@ $(document).on("tap", "#share-menu-button", function() {
 
     //Make sure grid is gone before render
 
-    stage.find("#stage-grid").remove();
-    layer.draw();
-    $("#grid-menu-options").hide();
+    if (stage.find("#stage-grid").length === 1) {
+        stage.find("#stage-grid").remove();
+        layer.draw();
+        $("#grid-menu-options").hide();
+    }
 
     if ($("#share-menu").is(":visible")) {
         $("#share-menu").fadeOut(200, function() {
             hideShareMenu();
         });
-
-        //Remove branding text
-
-        stage.find("#brand-text")[0].remove();
-        layer.draw();
     } else {
         $("#share-menu").fadeIn(200, function() {
             //Add branding text before render            
@@ -103,6 +100,13 @@ function hideShareMenu() {
     
     canvasRenderIMG = null;
     canvasRenderURL = null;
+
+    //Remove branding text
+
+    if (stage.find("#brand-text").length === 1) {
+        stage.find("#brand-text")[0].remove();
+        layer.draw();
+    }
 }
 
 //Share on Facebook
