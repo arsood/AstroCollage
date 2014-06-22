@@ -585,7 +585,9 @@ $(document).on("tap", "#edit-menu-remove", function() {
     stage.find("#" + localStorage.getItem("canvas_image_selected")).remove();
     layer.draw();
 
-    cancelCrop();
+    if (cropFlag) {
+        cancelCrop();
+    }
 
     hideManiMenu();
 });
