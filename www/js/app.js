@@ -69,6 +69,12 @@ $(document).ready(function() {
     // Hammer(editMenu).on("dragright", function() {
     //     hideManiMenu();
     // });
+
+    //Unlock full app if purchase flag is set
+
+    if (localStorage.getItem("full_unlock")) {
+        $(".locked").remove();
+    }
 });
 
 //Toggle stamp pad visibility

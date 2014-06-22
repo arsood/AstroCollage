@@ -242,7 +242,8 @@ module.exports.metadata =
     "org.devgeeks.Canvas2ImagePlugin": "0.6.0",
     "org.apache.cordova.file": "1.2.0",
     "org.apache.cordova.console": "0.2.10-dev",
-    "org.apache.cordova.file-transfer": "0.4.4"
+    "org.apache.cordova.file-transfer": "0.4.4",
+    "cc.fovea.plugins.inapppurchase": "3.4.1"
 }
 // BOTTOM OF METADATA
 });
