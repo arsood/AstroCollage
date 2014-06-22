@@ -21,11 +21,7 @@ $(document).on("tap", "#share-menu-button", function() {
 
     if ($("#share-menu").is(":visible")) {
         $("#share-menu").fadeOut(200, function() {
-            $("#share-render-container .ajax-block").show();
-            $("#share-render-container").removeAttr("style");
-            
-            canvasRenderIMG = null;
-            canvasRenderURL = null;
+            hideShareMenu();
         });
     } else {
         $("#share-menu").fadeIn(200, function() {
@@ -82,6 +78,11 @@ $(document).on("tap", "#share-menu-button", function() {
 
 function hideShareMenu() {
     $("#share-menu").hide();
+    $("#share-render-container .ajax-block").show();
+    $("#share-render-container").removeAttr("style");
+    
+    canvasRenderIMG = null;
+    canvasRenderURL = null;
 }
 
 //Share on Facebook

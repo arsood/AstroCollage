@@ -641,6 +641,7 @@ function hideGridMenu() {
 
 $(document).on("tap", "#grid-menu-button", function() {
     hideAddMenu();
+    hideShareMenu();
 
     $("#grid-menu").fadeToggle(200);
 });
