@@ -23,8 +23,28 @@ $(document).on("tap", "#share-menu-button", function() {
         $("#share-menu").fadeOut(200, function() {
             hideShareMenu();
         });
+
+        //Remove branding text
+
+        stage.find("#brand-text")[0].remove();
+        layer.draw();
     } else {
         $("#share-menu").fadeIn(200, function() {
+            //Add branding text before render            
+
+            var brandText = new Kinetic.Text({
+                x:stage.width() - 400,
+                y:stage.height() - 100,
+                fontSize:50,
+                text:"AstroCollage",
+                fill:"#FFFFFF",
+                id:"brand-text"
+            });
+
+
+            layer.add(brandText);
+            stage.add(layer);
+
             stage.toDataURL({
                 mimeType:"image/png",
                 quality:1,
