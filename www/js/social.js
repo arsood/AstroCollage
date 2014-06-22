@@ -1,6 +1,7 @@
 //Open share menu and render canvas to image
 
 var fullCanvasURL;
+var canvasRenderURL;
 
 $(document).on("tap", "#share-menu-button", function() {
     hideGridMenu();
@@ -20,6 +21,7 @@ $(document).on("tap", "#share-menu-button", function() {
         $("#share-menu").fadeOut(200, function() {
             $("#share-render-container .ajax-block").show();
             $("#share-render-container").removeAttr("style");
+            canvasRenderURL = null;
         });
     } else {
         $("#share-menu").fadeIn(200, function() {
@@ -37,6 +39,9 @@ $(document).on("tap", "#share-menu-button", function() {
                         },
                         success:function(data) {
                             $("#share-render-container").attr("style", "background:url(http://api.astrocollage.net/astrocollages/" + data + ") no-repeat;");
+
+                            canvasRenderURL = "http://api.astrocollage.net/astrocollages/" + data;
+                            
                             $("#share-render-container .ajax-block").hide();
                         },
                         error:function() {
@@ -66,26 +71,53 @@ function hideShareMenu() {
 $(document).on("tap", "#share-facebook", function(event) {
 	event.preventDefault();
 
-	window.plugins.socialsharing.shareViaFacebook('Check out my cool AstroCollage!', null, fullCanvasURL, null, null);
+    if (canvasRenderURL) {
+	   window.plugins.socialsharing.shareViaFacebook('Check out my cool AstroCollage!', null, canvasRenderURL, null, null);
+    } else {
+        navigator.notification.alert(
+            "Your canvas is not ready yet. Please try again shortly.",
+            null,
+            "Not Ready",
+            "Close"
+        );
+    }
 });
 
 $(document).on("tap", "#share-twitter", function(event) {
 	event.preventDefault();
 
-	window.plugins.socialsharing.shareViaTwitter('Check out my cool AstroCollage!', null, fullCanvasURL, null, null);
+    if (canvasRenderURL) {
+       window.plugins.socialsharing.shareViaTwitter('Check out my cool AstroCollage!', null, canvasRenderURL, null, null);
+    } else {
+        navigator.notification.alert(
+            "Your canvas is not ready yet. Please try again shortly.",
+            null,
+            "Not Ready",
+            "Close"
+        );
+    }
 });
 
 $(document).on("tap", "#share-send-by-email", function(event) {
 	event.preventDefault();
 
-	window.plugins.socialsharing.shareViaEmail(
-		'Check out my AstroCollage',
-		'My AstroCollage',
-		null, // TO: must be null or an array
-		null, // CC: must be null or an array
-		null, // BCC: must be null or an array
-		["'" + fullCanvasURL + "'"], // FILES: can be null, a string, or an array
-		null, // called when sharing worked, but also when the user cancelled sharing via email (I've found no way to detect the difference)
-		null // called when sh*t hits the fan
-	);
+    if (canvasRenderURL) {
+       window.plugins.socialsharing.shareViaEmail(
+            'Check out my AstroCollage',
+            'My AstroCollage',
+            null, // TO: must be null or an array
+            null, // CC: must be null or an array
+            null, // BCC: must be null or an array
+            ["'" + canvasRenderURL + "'"], // FILES: can be null, a string, or an array
+            null, // called when sharing worked, but also when the user cancelled sharing via email (I've found no way to detect the difference)
+            null // called when sh*t hits the fan
+        );
+    } else {
+        navigator.notification.alert(
+            "Your canvas is not ready yet. Please try again shortly.",
+            null,
+            "Not Ready",
+            "Close"
+        );
+    }
 });
