@@ -460,7 +460,7 @@ function rectCrop(){
 		x: x,
 		y: y,
 		width: w,
-		height: h,
+		height: h
 	});
 }
 
@@ -532,7 +532,7 @@ function circleCrop(){
 		x: x - r,
 		y: y - r,
 		width: r * 2,
-		height: r * 2,
+		height: r * 2
 	});
 	
 	console.log(x + "  ,  " + y + "  ,  " + r);
@@ -720,6 +720,6 @@ function freeCrop(){
 		x: x,
 		y: y,
 		width: w,
-		height: h,
+		height: h
 	});
 }
