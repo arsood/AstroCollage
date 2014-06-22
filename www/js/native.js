@@ -116,8 +116,6 @@ function saveBlobToFile(blob) {
 	// root file system entry
 	var root = getFileSystemRoot();
 
-	return root;
-
 	// writes a file
 	write_file = function(writer) {
 		// write to file

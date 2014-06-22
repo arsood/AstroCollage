@@ -21,6 +21,8 @@ $(document).on("tap", "#share-menu-button", function() {
         $("#share-menu").fadeOut(200, function() {
             $("#share-render-container .ajax-block").show();
             $("#share-render-container").removeAttr("style");
+            
+            canvasRenderIMG = null;
             canvasRenderURL = null;
         });
     } else {
@@ -39,8 +41,20 @@ $(document).on("tap", "#share-menu-button", function() {
                         },
                         success:function(data) {
                             $("#share-render-container").attr("style", "background:url(http://api.astrocollage.net/astrocollages/" + data + ") no-repeat;");
-
                             canvasRenderURL = "http://api.astrocollage.net/astrocollages/" + data;
+
+                            // fileTransfer.download(
+                            //     canvasRenderURL,
+                            //     "/user/full",
+                            //     function(entry) {
+                            //         console.log("Download complete: " + entry.fullPath);
+                            //     },
+                            //     function(error) {
+                            //         console.log("Download error source: " + error.source);
+                            //         console.log("Download error target: " + error.target);
+                            //         console.log("Error code: " + error.code);
+                            //     }
+                            // );
                             
                             $("#share-render-container .ajax-block").hide();
                         },
@@ -108,7 +122,7 @@ $(document).on("tap", "#share-send-by-email", function(event) {
             null, // TO: must be null or an array
             null, // CC: must be null or an array
             null, // BCC: must be null or an array
-            ["'" + canvasRenderURL + "'"], // FILES: can be null, a string, or an array
+            [canvasRenderURL], // FILES: can be null, a string, or an array
             null, // called when sharing worked, but also when the user cancelled sharing via email (I've found no way to detect the difference)
             null // called when sh*t hits the fan
         );

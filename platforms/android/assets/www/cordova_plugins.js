@@ -215,6 +215,20 @@ module.exports = [
             "cordova"
         ],
         "runs": true
+    },
+    {
+        "file": "plugins/org.apache.cordova.file-transfer/www/FileTransferError.js",
+        "id": "org.apache.cordova.file-transfer.FileTransferError",
+        "clobbers": [
+            "window.FileTransferError"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.file-transfer/www/FileTransfer.js",
+        "id": "org.apache.cordova.file-transfer.FileTransfer",
+        "clobbers": [
+            "window.FileTransfer"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -226,7 +240,9 @@ module.exports.metadata =
     "org.apache.cordova.vibration": "0.3.9-dev",
     "nl.x-services.plugins.socialsharing": "4.3.0",
     "org.devgeeks.Canvas2ImagePlugin": "0.6.0",
-    "org.apache.cordova.file": "1.2.1-dev"
+    "org.apache.cordova.file": "1.2.0",
+    "org.apache.cordova.console": "0.2.10-dev",
+    "org.apache.cordova.file-transfer": "0.4.4"
 }
 // BOTTOM OF METADATA
 });
