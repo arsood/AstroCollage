@@ -9,7 +9,9 @@ $(document).on("tap", "#share-menu-button", function() {
     
     //Make sure crop and grid are disabled before render
 
-    cancelCrop();
+    if (cropFlag) {
+        cancelCrop();
+    }
 
     //Make sure grid is gone before render
 
