@@ -466,6 +466,8 @@ $(document).on("tap", "#edit-menu-stamp-adduse", function(event) {
 	h = Math.max(pos1.y, pos2.y, pos3.y, pos4.y) - y;
 	
     var canvasImageUrl = selectedLayer.toDataURL({
+        mimeType:"image/png",
+        quality:1,
 		x: x,
 		y: y,
 		width: w,

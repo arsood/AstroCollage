@@ -455,6 +455,8 @@ function rectCrop(){
 		layer.draw();
 	};
 	imageObj.src = (astroElement.getChildren()[0]).toDataURL({
+		mimeType:"image/png",
+		quality:1,
 		x: x,
 		y: y,
 		width: w,
@@ -525,6 +527,8 @@ function circleCrop(){
 		layer.draw();
 	};
 	imageObj.src = (astroElement.getChildren()[0]).toDataURL({
+		mimeType:"image/png",
+		quality:1,
 		x: x - r,
 		y: y - r,
 		width: r * 2,
@@ -711,6 +715,8 @@ function freeCrop(){
 		layer.draw();
 	};
 	imageObj.src = (astroElement.getChildren()[0]).toDataURL({
+		mimeType:"image/png",
+		quality:1,
 		x: x,
 		y: y,
 		width: w,

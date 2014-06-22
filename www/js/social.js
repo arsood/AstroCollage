@@ -28,6 +28,8 @@ $(document).on("tap", "#share-menu-button", function() {
     } else {
         $("#share-menu").fadeIn(200, function() {
             stage.toDataURL({
+                mimeType:"image/png",
+                quality:1,
                 callback:function(dataUrl) {
                     fullCanvasURL = dataUrl;
 
@@ -45,7 +47,7 @@ $(document).on("tap", "#share-menu-button", function() {
 
                             // fileTransfer.download(
                             //     canvasRenderURL,
-                            //     "/user/full",
+                            //     "/user/full/" + data,
                             //     function(entry) {
                             //         console.log("Download complete: " + entry.fullPath);
                             //     },
