@@ -58,7 +58,7 @@ $(document).on("tap", "#share-menu-button", function() {
                         },
                         success:function(data) {
                             $("#share-render-container").attr("style", "background:url(http://api.astrocollage.net/astrocollages/" + data + ") no-repeat;");
-                            canvasRenderURL = "http://api.astrocollage.net/astrocollages/" + data;
+                            canvasRenderURL = "http://104.130.10.41/astrocollages/" + data;
 
                             // fileTransfer.download(
                             //     canvasRenderURL,
