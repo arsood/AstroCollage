@@ -101,7 +101,12 @@ $(document).on("tap", "#share-save-to-camera-roll", function(event) {
 
 	window.canvas2ImagePlugin.saveImageDataToLibrary(
         function(msg){
-            console.log(msg);
+            navigator.notification.alert(
+	            "Saved successfully to camera!",
+	            null,
+	            "Saved To Camera",
+	            "Done"
+	        );
         },
         function(err){
             console.log(err);
