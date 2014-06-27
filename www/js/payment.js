@@ -73,7 +73,9 @@
 
 //YEAH
 
-$(document).on("deviceready", function() {
+var IAP = {};
+
+$(document).on("tap", ".locked", function() {
 	storekit.init({
 		debug:false,
 		ready:IAP.onReady,
@@ -81,9 +83,7 @@ $(document).on("deviceready", function() {
 		restore:IAP.onRestore,
 		error:IAP.onError
 	});
-});
 
-$(document).on("tap", ".locked", function() {
 	navigator.notification.confirm(
 		"Would you like to unlock all images for $0.99?",
 		onConfirm,
