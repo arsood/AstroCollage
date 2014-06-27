@@ -73,12 +73,14 @@
 
 //YEAH
 
-storekit.init({
-	debug:true,
-	ready:IAP.onReady,
-	purchase:IAP.onPurchase,
-	restore:IAP.onRestore,
-	error:IAP.onError
+$(document).on("deviceready", function() {
+	storekit.init({
+		debug:false,
+		ready:IAP.onReady,
+		purchase:IAP.onPurchase,
+		restore:IAP.onRestore,
+		error:IAP.onError
+	});
 });
 
 $(document).on("tap", ".locked", function() {
