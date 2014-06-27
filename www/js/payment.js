@@ -1,104 +1,40 @@
-// var IAP = {
-// 	list:["app.astrocollage.unlock"]
-// };
-
-// IAP.load = function() {
-// 	if (!window.storekit) {
-// 		console.log("In-App Purchase is not available");
-// 		return;
-// 	}
-
-// 	storekit.init({
-// 		debug:true,
-// 		ready:IAP.onReady,
-// 		purchase:IAP.onPurchase,
-// 		restore:IAP.onRestore,
-// 		error:IAP.onError
-// 	});
-// };
-
-// IAP.load();
-
-// IAP.onReady = function() {
-// 	storekit.load(IAP.list, function(products, invalidids) {
-// 		IAP.products = products;
-// 		IAP.loaded = true;
-// 	});
-// };
-
-// if (IAP.loaded) {
-// 	$(document).on("tap", ".locked", function() {
-// 		navigator.notification.confirm(
-// 			"Would you like to unlock all images for $0.99?",
-// 			onConfirm,
-// 			"Purchase Image Unlock",
-// 			"Purchase,Restore,Cancel"
-// 		);
-
-// 		function onConfirm(button) {
-// 			if (button === 1) {
-// 				IAP.buy("app.astrocollage.unlock");
-// 			} else if (button === 2) {
-// 				IAP.restore();
-// 			} else if (button === 3) {
-// 				return false;
-// 			}
-// 		}
-// 	});
-// };
-
-// IAP.onPurchase = function(transactionId, productId, receipt) {
-// 	if (productId === "app.astrocollage.unlock") {
-// 		$(".locked").remove();
-// 	}
-// };
-
-// IAP.onError = function(errorCode, errorMessage) {
-// 	alert("Error: " + errorMessage);
-// };
-
-// IAP.buy = function(productId) {
-// 	storekit.purchase(productId);
-// };
-
-// IAP.onRestore = function(transactionId, productId, transactionReceipt) {
-// 	if (productId === "app.astrocollage.unlock") {
-// 		$(".locked").remove();
-// 	}
-// };
-
-// IAP.restore = function() {
-// 	storekit.restore();
-// };
-
-//YEAH
-
 var IAP = {};
 
-$(document).on("tap", ".locked", function() {
+$(document).on("deviceready", function() {
 	storekit.init({
-		debug:false,
+		debug:true,
 		ready:IAP.onReady,
 		purchase:IAP.onPurchase,
 		restore:IAP.onRestore,
 		error:IAP.onError
 	});
+});
 
-	navigator.notification.confirm(
-		"Would you like to unlock all images for $0.99?",
-		onConfirm,
-		"Purchase Image Unlock",
-		"Purchase,Restore,Cancel"
-	);
+$(document).on("tap", ".locked", function() {
+	if (IAP.loaded) {
+		navigator.notification.confirm(
+			"Would you like to unlock all images for $0.99?",
+			onConfirm,
+			"Purchase Image Unlock",
+			"Purchase,Restore,Cancel"
+		);
 
-	function onConfirm(button) {
-		if (button === 1) {
-			storekit.purchase("app.astrocollage.unlock");
-		} else if (button === 2) {
-			storekit.restore();
-		} else if (button === 3) {
-			return false;
+		function onConfirm(button) {
+			if (button === 1) {
+				window.storekit.purchase("app.astrocollage.unlock");
+			} else if (button === 2) {
+				window.storekit.restore();
+			} else if (button === 3) {
+				return false;
+			}
 		}
+	} else {
+		navigator.notification.alert(
+            "Sorry, the store is not available.",
+            null,
+            "Store Not Available",
+            "Close"
+        );
 	}
 });
 
