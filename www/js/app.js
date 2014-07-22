@@ -333,7 +333,7 @@ function placeImage(insertImage, xCoord, yCoord, dimensions, imageId, mani) {
                 if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !$("#astro-edu-menu").is(":visible") && !cropFlag) {
                     showManiMenu();
                 } else {
-                    hideManiMenu();
+                    //hideManiMenu(); Disabled hiding on piece tap
                 }
             }
         });
