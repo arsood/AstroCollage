@@ -30,9 +30,9 @@ $(document).on("tap", "#share-menu-button", function() {
             //Add branding text before render            
 
             var brandText = new Kinetic.Text({
-                x:stage.width() - 420,
-                y:stage.height() - 150,
-                fontSize:50,
+                x:stage.width() - 200,
+                y:stage.height() - 50,
+                fontSize:25,
                 text:"AstroCollage",
                 fill:"#FFFFFF",
                 id:"brand-text"

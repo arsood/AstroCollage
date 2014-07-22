@@ -48,6 +48,13 @@ IAP.onPurchase = function(transactionId, productId, receipt) {
 	if (productId === "app.astrocollage.unlock") {
 		$(".locked").remove();
 		localStorage.setItem("full_unlock", true);
+
+		navigator.notification.alert(
+            "Thanks for your purchase! Your images are now unlocked.",
+            null,
+            "Purchase Confirmation",
+            "Done"
+        );
 	}
 };
 
@@ -55,6 +62,13 @@ IAP.onRestore = function(transactionId, productId, transactionReceipt) {
 	if (productId === "app.astrocollage.unlock") {
 		$(".locked").remove();
 		localStorage.setItem("full_unlock", true);
+
+		navigator.notification.alert(
+            "Thanks! Your purchase is now restored.",
+            null,
+            "Restore Confirmation",
+            "Done"
+        );
 	}
 };
 
