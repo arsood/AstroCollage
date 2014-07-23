@@ -72,6 +72,8 @@ $(document).ready(function() {
 
     //Unlock full app if purchase flag is set
 
+    localStorage.removeItem("full_unlock");
+
     if (localStorage.getItem("full_unlock")) {
         $(".locked").remove();
     }
