@@ -72,8 +72,6 @@ $(document).ready(function() {
 
     //Unlock full app if purchase flag is set
 
-    localStorage.removeItem("full_unlock");
-
     if (localStorage.getItem("full_unlock")) {
         $(".locked").remove();
     }
@@ -191,7 +189,6 @@ $(document).on("tap", "#add-menu-container div.menu-image", function() {
 //Hide options on menu back tap
 
 $(document).on("tap", ".select-menu-back", function() {
-    console.log("Worked");
     hideAddMenu();
     $("#add-menu-container").show();
 });
