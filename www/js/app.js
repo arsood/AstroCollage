@@ -664,23 +664,25 @@ $(document).on("tap", ".grid-menu-item", function() {
 
     var imageObj = new Image();
 
-    var piece = new Kinetic.Image({
-        image: imageObj,
-        id:"stage-grid",
-        width:$(document).width(),
-        height:$(document).height(),
-        opacity:0.3
-    });
+    imageObj.onload = function() {
+        var piece = new Kinetic.Image({
+            image: imageObj,
+            id:"stage-grid",
+            width:$(document).width(),
+            height:$(document).height(),
+            opacity:0.3
+        });
+
+        layer.add(piece);
+        stage.add(layer);
+
+        resetStageBackground();
+
+        $("#grid-menu").fadeOut(200).dequeue();
+        $("#grid-menu-options").fadeIn(200).dequeue();
+    }
 
     imageObj.src = $(this).attr("data-grid");
-
-    layer.add(piece);
-    stage.add(layer);
-
-    resetStageBackground();
-
-    $("#grid-menu").fadeOut(200).dequeue();
-    $("#grid-menu-options").fadeIn(200).dequeue();
 });
 
 //Change grid layers
