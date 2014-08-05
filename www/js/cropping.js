@@ -499,7 +499,7 @@ function circleCrop(){
             height: r * 2
 		});
 		
-        pieceGroup.on("tap click", function() {
+        pieceGroup.on("tap", function() {
             //Toggle option menu on tap of canvas image
 
             if (localStorage.getItem("stamp_selected")) {
@@ -509,7 +509,7 @@ function circleCrop(){
                 if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !$("#astro-edu-menu").is(":visible") && !cropFlag) {
                     showManiMenu();
                 } else {
-                    hideManiMenu();
+                    //hideManiMenu();
                 }
 
                 layer.draw();
@@ -687,7 +687,7 @@ function freeCrop(){
             width:w,
             height:h
 		});
-        pieceGroup.on("tap click", function() {
+        pieceGroup.on("tap", function() {
             //Toggle option menu on tap of canvas image
 
             if (localStorage.getItem("stamp_selected")) {
@@ -697,7 +697,7 @@ function freeCrop(){
                 if ($("#edit-menu").hasClass("edit-menu-hide") && !$("#add-menu-container").is(":visible") && !$("#select-menu-container").is(":visible") && !$("#add-astro-background-menu").is(":visible") && !$("#add-text-menu").is(":visible") && !$("#text-style-menu").is(":visible") && !$("#share-menu").is(":visible") && !$("#astro-edu-menu").is(":visible") && !cropFlag) {
                     showManiMenu();
                 } else {
-                    hideManiMenu();
+                    //hideManiMenu();
                 }
 
                 layer.draw();
