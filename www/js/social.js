@@ -30,10 +30,10 @@ $(document).on("tap", "#share-menu-button", function() {
             //Add branding text before render            
 
             var brandText = new Kinetic.Text({
-                x:stage.width() - 200,
+                x:stage.width() - 250,
                 y:stage.height() - 50,
                 fontSize:25,
-                text:"AstroCollage",
+                text:"Astronomy Collage",
                 fill:"#FFFFFF",
                 id:"brand-text"
             });
@@ -126,6 +126,8 @@ $(document).on("tap", "#share-facebook", function(event) {
     }
 });
 
+//Share on Twitter
+
 $(document).on("tap", "#share-twitter", function(event) {
 	event.preventDefault();
 
@@ -141,13 +143,15 @@ $(document).on("tap", "#share-twitter", function(event) {
     }
 });
 
+//Send by email
+
 $(document).on("tap", "#share-send-by-email", function(event) {
 	event.preventDefault();
 
     if (canvasRenderURL) {
        window.plugins.socialsharing.shareViaEmail(
-            'Check out my AstroCollage',
-            'My AstroCollage',
+            'Check out my Astronomy Collage! <div style="margin-top:20px;"><a href="https://itunes.apple.com/us/app/astrocollage/id893408730?ls=1&mt=8">Download Astronomy Collage on the App Store</a></div>',
+            'My Astronomy Collage',
             null, // TO: must be null or an array
             null, // CC: must be null or an array
             null, // BCC: must be null or an array
