@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3B9223E8-03C2-461F-993C-33A08603BE12</string>
+	<key>IDESourceControlProjectName</key>
+	<string>AstroCollage</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>576D5B45-938B-4A08-BE51-4F8A554E2B5A</key>
+		<string>https://github.com/arsood/AstroCollage.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>platforms/ios/AstroCollage.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>576D5B45-938B-4A08-BE51-4F8A554E2B5A</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/arsood/AstroCollage.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>576D5B45-938B-4A08-BE51-4F8A554E2B5A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>576D5B45-938B-4A08-BE51-4F8A554E2B5A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AstroCollage</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -90,11 +90,10 @@ $(document).on("tap", "#crop-confirm-button", function(event){
 	event.preventDefault();
 
     $("#crop-confirm-menu").hide();
-
-	recoverDragFlag();
 	
 	if(CropObj) {
 		CropObj.destroy();
+		recoverDragFlag();
 	}
 
 	if(ControlObj) {

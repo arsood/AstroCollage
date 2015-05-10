@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.emboldenmedia.astrocollage" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Astronomy Collage</name>
+    <description>
+        AstroCollage uses 100% real astronomy images, allowing the user to make collages like never before! You can build your own solar system, send rockets to alien worlds, float yourself in space, and create space monsters or familiar creatures – the possibilities are endless.
+    </description>
+    <author email="arun@emboldenmedia.com" href="http://emboldenmedia.com">
+        Astronomy Collage Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+</widget>

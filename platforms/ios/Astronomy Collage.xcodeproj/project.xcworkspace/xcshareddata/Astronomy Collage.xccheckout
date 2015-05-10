@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>EC329847-849A-43D4-B1C9-EC430BC2EDA3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Astronomy Collage</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9703806E-1DBD-4B16-BB84-2295E62D5625</key>
+		<string>https://github.com/robbiehanson/CocoaHTTPServer.git</string>
+		<key>C892CC87-DB03-4340-8AD1-DCE49E38FE5D</key>
+		<string>https://github.com/arsood/AstroCollage.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>platforms/ios/Astronomy Collage.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9703806E-1DBD-4B16-BB84-2295E62D5625</key>
+		<string>../../externals/CocoaHTTPServer</string>
+		<key>C892CC87-DB03-4340-8AD1-DCE49E38FE5D</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/arsood/AstroCollage.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C892CC87-DB03-4340-8AD1-DCE49E38FE5D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C892CC87-DB03-4340-8AD1-DCE49E38FE5D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AstroCollage</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9703806E-1DBD-4B16-BB84-2295E62D5625</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CocoaHTTPServer</string>
+		</dict>
+	</array>
+</dict>
+</plist>

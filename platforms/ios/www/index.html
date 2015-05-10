@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AstroCollage</title>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+            <!--Owl Carousel-->
+            <link rel="stylesheet" href="libraries/owl-carousel/owl.carousel.css" />
+            <link rel="stylesheet" href="libraries/owl-carousel/owl.theme.css" />
+            
+            <link rel="stylesheet" href="libraries/font-awesome/css/font-awesome.min.css" />
+            <link rel="stylesheet" href="css/style.css" />
+            <link rel="stylesheet" href="css/helpers.css" />
+    </head>
+    
+    <body>
+        
+        <div id="headfix"></div>
+        
+        <div id="holder">
+            <div id="container">
+                <!--Main Canvas Stage-->
+                <div id="stage"></div>
+                <!--/Main Canvas Stage-->
+                
+                <!--Stamp Pad-->
+                <div id="stamp-pad-container">
+                    <div id="stamp-pad-scroll-container" class="chrome-background">
+                        <div id="stamp-pad-image-container">
+                            <!--LOADER HERE-->
+                        </div>
+                    </div>
+                    <div id="stamp-pad-handle" class="chrome-background">
+                        <img src="img/palette.png" />
+                        <span>STAMP PAD</span>
+                    </div>
+                </div>
+                <!--/Stamp Pad-->
+                
+                <!--Stamp Pad Template-->
+                <script id="stamp-pad-template" type="text/x-template">
+                    <div id="stamp{{ id }}" data-image="{{ image }}" class="stamp-pad-image black-background" style="background:url({{ image }}) no-repeat;">
+                    </div>
+                    </script>
+                <!--/Stamp Pad Template-->
+                
+                <!--Stamp Image Menu-->
+                <div id="stamp-image-menu" class="chrome-background rounded-white-border">
+                    <div id="stamp-image-activate" class="snap-menu-item-container">
+                        <div class="stamp-image-menu-1">
+                            <div class="menu-buttons menu-buttons-small rounded-white-border">
+                                <img src="img/palette.png" />
+                            </div>
+                        </div>
+                        <div class="stamp-image-menu-2">
+                            ACTIVATE STAMP
+                        </div>
+                    </div>
+                    
+                    <div id="stamp-image-remove" class="snap-menu-item-container">
+                        <div class="stamp-image-menu-1">
+                            <div class="menu-buttons menu-buttons-small rounded-white-border">
+                                <i class="fa fa-times"></i>
+                            </div>
+                        </div>
+                        <div class="stamp-image-menu-2">
+                            REMOVE STAMP
+                        </div>
+                    </div>
+                    
+                    <div id="stamp-image-cancel" class="snap-menu-item-container">
+                        <div class="stamp-image-menu-1">
+                            <div class="menu-buttons menu-buttons-small rounded-white-border">
+                                <i class="fa fa-ban"></i>
+                            </div>
+                        </div>
+                        <div class="stamp-image-menu-2">
+                            CANCEL
+                        </div>
+                    </div>
+                </div>
+                <!--/Stamp Image Menu-->
+                
+                <!--Stamp Image Caret-->
+                <div id="stamp-image-caret"></div>
+                <!--Stamp Image Caret-->
+                
+                <!--Add Image Menu-->
+                <div id="add-menu-container" class="main-menu-container chrome-background rounded-white-border">
+                    <div class="item">
+                        <div class="main-menu-title-container">
+                            <div id="main-menu-title">
+                                CHOOSE AN IMAGE
+                            </div>
+                        </div>
+                        
+                        <div class="menu-content-container">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div data-category="nebulae" class="menu-image rounded-white-border black-background" style="background:url(img/categories/planetary_nebulae.jpg) no-repeat;"></div>
+                                        <div class="menu-image-title">
+                                            PLANETARY NEBULAE
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-category="supernovae" class="menu-image rounded-white-border black-background" style="background:url(img/categories/supernovae.jpg) no-repeat;"></div>
+                                        <div class="menu-image-title">
+                                            SUPERNOVAE
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-category="nurseries" class="menu-image rounded-white-border black-background" style="background:url(img/categories/stellar_nurseries.jpg) no-repeat;"></div>
+                                        <div class="menu-image-title">
+                                            STELLAR NURSERIES
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-category="galaxies" class="menu-image rounded-white-border black-background" style="background:url(img/categories/galaxies.jpg) no-repeat;"></div>
+                                        <div class="menu-image-title">
+                                            GALAXIES
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr height="20px"></tr>
+                                <tr>
+                                    <td>
+                                        <div data-category="stars" class="menu-image rounded-white-border black-background" style="background:url(img/categories/stars.jpg) no-repeat;"></div>
+                                        <div class="menu-image-title">
+                                            STARS
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-category="sun" class="menu-image rounded-white-border black-background" style="background:url(img/categories/sun.jpg) no-repeat;"></div>
+                                        <div class="menu-image-title">
+                                            SUN
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-category="planets" class="menu-image rounded-white-border black-background" style="background:url(img/categories/planets.jpg) no-repeat;"></div>
+                                        <div class="menu-image-title">
+                                            PLANETS AND MOONS
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-category="misc" class="menu-image rounded-white-border black-background" style="background:url(img/categories/miscellaneous.jpg) no-repeat;"></div>
+                                        <div class="menu-image-title">
+                                            MISCELLANEOUS
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr height="20px"></tr>
+                                <tr>
+                                    <td>
+                                        <div id="place-camera-roll" class="menu-buttons rounded-white-border center-margins">
+                                            <i class="fa fa-picture-o"></i>
+                                        </div>
+                                        <div class="menu-image-title">
+                                            CAMERA ROLL
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="place-text" class="menu-buttons rounded-white-border center-margins">
+                                            <i class="fa fa-pencil"></i>
+                                        </div>
+                                        <div class="menu-image-title">
+                                            ADD TEXT
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="place-camera" class="menu-buttons rounded-white-border center-margins">
+                                            <i class="fa fa-camera-retro"></i>
+                                        </div>
+                                        <div class="menu-image-title">
+                                            TAKE PHOTO
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="go-astroedu" class="menu-buttons rounded-white-border center-margins">
+                                            <i class="fa fa-graduation-cap"></i>
+                                        </div>
+                                        <div class="menu-image-title">
+                                            ASTRO EDU
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="main-menu-title-container">
+                            <div id="main-menu-title">
+                                BACKGROUNDS
+                            </div>
+                        </div>
+                        
+                        <div class="menu-content-container margin-top-50">
+                            <table id="backgrounds-table">
+                                <tr>
+                                    <td>
+                                        <div id="background-camera-roll" class="menu-backgrounds-icon rounded-white-border">
+                                            <i class="fa fa-picture-o"></i>
+                                        </div>
+                                        <div class="menu-image-title">
+                                            FROM CAMERA ROLL
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="background-astro" class="menu-backgrounds-icon rounded-white-border">
+                                        </div>
+                                        <div class="menu-image-title">
+                                            FROM ASTRO IMAGES
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="background-take-photo" class="menu-backgrounds-icon rounded-white-border">
+                                            <i class="fa fa-camera"></i>
+                                        </div>
+                                        <div class="menu-image-title">
+                                            TAKE PHOTO
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <div class="margin-top-50 change-color-text">
+                                CHANGE COLOR
+                            </div>
+                            
+                            <table id="menu-backgrounds-color-options" class="menu-color-options" class="margin-top-20">
+                                <tr>
+                                    <td>
+                                        <div id="menu-backgrounds-1"></div>
+                                    </td>
+                                    <td>
+                                        <div id="menu-backgrounds-2"></div>
+                                    </td>
+                                    <td>
+                                        <div id="menu-backgrounds-3"></div>
+                                    </td>
+                                    <td>
+                                        <div id="menu-backgrounds-4"></div>
+                                    </td>
+                                    <td>
+                                        <div id="menu-backgrounds-5"></div>
+                                    </td>
+                                    <td>
+                                        <div id="menu-backgrounds-6"></div>
+                                    </td>
+                                    <td>
+                                        <div id="menu-backgrounds-7"></div>
+                                    </td>
+                                    <td>
+                                        <div id="menu-backgrounds-8"></div>
+                                    </td>
+                                    <td>
+                                        <div id="menu-backgrounds-9"></div>
+                                    </td>
+                                    <td>
+                                        <div id="menu-backgrounds-10"></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--/Add Image Menu-->
+                
+                <!--Add Astro Background Menu-->
+                <div id="add-astro-background-menu" class="main-menu-container chrome-background rounded-white-border">
+                    <div class="select-menu-back">
+                        <i class="fa fa-arrow-left"></i>
+                    </div>
+                    <div class="main-menu-title-container">
+                        <div id="main-menu-title">
+                            CHOOSE A BACKGROUND
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="menu-content-container">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div data-image="img/backgrounds/back1.png" class="menu-image rounded-white-border" style="background:url(img/thumbs/backgrounds/back1.png) no-repeat; background-size:cover !important;"></div>
+                                    </td>
+                                    <td>
+                                        <div data-image="img/backgrounds/back2.png" class="menu-image rounded-white-border" style="background:url(img/thumbs/backgrounds/back2.png) no-repeat; background-size:cover !important;"></div>
+                                    </td>
+                                    <td>
+                                        <div data-image="img/backgrounds/back3.png" class="menu-image rounded-white-border" style="background:url(img/thumbs/backgrounds/back3.png) no-repeat; background-size:cover !important;"></div>
+                                    </td>
+                                    <td>
+                                        <div data-image="img/backgrounds/back4.png" class="menu-image rounded-white-border" style="background:url(img/thumbs/backgrounds/back4.png) no-repeat; background-size:cover !important;"></div>
+                                    </td>
+                                </tr>
+                                <tr height="20px"></tr>
+                                <tr>
+                                    <td>
+                                        <div data-image="img/backgrounds/back5.png" class="menu-image rounded-white-border" style="background:url(img/thumbs/backgrounds/back5.png) no-repeat; background-size:cover !important;"></div>
+                                    </td>
+                                    <td>
+                                        <div data-image="img/backgrounds/back6.png" class="menu-image rounded-white-border" style="background:url(img/thumbs/backgrounds/back6.png) no-repeat; background-size:cover !important;"></div>
+                                    </td>
+                                    <td>
+                                        <div data-image="img/backgrounds/back7_l.png" class="menu-image rounded-white-border" style="background:url(img/thumbs/backgrounds/back7_l.png) no-repeat; background-size:cover !important;">
+                                            <div class="locked"><i class="fa fa-lock"></i></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--/Add Astro Background Menu-->
+                
+                <!--Astro Edu-->
+                <div id="astro-edu-menu" class="main-menu-container chrome-background rounded-white-border">
+                    <div class="select-menu-back">
+                        <i class="fa fa-arrow-left"></i>
+                    </div>
+                    <div id="astro-edu-items">
+                        <!--Planetary Nebulae-->
+                        <div class="item">
+                            <div class="main-menu-title-container">
+                                <div id="main-menu-title">
+                                    ABOUT PLANETARY NEBULAE
+                                </div>
+                            </div>
+                            <div class="astro-edu-image black-background margin-top-20" style="background:url(img/thumbs/nebulae/neb7.png) no-repeat;"></div>
+                            <div class="astro-edu-text margin-top-20">
+                                <p>
+                                ("Nebulae" is pronounced neb-you-lee, and is the plural of nebula, or neb-you-lah, which means cloud or mist.)
+                                </p>
+                                
+                                <p>
+                                Planetary nebulae have nothing to do with planets! However, early telescopes could only see a somewhat planet-shaped patch of light, so these objects were incorrectly associated with planets. Planetary nebulae are much, much bigger than planets and are created by stars. You can see the bright star in this planetary nebula right at the very center.
+                                </p>
+                                
+                                <p>
+                                Near the end of a star's life, a star will become something called a red giant and expand hundreds of times larger than its normal size. During this expansion, some of the star's gas will get pushed off into space, and at the end of the star's life, this is the colorful gas we see in these images.
+                                </p>
+                                
+                                <p>
+                                The way this gas gives off colorful light is a little tricky, and begins with the nebula's central star, which is called a white dwarf. The white dwarf is extremely hot and emits light that energizes the atoms in the surrounding gas. In this process each atom can emit unique colors of light, and astronomers can tell, for example, that there are hydrogen atoms in the gas where they see red light, and oxygen atoms where they see green light. Once the white dwarf in the center cools down, the entire planetary nebula fades from view.
+                                </p>
+                            </div>
+                        </div>
+                        <!--/Planetary Nebulae-->
+                        
+                        <!--Stellar Nurseries-->
+                        <div class="item">
+                            <div class="main-menu-title-container">
+                                <div id="main-menu-title">
+                                    ABOUT STELLAR NURSERIES
+                                </div>
+                            </div>
+                            <div class="astro-edu-image black-background margin-top-20" style="background:url(img/thumbs/backgrounds/back2.png) no-repeat;"></div>
+                            <div class="astro-edu-text margin-top-20">
+                                <p>
+                                A stellar nursery is a large dense cloud of gas where stars are born as gravity pulls the densest clumps into stars. Stars of many sizes form from the dense gas, but the blue stars are the most massive and brightest of the newly formed stars.
+                                </p>
+                                
+                                <p>
+                                With their intense emission of light, the bright blue stars in the center of this image have several effects on the stellar nursery that created them. Near the blue stars, the emission is so intense that much of the gas has been cleared out, leaving a cavity in the center of this cloud. Farther out, the intense emission from the bright blue stars causes the gas in the stellar nursery to glow. Some of the glow comes from reflection of the blue starlight off of the gas itself (this gives a hazy blue appearance in the central regions). The brighter glowing gas surrounding the cavity arises when starlight energizes atoms in the gas, causing it to emit unique colors.
+                                </p>
+                                
+                                <p>
+                                In many stellar nurseries the blue stars are hidden behind thicker clouds but the larger nursery is still made visible by its glowing gas. Because different clouds of gas contain different proportions of different atoms, stellar nurseries can emit a wide variety of colors.
+                                </p>
+                            </div>
+                        </div>
+                        <!--/Stellar Nurseries-->
+                        
+                        <!--Supernovae-->
+                        <div class="item">
+                            <div class="main-menu-title-container">
+                                <div id="main-menu-title">
+                                    ABOUT SUPERNOVAE
+                                </div>
+                            </div>
+                            <div class="astro-edu-image black-background margin-top-20" style="background:url(img/thumbs/supernovae/sup1.png) no-repeat;"></div>
+                            <div class="astro-edu-text margin-top-20">
+                                <p>
+                                ("Supernovae" is pronounced super-no-vee, and is the plural of supernova, or super-no-vah)
+                                </p>
+                                
+                                <p>
+                                Stars can end their lives in a spectacular explosion called a supernova. Almost a thousand years ago, in the year 1054, Chinese astronomers observed the supernova that produced this debris, which is now called the Crab nebula.
+                                </p>
+                                
+                                <p>
+                                Normally, a star is powered by nuclear energy that produces a lot of heat and pressure. This internal pressure keeps the star's matter from collapsing under its own tremendous inward gravitational pull. But when a star runs out of its nuclear energy, the star collapses under the weight of its own gravity. Just as gravity powers the shattering of a falling drinking glass as it hits the floor, gravity fuels a supernova's explosive ejection of matter into space.
+                                </p>
+                                
+                                <p>
+                                Since energized atoms can emit light of different colors, the supernova debris can be very colorful as in this image. In most cases the supernova that ejected the matter in the first place also energizes the atoms in the debris. In other cases such as the supernova in this image, the star also leaves behind a small strange object called a neutron star, and this object transfers energy to the debris to keep it glowing. Some supernovae even leave behind very strange objects called black holes.
+                                </p>
+                            </div>
+                        </div>
+                        <!--/Supernovae-->
+                        
+                        <!--Galaxies-->
+                        <div class="item">
+                            <div class="main-menu-title-container">
+                                <div id="main-menu-title">
+                                    ABOUT GALAXIES
+                                </div>
+                            </div>
+                            <div class="astro-edu-image black-background margin-top-20" style="background:url(img/thumbs/galaxies/gal7-2.png) no-repeat;"></div>
+                            <div class="astro-edu-text margin-top-20">
+                                <p>
+                                A typical galaxy contains a hundred billion stars. This galaxy with spiral arms is called the Whirlpool Galaxy, and stars produce its fuzzy white and yellow light. The red spots come from hydrogen atoms (in gas between the stars) which emit red light when they are energized by the brighter stars in the spiral arms.
+                                </p>
+                                
+                                <p>
+                                The smaller round feature to the right is actually another galaxy. Around half a billion years ago the smaller galaxy passed right through the Whirlpool Galaxy (from the back, towards us), and this gravitational interaction created the spiral arms we see today. Collisions and mergers of galaxies are very common, and a typical galaxy is already the result of several mergers.
+                                </p>
+                                
+                                <p>
+                                Like most galaxies, including our very own Milky Way Galaxy, this galaxy contains a massive black hole at its center. The black hole contains a mass of around 100 million Suns (or 'solar masses'), yet the black hole is only around the size of our Solar System.
+                                </p>
+                                
+                                <p>
+                                Galaxies also emit light that is not seen by the human eye. Telescopes can still detect this light, which is how some of the false-color images in this category were made.
+                                </p>
+                            </div>
+                        </div>
+                        <!--/Galaxies-->
+                        
+                        <!--Stars-->
+                        <div class="item">
+                            <div class="main-menu-title-container">
+                                <div id="main-menu-title">
+                                    ABOUT STARS
+                                </div>
+                            </div>
+                            <div class="astro-edu-image black-background margin-top-20" style="background:url(img/thumbs/stars/sta3.png) no-repeat;"></div>
+                            <div class="astro-edu-text margin-top-20">
+                                <p>
+                                Stars come in a range of temperatures and colors. Just as an electric stove (or a toaster's heating wire) emits red light due to its high temperature, it's the temperature of stars that produce their light. Cooler stars are orange or red, and hotter stars are white or blue. Our own Sun is just like one of the many small white stars in this image.
+                                </p>
+                                
+                                <p>
+                                Stars can be spread around a galaxy, or thousands can be clumped together in round balls called a globular cluster. This image is the very center of a globular cluster called Omega Centauri.
+                                </p>
+                                
+                                <p>
+                                With the exception of one very large and nearby orange star named Betelgeuse (also in this collection of images), stars are too far away for even the best telescopes to directly see their physical size. In these images, stars only look bigger because they are brighter, and it is the telescope that spreads out their light.
+                                </p>
+                            </div>
+                        </div>
+                        <!--/Stars-->
+                        
+                        <!--Sun-->
+                        <div class="item">
+                            <div class="main-menu-title-container">
+                                <div id="main-menu-title">
+                                    ABOUT THE SUN
+                                </div>
+                            </div>
+                            <div class="astro-edu-image black-background margin-top-20" style="background:url(img/thumbs/sun/sun3.png) no-repeat;"></div>
+                            <div class="astro-edu-text margin-top-20">
+                                <p>
+                                The Sun is a star; our star. It is a hot ball of gas made mostly of hydrogen. Like all stars, the Sun is powered by nuclear energy. The temperature at the Sun's surface is around 10 times hotter than the hottest kitchen oven. At around 4.5 billion years old, the Sun is almost half way through its life. Before the Sun burns out, it will expand into something called a red giant and become about 250 times larger than its present size. The Sun is not massive enough to end with a violent supernova, but instead will gently produce a planetary nebula.
+                                </p>
+                                
+                                <p>
+                                The Sun also contains very strong magnetic fields. These magnetic fields can poke out of the surface to make bright arcs. As charged particles (such as electrons) move along the arcs of magnetic fields, they give off ultraviolet light and X-rays. It is this very high energy light, which is not visible to the human eye, which makes the Sun visible in this telescope image.
+                                </p>
+                                
+                                <p>
+                                Sometimes when a magnetic field erupts from within the Sun, it ejects a large mass of charged particles into our Solar System. These events are called solar flares and when directed towards Earth, the high-speed particles can pose dangers to astronauts and communications satellites.
+                                </p>
+                            </div>
+                        </div>
+                        <!--/Sun-->
+                        
+                        <!--Planets and Moons-->
+                        <div class="item">
+                            <div class="main-menu-title-container">
+                                <div id="main-menu-title">
+                                    ABOUT PLANETS AND MOONS
+                                </div>
+                            </div>
+                            <div class="astro-edu-image black-background margin-top-20" style="background:url(img/thumbs/planets/pla19_l.png) no-repeat;"></div>
+                            <div class="astro-edu-text margin-top-20">
+                                <p>
+                                This is Titan, a moon orbiting Saturn. Titan is a rich world with rain, lakes and volcanoes. However, Titan is an alien world with its rain and lakes consisting of liquid methane (often called natural gas), and its volcanoes made of ice.
+                                </p>
+                                
+                                <p>
+                                One moon of Jupiter named Io undergoes constant volcanic activity, oozing molten rock over its surface, and other moons are covered with ice. At least two ice-covered moons have vast oceans that are a prime target in future searches for life in the Solar System. One of these moons, Enceladus, has geysers that shoot its subsurface ocean water into space.
+                                </p>
+                                
+                                <p>
+                                The planets come in two main forms: small and rocky, or large and gaseous. One small planet, Mars, is being explored for signs of past or present microbial life. Jupiter and Saturn are the largest planets, and Saturn's majestic rings are made of small bits of orbiting ice. All of the large gaseous planets have rings, but Saturn's rings contain the most matter and are the easiest to see.
+                                </p>
+                            </div>
+                        </div>
+                        <!--/Planets and Moons-->
+                    </div>
+                </div>
+                <!--/Astro Edu-->
+                
+                <!--Snap Image Menu-->
+                <div id="snap-menu" class="chrome-background rounded-white-border">
+                    <div id="snap-menu-place" class="snap-menu-item-container">
+                        <div class="snap-menu-1">
+                            <div class="menu-buttons menu-buttons-small rounded-white-border">
+                                <i class="fa fa-crosshairs"></i>
+                            </div>
+                        </div>
+                        <div class="snap-menu-2">
+                            PLACE IMAGE
+                        </div>
+                    </div>
+                    
+                    <div id="snap-menu-add" class="snap-menu-item-container">
+                        <div class="snap-menu-1">
+                            <div class="menu-buttons menu-buttons-small rounded-white-border">
+                                <img src="img/palette.png" />
+                            </div>
+                        </div>
+                        <div class="snap-menu-2">
+                            ADD TO STAMP PAD
+                        </div>
+                    </div>
+                    
+                    <div id="snap-menu-cancel" class="snap-menu-item-container">
+                        <div class="snap-menu-1">
+                            <div class="menu-buttons menu-buttons-small rounded-white-border">
+                                <i class="fa fa-ban"></i>
+                            </div>
+                        </div>
+                        <div class="snap-menu-2">
+                            CANCEL
+                        </div>
+                    </div>
+                    <div class="menu-bottom-tick"></div>
+                </div>
+                <!--/Snap Image Menu-->
+                
+                <!--Cancel Stamp Menu-->
+                <div id="cancel-stamp-menu" class="chrome-background rounded-white-border">
+                    <div id="cancel-stamp" class="snap-menu-item-container">
+                        <div class="snap-menu-1">
+                            <div class="menu-buttons menu-buttons-small rounded-white-border">
+                                <i class="fa fa-times"></i>
+                            </div>
+                        </div>
+                        <div class="snap-menu-2">
+                            CANCEL STAMP
+                        </div>
+                    </div>
+                </div>
+                <!--/Cancel Stamp Menu-->
+                
+                <!--Select Image Menu-->
+                <div id="select-menu-container" class="main-menu-container chrome-background rounded-white-border">
+                    <div class="select-menu-back">
+                        <i class="fa fa-arrow-left"></i>
+                    </div>
+                    
+                    <div class="main-menu-title-container">
+                        <div id="main-menu-title">
+                            CHOOSE AN IMAGE
+                        </div>
+                    </div>
+                    
+                    <div class="menu-content-container menu-select-container">
+                        <!--Nebulae Category-->
+                        <div id="menu-select-nebulae">
+                            <div class="item">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div data-image="nebulae/neb1.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nebulae/neb1.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nebulae/neb2.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nebulae/neb2.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nebulae/neb3.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nebulae/neb3.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nebulae/neb4.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nebulae/neb4.png) no-repeat;"></div>
+                                        </td>
+                                    </tr>
+                                    <tr height="20px"></tr>
+                                    <tr>
+                                        <td>
+                                            <div data-image="nebulae/neb5.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nebulae/neb5.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nebulae/neb6.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nebulae/neb6.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nebulae/neb7.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nebulae/neb7.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nebulae/neb8.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nebulae/neb8.png) no-repeat;"></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <div class="item">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div data-image="nebulae/neb9_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nebulae/neb9_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nebulae/neb10_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nebulae/neb10_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nebulae/neb11_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nebulae/neb11_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nebulae/neb12_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nebulae/neb12_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr height="20px"></tr>
+                                    <tr>
+                                        <td>
+                                            <div data-image="nebulae/neb13_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nebulae/neb13_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nebulae/neb14_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nebulae/neb14_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nebulae/neb15_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nebulae/neb15_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!--/Nebulae Category-->
+                        
+                        <!--Supernovae Category-->
+                        <div id="menu-select-supernovae">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div data-image="supernovae/sup1.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/supernovae/sup1.png) no-repeat;"></div>
+                                    </td>
+                                    <td>
+                                        <div data-image="supernovae/sup2.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/supernovae/sup2.png) no-repeat;"></div>
+                                    </td>
+                                    <td>
+                                        <div data-image="supernovae/sup3.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/supernovae/sup3.png) no-repeat;"></div>
+                                    </td>
+                                    <td>
+                                        <div data-image="supernovae/sup4_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/supernovae/sup4_l.png) no-repeat;">
+                                            <div class="locked"><i class="fa fa-lock"></i></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr height="20px"></tr>
+                                <tr>
+                                    <td>
+                                        <div data-image="supernovae/sup5_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/supernovae/sup5_l.png) no-repeat;">
+                                            <div class="locked"><i class="fa fa-lock"></i></div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-image="supernovae/sup6_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/supernovae/sup6_l.png) no-repeat;">
+                                            <div class="locked"><i class="fa fa-lock"></i></div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-image="supernovae/sup7_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/supernovae/sup7_l.png) no-repeat;">
+                                            <div class="locked"><i class="fa fa-lock"></i></div>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--/Supernovae Category-->
+                        
+                        <!--Nurseries Category-->
+                        <div id="menu-select-nurseries">
+                            <div class="item">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div data-image="nurseries/nur1.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nurseries/nur1.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nurseries/nur2.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nurseries/nur2.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nurseries/nur3.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nurseries/nur3.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nurseries/nur4.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nurseries/nur4.png) no-repeat;"></div>
+                                        </td>
+                                    </tr>
+                                    <tr height="20px"></tr>
+                                    <tr>
+                                        <td>
+                                            <div data-image="nurseries/nur5.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nurseries/nur5.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nurseries/nur6_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nurseries/nur6_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nurseries/nur7_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nurseries/nur7_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nurseries/nur8_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nurseries/nur8_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <div class="item">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div data-image="nurseries/nur9_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nurseries/nur9_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nurseries/nur10_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nurseries/nur10_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nurseries/nur11_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nurseries/nur11_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="nurseries/nur12_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/nurseries/nur12_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!--/Nurseries Category-->
+                        
+                        <!--Galaxies Category-->
+                        <div id="menu-select-galaxies">
+                            <div class="item">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div data-image="galaxies/gal1.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/galaxies/gal1.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="galaxies/gal2.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/galaxies/gal2.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="galaxies/gal3.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/galaxies/gal3.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="galaxies/gal4.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/galaxies/gal4.png) no-repeat;"></div>
+                                        </td>
+                                    </tr>
+                                    <tr height="20px"></tr>
+                                    <tr>
+                                        <td>
+                                            <div data-image="galaxies/gal5.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/galaxies/gal5.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="galaxies/gal6.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/galaxies/gal6.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="galaxies/gal7.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/galaxies/gal7.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="galaxies/gal8_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/galaxies/gal8_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <div class="item">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div data-image="galaxies/gal9_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/galaxies/gal9_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="galaxies/gal10_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/galaxies/gal10_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="galaxies/gal11_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/galaxies/gal11_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="galaxies/gal12_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/galaxies/gal12_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr height="20px"></tr>
+                                    <tr>
+                                        <td>
+                                            <div data-image="galaxies/gal13_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/galaxies/gal13_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="galaxies/gal14_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/galaxies/gal14_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!--/Galaxies Category-->
+                        
+                        <!--Stars Category-->
+                        <div id="menu-select-stars">
+                            <div class="item">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div data-image="stars/sta1.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/stars/sta1.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="stars/sta2.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/stars/sta2.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="stars/sta3.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/stars/sta3.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="stars/sta4.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/stars/sta4.png) no-repeat;"></div>
+                                        </td>
+                                    </tr>
+                                    <tr height="20px"></tr>
+                                    <tr>
+                                        <td>
+                                            <div data-image="stars/sta5_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/stars/sta5_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="stars/sta6_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/stars/sta6_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="stars/sta7_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/stars/sta7_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="stars/sta8_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/stars/sta8_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <div class="item">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div data-image="stars/sta9_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/stars/sta9_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!--/Stars Category-->
+                        
+                        <!--Sun Category-->
+                        <div id="menu-select-sun">
+                            <div class="item">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div data-image="sun/sun1.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/sun/sun1.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="sun/sun2.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/sun/sun2.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="sun/sun3.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/sun/sun3.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="sun/sun4.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/sun/sun4.png) no-repeat;"></div>
+                                        </td>
+                                    </tr>
+                                    <tr height="20px"></tr>
+                                    <tr>
+                                        <td>
+                                            <div data-image="sun/sun5.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/sun/sun5.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="sun/sun6.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/sun/sun6.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="sun/sun7.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/sun/sun7.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="sun/sun8_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/sun/sun8_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <div class="item">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div data-image="sun/sun9_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/sun/sun9_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="sun/sun10_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/sun/sun10_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="sun/sun11_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/sun/sun11_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="sun/sun12_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/sun/sun12_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr height="20px"></tr>
+                                    <tr>
+                                        <td>
+                                            <div data-image="sun/sun13_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/sun/sun13_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!--/Sun Category-->
+                        
+                        <!--Planets Category-->
+                        <div id="menu-select-planets">
+                            <div class="item">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div data-image="planets/pla1.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla1.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="planets/pla2.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla2.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="planets/pla3.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla3.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="planets/pla4.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla4.png) no-repeat;"></div>
+                                        </td>
+                                    </tr>
+                                    <tr height="20px"></tr>
+                                    <tr>
+                                        <td>
+                                            <div data-image="planets/pla5.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla5.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="planets/pla6.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla6.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="planets/pla7.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla7.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="planets/pla8_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla8_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <div class="item">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div data-image="planets/pla9_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla9_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="planets/pla10_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla10_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="planets/pla11_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla11_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="planets/pla12_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla12_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr height="20px"></tr>
+                                    <tr>
+                                        <td>
+                                            <div data-image="planets/pla13_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla13_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="planets/pla14_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla14_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="planets/pla15_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla15_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="planets/pla16_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla16_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <div class="item">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div data-image="planets/pla17_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla17_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="planets/pla18_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla18_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="planets/pla19_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla19_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="planets/pla20_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/planets/pla20_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!--/Planets Category-->
+                        
+                        <!--Misc Category-->
+                        <div id="menu-select-misc">
+                            <div class="item">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div data-image="misc/mis1.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/misc/mis1.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="misc/mis2.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/misc/mis2.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="misc/mis3.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/misc/mis3.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="misc/mis4.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/misc/mis4.png) no-repeat;"></div>
+                                        </td>
+                                    </tr>
+                                    <tr height="20px"></tr>
+                                    <tr>
+                                        <td>
+                                            <div data-image="misc/mis5.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/misc/mis5.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="misc/mis6.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/misc/mis6.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="misc/mis7.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/misc/mis7.png) no-repeat;"></div>
+                                        </td>
+                                        <td>
+                                            <div data-image="misc/mis8_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/misc/mis8_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <div class="item">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div data-image="misc/mis9_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/misc/mis9_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="misc/mis10_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/misc/mis10_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="misc/mis11_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/misc/mis11_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-image="misc/mis12_l.png" class="menu-image rounded-white-border black-background" style="background:url(img/thumbs/misc/mis12_l.png) no-repeat;">
+                                                <div class="locked"><i class="fa fa-lock"></i></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!--/Misc Category-->
+                    </div>
+                </div>
+                <!--/Select Image Menu-->
+                
+                <!--Add Text Menu-->
+                <div id="add-text-menu" class="main-menu-container chrome-background rounded-white-border">
+                    <div class="select-menu-back">
+                        <i class="fa fa-arrow-left"></i>
+                    </div>
+                    
+                    <div class="main-menu-title-container">
+                        <div id="main-menu-title">
+                            ENTER YOUR TEXT
+                        </div>
+                    </div>
+                    
+                    <div class="margin-top-20">
+                        <input id="add-text-input" type="text" />
+                    </div>
+                    
+                    <div class="margin-top-20 txt-center">
+                        <a href="#" id="add-text-button">Add Text</a>
+                    </div>
+                </div>
+                <!--/Add Text Menu-->
+                
+                <!--Text Style Menu-->
+                <div id="text-style-menu" class="main-menu-container chrome-background rounded-white-border">
+                    <div class="close-menu-x">
+                        <i class="fa fa-times"></i>
+                    </div>
+                    
+                    <div class="main-menu-title-container">
+                        <div id="main-menu-title">
+                            TEXT OPTIONS
+                        </div>
+                    </div>
+                    
+                    <div class="margin-top-20">
+                        <table id="text-style-colors" class="menu-color-options">
+                            <tr>
+                                <td>
+                                    <div id="text-color-1"></div>
+                                </td>
+                                <td>
+                                    <div id="text-color-2"></div>
+                                </td>
+                                <td>
+                                    <div id="text-color-3"></div>
+                                </td>
+                                <td>
+                                    <div id="text-color-4"></div>
+                                </td>
+                                <td>
+                                    <div id="text-color-5"></div>
+                                </td>
+                                <td>
+                                    <div id="text-color-6"></div>
+                                </td>
+                                <td>
+                                    <div id="text-color-7"></div>
+                                </td>
+                                <td>
+                                    <div id="text-color-8"></div>
+                                </td>
+                                <td>
+                                    <div id="text-color-9"></div>
+                                </td>
+                                <td>
+                                    <div id="text-color-10"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="margin-top-20 txt-center bold">
+                        CHANGE FONT SIZE
+                    </div>
+                    
+                    <div class="margin-top-20">
+                        <table id="font-sizing-table">
+                            <tr>
+                                <td>
+                                    <div id="text-size-up" class="menu-buttons rounded-white-border center-margins">
+                                        <i class="fa fa-plus"></i>
+                                    </div>
+                                </td>
+                                <td class="txt-center">
+                                    <a id="delete-text-button" href="#">Remove Text</a>
+                                </td>
+                                <td>
+                                    <div id="text-size-down" class="menu-buttons rounded-white-border center-margins">
+                                        <i class="fa fa-minus"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--/Text Style Menu-->
+                
+                <!--Edit Image Menu-->
+                <div id="edit-menu" class="chrome-background edit-menu-hide">
+                    <div class="relative-container">
+                        <div id="close-mani-menu-button" class="menu-buttons menu-buttons-small close-button right-top">
+                            <i class="fa fa-times"></i>
+                        </div>
+                        <div id="edit-menu-reccrop" class="menu-group-container">
+                            <div class="menu-group-icon">
+                                <div class="menu-buttons menu-buttons-small rounded-white-border">
+                                    <img src="img/icons/rectangular_crop.png" />
+                                </div>
+                            </div>
+                            <div class="menu-group-text">
+                                RECTANGULAR CROP
+                            </div>
+                        </div>
+                        
+                        <div id="edit-menu-circrop" class="menu-group-container">
+                            <div class="menu-group-icon">
+                                <div class="menu-buttons menu-buttons-small rounded-white-border">
+                                    <img src="img/icons/circular_crop.png" />
+                                </div>
+                            </div>
+                            <div class="menu-group-text">
+                                CIRCULAR CROP
+                            </div>
+                        </div>
+                        
+                        <div id="edit-menu-freecrop" class="menu-group-container">
+                            <div class="menu-group-icon">
+                                <div class="menu-buttons menu-buttons-small rounded-white-border">
+                                    <img src="img/icons/free_crop.png" />
+                                </div>
+                            </div>
+                            <div class="menu-group-text">
+                                FREE CROP
+                            </div>
+                        </div>
+                        
+                        <div id="edit-menu-stamp-adduse" class="menu-group-container">
+                            <div class="menu-group-icon">
+                                <div class="menu-buttons menu-buttons-small rounded-white-border">
+                                    <img src="img/palette.png" />
+                                </div>
+                            </div>
+                            <div class="menu-group-text">
+                                ADD TO STAMP PAD AND USE
+                            </div>
+                        </div>
+                        
+                        <div id="edit-menu-remove" class="menu-group-container">
+                            <div class="menu-group-icon">
+                                <div class="menu-buttons menu-buttons-small rounded-white-border">
+                                    <img src="img/icons/remove_photo.png" />
+                                </div>
+                            </div>
+                            <div class="menu-group-text">
+                                REMOVE PHOTO
+                            </div>
+                        </div>
+                        
+                        <div class="menu-group-container">
+                            <div class="change-layer-container">
+                                <div id="change-layer-up" class="change-layer-option rounded-white-border">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                                <div class="change-layer-text">
+                                    CHANGE LAYER
+                                </div>
+                                <div id="change-layer-down" class="change-layer-option rounded-white-border">
+                                    <i class="fa fa-minus"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/Edit Image Menu-->
+                
+                <!--Grid Menu-->
+                <div id="grid-menu" class="main-menu-container chrome-background rounded-white-border">
+                    <div class="main-menu-title-container">
+                        <div id="main-menu-title">
+                            CHOOSE A GRID
+                        </div>
+                    </div>
+                    
+                    <div data-grid="img/grids/grid1.png" class=" margin-top-20 grid-menu-item rounded-white-border" style="background:url(img/thumbs/grids/grid1.png) no-repeat;"></div>
+                    <div data-grid="img/grids/grid2.png" class="margin-top-20 grid-menu-item rounded-white-border" style="background:url(img/thumbs/grids/grid2.png) no-repeat;"></div>
+                    <div data-grid="img/grids/grid3.png" class="margin-top-20 grid-menu-item rounded-white-border" style="background:url(img/thumbs/grids/grid3.png) no-repeat;"></div>
+                </div>
+                <!--/Grid Menu-->
+                
+                <!--Grid Menu Options-->
+                <div id="grid-menu-options" class="chrome-background rounded-white-border">
+                    <div class="txt-center bold">
+                        GRID
+                    </div>
+                    <div id="grid-layer-up" class="change-layer-option rounded-white-border margin-top-10">
+                        <i class="fa fa-plus"></i>
+                    </div>
+                    
+                    <div id="remove-grid-button" class="menu-buttons menu-buttons-small rounded-white-border center-margins margin-top-20">
+                        <i class="fa fa-times"></i>
+                    </div>
+                    
+                    <div id="grid-layer-down" class="change-layer-option rounded-white-border margin-top-20">
+                        <i class="fa fa-minus"></i>
+                    </div>
+                </div>
+                <!--/Grid Menu Options-->
+                
+                <!--Crop Confirm-->
+                <div id="crop-confirm-menu" class="chrome-background rounded-white-border">
+                    <div class="txt-center bold">
+                        CROP
+                    </div>
+                    <div id="crop-confirm-button" class="margin-top-20 menu-buttons menu-buttons-small rounded-white-border center-margins">
+                        <i class="fa fa-check"></i>
+                    </div>
+                    <div id="crop-cancel-button" class="margin-top-20 menu-buttons menu-buttons-small rounded-white-border center-margins">
+                        <i class="fa fa-times"></i>
+                    </div>
+                </div>
+                <!--/Crop Confirm-->
+                
+                <!--Share Menu-->
+                <div id="share-menu" class="main-menu-container chrome-background rounded-white-border">
+                    <div class="main-menu-title-container">
+                        <div id="main-menu-title">
+                            SHARE COLLAGE
+                        </div>
+                    </div>
+                    
+                    <div class="margin-top-20">
+                        <div id="share-render-container">
+                            <div class="ajax-block">
+                                <img src="img/ajax-loader.gif" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!--<div class="margin-top-20">
+                     <textarea id="share-caption" placeholder="CAPTION"></textarea>
+                     </div>-->
+                    
+                    <div id="share-facebook" class="margin-top-20 share-buttons-container">
+                        <div class="share-buttons-icon">
+                            <img src="img/icons/social/facebook.png" />
+                        </div>
+                        <div class="share-buttons-text">
+                            SHARE ON FACEBOOK
+                        </div>
+                    </div>
+                    
+                    <div id="share-twitter" class="margin-top-10 share-buttons-container">
+                        <div class="share-buttons-icon">
+                            <img src="img/icons/social/twitter.png" />
+                        </div>
+                        <div class="share-buttons-text">
+                            SHARE ON TWITTER
+                        </div>
+                    </div>
+                    
+                    <!--<div id="share-pinterest" class="margin-top-10 share-buttons-container">
+                     <div class="share-buttons-icon">
+                     <img src="img/icons/social/pinterest.png" />
+                     </div>
+                     <div class="share-buttons-text">
+                     SHARE ON PINTEREST
+                     </div>
+                     </div>-->
+                    
+                    <div id="share-save-to-camera-roll" class="margin-top-50 share-buttons-container">
+                        <div class="share-buttons-icon">
+                            <div class="menu-buttons menu-buttons-small rounded-white-border center-margins">
+                                <i class="fa fa-picture-o"></i>
+                            </div>
+                        </div>
+                        <div class="share-buttons-text">
+                            SAVE TO CAMERA ROLL
+                        </div>
+                    </div>
+                    
+                    <div id="share-send-by-email" class="margin-top-10 share-buttons-container">
+                        <div class="share-buttons-icon">
+                            <div class="menu-buttons menu-buttons-small rounded-white-border center-margins">
+                                <i class="fa fa-envelope-o"></i>
+                            </div>
+                        </div>
+                        <div class="share-buttons-text">
+                            SEND BY EMAIL
+                        </div>
+                    </div>
+                </div>
+                <!--/Share Menu-->
+                
+                <!--Bottom Buttons-->
+                <div class="bottom-options" id="grid-menu-button">
+                    <i class="fa fa-table"></i>
+                </div>
+                <div class="bottom-options" id="add-menu-button">
+                    <i class="fa fa-plus"></i>
+                </div>
+                <div class="bottom-options" id="share-menu-button">
+                    <i class="fa fa-heart"></i>
+                </div>
+                <div class="bottom-options" id="reset-canvas-button">
+                    <i class="fa fa-refresh"></i>
+                </div>
+                <!--/Bottom Buttons-->
+            </div>
+        </div>
+        
+        <!--Include Cordova-->
+        <script src="cordova.js"></script>
+        
+        <!--Include Additional Libraries-->
+        <script src="libraries/hammer/hammer.min.js"></script>
+        <script src="libraries/kinetic/kinetic.js"></script>
+        <script src="libraries/jquery/jquery.js"></script>
+        <!--<script src="libraries/jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
+         <script src="libraries/jquery-ui-touch-punch/jq-touch-punch.js"></script>-->
+        <script src="libraries/jquery-tap/jquery.tap.min.js"></script>
+        <script src="libraries/owl-carousel/owl.carousel.min.js"></script>
+        <script src="libraries/handlebars/handlebars-v1.3.0.js"></script>
+        <script src="js/utilities.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/cropping.js"></script>
+        <script src="js/social.js"></script>
+        <script src="js/native.js"></script>
+        <script src="js/payment.js"></script>
+        
+    </body>
+</html>
